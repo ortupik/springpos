@@ -9,13 +9,11 @@ import com.springpos.bean.User;
 import com.springpos.bean.Sessions;
 import com.springpos.service.ContactService;
 import com.springpos.service.ContractorService;
-import com.springpos.service.CountryService;
 import com.springpos.service.CustomerSiteService;
 import org.springframework.stereotype.Service;
 import com.springpos.service.MainService;
 import com.springpos.service.ServiceOrderService;
 import com.springpos.service.SessionService;
-import com.springpos.service.StateService;
 import com.springpos.service.UserService;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -248,17 +246,20 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public String executeSequence() {
+    public ServiceOrder executeSequence() {
         CustomerSite customer = this.customerSiteService.save(this.sequence.getCustomer());
-        Contractor contractor = this.contractorService.save(this.sequence.getContractor());
-        Contact cont=new Contact(customer);
-        Contact contact = this.contactService.save(cont);
-        ServiceOrder order =this.sequence.getServiceOrder();
-        if (customer == null || contact == null || order == null) {
-            this.customerSiteService.delete(customer);
-            this.contactService.delete(contact);
+        if (this.customerSiteService.findByCust_site_name(this.sequence.getCustomer().getCustSiteName()) == null) {
+            customer = this.customerSiteService.save(this.sequence.getCustomer());
+            Contact cont = new Contact(customer);
+            this.contactService.save(cont);
         }
+        Contractor contractor = this.sequence.getContractor();
+        ServiceOrder order = this.sequence.getServiceOrder();
+        if (customer == null ||contractor ==null|| order == null) {
         return null;
+        }
+        ServiceOrder newOrder=this.serviceOrderService.save(order);
+        return newOrder;
     }
 
 }

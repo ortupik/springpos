@@ -23,9 +23,9 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="serviceStatus : ${serviceStatuss}">
-                                        <td th:text="${serviceStatus.id}"><a href="/serviceStatus/${serviceStatus.id}">Id</a></td>
-                                        <td th:text="${serviceStatus.svo_status}">Status</td>
-                                        <td><a th:href="@{/removeService Status/{id}(id=${serviceStatus.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                        <td th:text="${serviceType.svcStatusId}"></td>
+                                        <td th:text="${serviceStatus.svo_status}"></td>
+                                        <td><a th:href="@{/removeService Status/{id}(id=${serviceType.svcStatusId})}" class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

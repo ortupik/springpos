@@ -19,20 +19,25 @@ public class State implements Serializable {
     @Id
     @Column(name = "state_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int state_id;
 
     @NotNull
     @Size(max = 100)
     @Column(name = "state_name", unique = true)
     private String state_name;
 
-    public int getId() {
-        return id;
+    @OneToMany(mappedBy = "state")
+    private Set<CustomerSite> customer;
+
+    public int getState_id() {
+        return state_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setState_id(int state_id) {
+        this.state_id = state_id;
     }
+
+ 
 
     public String getState_name() {
         return state_name;
@@ -42,8 +47,12 @@ public class State implements Serializable {
         this.state_name = state_name;
     }
 
-    @Override
-    public String toString() {
-        return "State{" + "id=" + id + ", state_name=" + state_name + '}';
+    public Set<CustomerSite> getCustomer() {
+        return customer;
     }
+
+    public void setCustomer(Set<CustomerSite> customer) {
+        this.customer = customer;
+    }
+
 }

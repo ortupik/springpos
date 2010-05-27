@@ -56,4 +56,9 @@ public class CustomerSiteServiceImpl implements CustomerSiteService {
         bizRepository.deleteInBatch(categories);
     }
 
+    @Override
+    public CustomerSite findByCust_site_name(String custSiteName) {
+        return bizRepository.findByCustSiteName(custSiteName);
+    }
+
 }

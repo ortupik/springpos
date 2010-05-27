@@ -6,48 +6,58 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "SVC")
 public class Svc implements Serializable {
 
+    @ManyToOne
+    @JoinColumn(name = "svc_type_id", nullable = false)
+    private ServiceType serviceType;
+    @ManyToOne
+    @JoinColumn(name = "svc_status_id", nullable = false)
+    private ServiceStatus serviceStatus;
+
     @Id
     @Column(name = "svc_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "svc_type_id")
-    private int svc_type_id;
-    @Column(name = "svc_status_id")
-    private int svc_status_id;
+    private int svcId;
+    @Column(name = "svc_name")
+    private String svcName;
 
-    public int getId() {
-        return id;
+    public ServiceType getServiceType() {
+        return serviceType;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setServiceType(ServiceType serviceType) {
+        this.serviceType = serviceType;
     }
 
-    public int getSvc_type_id() {
-        return svc_type_id;
+    public ServiceStatus getServiceStatus() {
+        return serviceStatus;
     }
 
-    public void setSvc_type_id(int svc_type_id) {
-        this.svc_type_id = svc_type_id;
+    public void setServiceStatus(ServiceStatus serviceStatus) {
+        this.serviceStatus = serviceStatus;
     }
 
-    public int getSvc_status_id() {
-        return svc_status_id;
+    public int getSvcId() {
+        return svcId;
     }
 
-    public void setSvc_status_id(int svc_status_id) {
-        this.svc_status_id = svc_status_id;
+    public void setSvcId(int svcId) {
+        this.svcId = svcId;
     }
 
-    @Override
-    public String toString() {
-        return "Svc{" + "id=" + id + ", svc_type_id=" + svc_type_id + ", svc_status_id=" + svc_status_id + '}';
+    public String getSvcName() {
+        return svcName;
+    }
+
+    public void setSvcName(String svcName) {
+        this.svcName = svcName;
     }
 
 }

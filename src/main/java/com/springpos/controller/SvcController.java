@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.springpos.bean.Svc;
 import com.springpos.service.MainService;
+import com.springpos.service.ServiceStatusService;
+import com.springpos.service.ServiceTypeService;
 import java.util.ArrayList;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -22,12 +24,23 @@ import com.springpos.service.SvcService;
 public class SvcController {
 
     private SvcService svcService;
-
+    private ServiceStatusService statusService;
+    private ServiceTypeService typeService;
     private MainService mainService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SvcController.class);
 
     ArrayList<Svc> svcList = new ArrayList();
+
+    @Autowired
+    public void setStatusService(ServiceStatusService statusService) {
+        this.statusService = statusService;
+    }
+
+    @Autowired
+    public void setTypeService(ServiceTypeService typeService) {
+        this.typeService = typeService;
+    }
 
     @Autowired
     public void setSvcService(SvcService svcService) {
@@ -75,6 +88,8 @@ public class SvcController {
             return "svc";
         }
         svcService.save(svc);
+        model.addAttribute("serviceTypes", this.typeService.findAll());
+        model.addAttribute("serviceStatuss", this.statusService.findAll());
         model.addAttribute("svc", new Svc());
         model.addAttribute("addMessage", " Svc Added Successfull ");
         return "svc";
@@ -119,6 +134,5 @@ public class SvcController {
         model.addAttribute("svc", svc);
         return "updateSvc";
     }
-
 
 }

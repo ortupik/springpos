@@ -31,7 +31,7 @@ public interface MainService {
 
     public String encryptStuff(String crap);
     
-    public String executeSequence();
+    public ServiceOrder executeSequence();
     
     public Sequence getSequence();
     

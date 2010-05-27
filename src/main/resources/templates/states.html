@@ -8,7 +8,7 @@
         <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
         <div class="container" id="form">
             <div class="row justify-content-center">
-                <div class="col-md-12">
+                <div class="col-md-9">
                     <div th:switch="${states}">
                         <h2 th:case="null">No states yet!</h2>
                         <div th:case="*">
@@ -24,10 +24,10 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="state : ${states}">
-                                        <td th:text="${state.id}"><a href="/state/${state.id}">Id</a></td>
-                                        <td th:text="${state.state_name}">State Name</td>
-                                        <td><a th:href="@{/editState/{id}(id=${state.id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
-                                        <td><a th:href="@{/removeState/{id}(id=${state.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                        <td th:text="${state.state_id}"></td>
+                                        <td th:text="${state.state_name}"></td>
+                                        <td><a th:href="@{/editState/{id}(id=${state.state_id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
+                                        <td><a th:href="@{/removeState/{id}(id=${state.state_id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

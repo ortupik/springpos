@@ -1,10 +1,8 @@
 package com.springpos.bean;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,24 +10,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "CUSTOMER_SITE")
 public class CustomerSite implements Serializable {
 
-    /*@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "state_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private State state;*/
+    private State state;
     @Id
     @Column(name = "cust_site_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "cust_site_name")
-    private String cust_site_name;
+    private String custSiteName;
     @Column(name = "cust_site_address")
     private String cust_site_address;
     @Column(name = "cust_site_city")
@@ -46,8 +40,6 @@ public class CustomerSite implements Serializable {
     private int cust_site_type_id;
     @Column(name = "country_id")
     private int country_id;
-    @Column(name = "state_id")
-    private int state_id;
     @Transient
     private String storeId;
     @Transient
@@ -57,6 +49,9 @@ public class CustomerSite implements Serializable {
     @Transient
     private String contactPhone;
 
+    public CustomerSite() {
+    }
+
     public int getId() {
         return id;
     }
@@ -65,12 +60,12 @@ public class CustomerSite implements Serializable {
         this.id = id;
     }
 
-    public String getCust_site_name() {
-        return cust_site_name;
+    public String getCustSiteName() {
+        return custSiteName;
     }
 
-    public void setCust_site_name(String cust_site_name) {
-        this.cust_site_name = cust_site_name;
+    public void setCustSiteName(String custSiteName) {
+        this.custSiteName = custSiteName;
     }
 
     public String getCust_site_address() {
@@ -145,14 +140,6 @@ public class CustomerSite implements Serializable {
         this.storeId = storeId;
     }
 
-    public int getState_id() {
-        return state_id;
-    }
-
-    public void setState_id(int state_id) {
-        this.state_id = state_id;
-    }
-
     public String getContactName() {
         return contactName;
     }
@@ -175,6 +162,14 @@ public class CustomerSite implements Serializable {
 
     public void setContactPhone(String contactPhone) {
         this.contactPhone = contactPhone;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 
 }

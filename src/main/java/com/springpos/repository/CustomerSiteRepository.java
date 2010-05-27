@@ -10,5 +10,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CustomerSiteRepository extends JpaRepository<CustomerSite, Integer> {
-
+ 
+  CustomerSite findByCustSiteName(String custSiteName);
+    
+    
 }

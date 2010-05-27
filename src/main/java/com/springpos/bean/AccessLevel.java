@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class AccessLevel implements Serializable {
 
     @Id
-    @Column(name = "contact_type_id")
+    @Column(name = "acc_level_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "acc_level_name")

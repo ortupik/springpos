@@ -12,23 +12,21 @@
                     <form action="#"  th:object="${contractorSkill}" th:action="@{/contractorSkill}" method="post">
                         <div class ="form-group">
                             <label>Country</label>
-                            <input  placeholder="Country" type="text" list="countryList" class="form-control" th:field="*{contractorId}" id="contractorId" required="">
-                            <datalist id="countryList">      
-                                <option class="form-control" th:each="contractor : ${contractors}"
+                            <select  placeholder="Country" type="text" list="countryList" class="form-control" th:field="*{contractorId}" id="contractorId" required="">
+                             <option class="form-control" th:each="contractor : ${contractors}"
                                         th:value="${contractor.id}"
                                         th:utext="${contractor.fullnames}"></option>
-                            </datalist>
+                            </select>
                             <span th:if="${#fields.hasErrors('contractorId')}" th:errors="*{contractorId}"></span>
                         </div>
 
                         <div class ="form-group">
                             <label>Skill</label>
-                            <input placeholder="Skill" type="text" list="skillList" class="form-control" name="hidden" th:field="*{skillId}" id="skillId" required="">
-                            <datalist id="skillList">      
-                                <option class="form-control" th:each="skill : ${skills}"
+                            <select placeholder="Skill" type="text" list="skillList" class="form-control" name="hidden" th:field="*{skillId}" id="skillId" required="">
+                            <option class="form-control" th:each="skill : ${skills}"
                                         th:value="${skill.id}"
                                         th:utext="${skill.skillName}"></option>
-                            </datalist>
+                            </select>
                             <span th:if="${#fields.hasErrors('skillId')}" th:errors="*{skillId}"></span>
                         </div>
 

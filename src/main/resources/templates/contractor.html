@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-      
+
     </head>
     <body>
         <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
@@ -55,47 +55,43 @@
 
                         <div class ="form-group">
                             <label>Country</label>
-                            <input  placeholder="Country" type="text" list="countryList" class="form-control" th:field="*{country_id}" id="country_id" required="">
-                            <datalist id="countryList">      
+                            <select  placeholder="Country" class="form-control" th:field="*{country_id}" id="country_id" required="">
                                 <option class="form-control" th:each="country : ${countries}"
                                         th:value="${country.id}"
                                         th:utext="${country.country_name}"></option>
-                            </datalist>
+                            </select>
                             <span th:if="${#fields.hasErrors('country_id')}" th:errors="*{country_id}"></span>
                         </div>
 
                         <div class ="form-group">
                             <label>State</label>
-                            <input placeholder="State" type="text" list="stateList" class="form-control" name="hidden" th:field="*{state_id}" id="state_id" required="">
-                            <datalist id="stateList">      
+                            <select placeholder="State" class="form-control"  th:field="*{state_id}" id="state_id" required="">
                                 <option class="form-control" th:each="state : ${states}"
                                         th:value="${state.id}"
                                         th:utext="${state.state_name}"></option>
-                            </datalist>
+                            </select>
                             <span th:if="${#fields.hasErrors('state_id')}" th:errors="*{state_id}"></span>
                         </div>
 
                         <div class="form-group">
                             <div class="col-xs-10">
                                 <label class="control-label">Contractor Status : </label>
-                                <input  type="text"  placeholder="Contractor Status" list="statusList" class="form-control" name="hidden" th:field="*{contractor_status_id}" id="contractor_status_id" required="">
-                                <datalist id="statusList">      
+                                <select placeholder="Contractor Status" list="statusList" class="form-control"  th:field="*{contractor_status_id}" id="contractor_status_id" required="">
                                     <option class="form-control" th:each="contractorStatus : ${contractorStatuss}"
                                             th:value="${contractorStatus.id}"
                                             th:utext="${contractorStatus.contractor_status}"></option>
-                                </datalist>
+                                </select>
                                 <span th:if="${#fields.hasErrors('contractor_status_id')}" th:errors="*{contractor_status_id}"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-10">
                                 <label class="control-label">Contractor Type : </label>
-                                <input  type="text" placeholder="Contractor Type" list="typeList" class="form-control" name="hidden" th:field="*{contractor_type_id}" id="contractor_type_id" required="">
-                                <datalist id="typeList">      
+                                <select  type="text" placeholder="Contractor Type" class="form-control"  th:field="*{contractor_type_id}" id="contractor_type_id" required="">
                                     <option class="form-control" th:each="contractorType : ${contractorTypes}"
                                             th:value="${contractorType.id}"
                                             th:utext="${contractorType.contractor_type}"></option>
-                                </datalist>
+                                </select>
                                 <span th:if="${#fields.hasErrors('contractor_type_id')}" th:errors="*{contractor_type_id}"></span>
                             </div>
                         </div>
