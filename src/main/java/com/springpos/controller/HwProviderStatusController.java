@@ -45,7 +45,7 @@ public class HwProviderStatusController {
             return "index";
         }
         model.addAttribute("hwProviderStatus", new HwProviderStatus());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "hwProviderStatus";
     }
 
@@ -57,7 +57,7 @@ public class HwProviderStatusController {
             mv.setViewName("index");
         } else {
             mv.addObject("hwProviderStatus", new HwProviderStatus());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             hwProviderStatusList.clear();
             hwProviderStatusList = (ArrayList<HwProviderStatus>) this.hwProviderStatusService.findAll();
             mv.addObject("hwProviderStatuss", this.hwProviderStatusService.findAll());
@@ -67,7 +67,7 @@ public class HwProviderStatusController {
 
     @PostMapping(value = "hwProviderStatus")
     public String save(@Valid HwProviderStatus hwProviderStatus, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class HwProviderStatusController {
     @RequestMapping("/updateHwProviderStatus/{id}")
     public String updateHwProviderStatus(@PathVariable("id") int id, @Valid HwProviderStatus hwProviderStatus,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("hwProviderStatus", hwProviderStatus);
         this.hwProviderStatusService.update(hwProviderStatus);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class HwProviderStatusController {
 
     @GetMapping("/removeHwProviderStatus/{id}")
     public String deleteHwProviderStatus(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         HwProviderStatus hwProviderStatus = this.hwProviderStatusService.find(id);
         if (hwProviderStatus == null) {
             model.addAttribute("addMessage", "Invalid hwProviderStatus Id:" + id);
@@ -109,7 +109,7 @@ public class HwProviderStatusController {
 
     @GetMapping("/editHwProviderStatus/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         HwProviderStatus hwProviderStatus = this.hwProviderStatusService.find(id);
         if (hwProviderStatus == null) {
             model.addAttribute("addMessage", "Invalid hwProviderStatus Id:" + id);
@@ -120,14 +120,5 @@ public class HwProviderStatusController {
         return "updateHwProviderStatus";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

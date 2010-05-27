@@ -45,7 +45,7 @@ public class ServiceOrderController {
             return "index";
         }
         model.addAttribute("serviceOrder", new ServiceOrder());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "serviceOrder";
     }
 
@@ -57,7 +57,7 @@ public class ServiceOrderController {
             mv.setViewName("index");
         } else {
             mv.addObject("serviceOrder", new ServiceOrder());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             serviceOrderList.clear();
             serviceOrderList = (ArrayList<ServiceOrder>) this.serviceOrderService.findAll();
             mv.addObject("serviceOrders", this.serviceOrderService.findAll());
@@ -67,7 +67,7 @@ public class ServiceOrderController {
 
     @PostMapping(value = "serviceOrder")
     public String save(@Valid ServiceOrder serviceOrder, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class ServiceOrderController {
     @RequestMapping("/updateServiceOrder/{id}")
     public String updateServiceOrder(@PathVariable("id") int id, @Valid ServiceOrder serviceOrder,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("serviceOrder", serviceOrder);
         this.serviceOrderService.update(serviceOrder);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class ServiceOrderController {
 
     @GetMapping("/removeServiceOrder/{id}")
     public String deleteServiceOrder(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ServiceOrder serviceOrder = this.serviceOrderService.find(id);
         if (serviceOrder == null) {
             model.addAttribute("addMessage", "Invalid serviceOrder Id:" + id);
@@ -109,7 +109,7 @@ public class ServiceOrderController {
 
     @GetMapping("/editServiceOrder/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ServiceOrder serviceOrder = this.serviceOrderService.find(id);
         if (serviceOrder == null) {
             model.addAttribute("addMessage", "Invalid serviceOrder Id:" + id);
@@ -118,16 +118,6 @@ public class ServiceOrderController {
         }
         model.addAttribute("serviceOrder", serviceOrder);
         return "updateServiceOrder";
-    }
-
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
     }
 
 }

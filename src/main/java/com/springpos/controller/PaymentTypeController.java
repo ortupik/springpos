@@ -45,7 +45,7 @@ public class PaymentTypeController {
             return "index";
         }
         model.addAttribute("paymentType", new PaymentType());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "paymentType";
     }
 
@@ -57,7 +57,7 @@ public class PaymentTypeController {
             mv.setViewName("index");
         } else {
             mv.addObject("paymentType", new PaymentType());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             paymentTypeList.clear();
             paymentTypeList = (ArrayList<PaymentType>) this.paymentTypeService.findAll();
             mv.addObject("paymentTypes", this.paymentTypeService.findAll());
@@ -67,7 +67,7 @@ public class PaymentTypeController {
 
     @PostMapping(value = "paymentType")
     public String save(@Valid PaymentType paymentType, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class PaymentTypeController {
     @RequestMapping("/updatePaymentType/{id}")
     public String updatePaymentType(@PathVariable("id") int id, @Valid PaymentType paymentType,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("paymentType", paymentType);
         this.paymentTypeService.update(paymentType);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class PaymentTypeController {
 
     @GetMapping("/removePaymentType/{id}")
     public String deletePaymentType(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         PaymentType paymentType = this.paymentTypeService.find(id);
         if (paymentType == null) {
             model.addAttribute("addMessage", "Invalid paymentType Id:" + id);
@@ -109,7 +109,7 @@ public class PaymentTypeController {
 
     @GetMapping("/editPaymentType/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         PaymentType paymentType = this.paymentTypeService.find(id);
         if (paymentType == null) {
             model.addAttribute("addMessage", "Invalid paymentType Id:" + id);
@@ -120,14 +120,5 @@ public class PaymentTypeController {
         return "updatePaymentType";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

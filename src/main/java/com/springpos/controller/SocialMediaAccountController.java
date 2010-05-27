@@ -45,7 +45,7 @@ public class SocialMediaAccountController {
             return "index";
         }
         model.addAttribute("socialMediaAccount", new SocialMediaAccount());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "socialMediaAccount";
     }
 
@@ -57,7 +57,7 @@ public class SocialMediaAccountController {
             mv.setViewName("index");
         } else {
             mv.addObject("socialMediaAccount", new SocialMediaAccount());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             socialMediaAccountList.clear();
             socialMediaAccountList = (ArrayList<SocialMediaAccount>) this.socialMediaAccountService.findAll();
             mv.addObject("socialMediaAccounts", this.socialMediaAccountService.findAll());
@@ -67,7 +67,7 @@ public class SocialMediaAccountController {
 
     @PostMapping(value = "socialMediaAccount")
     public String save(@Valid SocialMediaAccount socialMediaAccount, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class SocialMediaAccountController {
     @RequestMapping("/updateSocialMediaAccount/{id}")
     public String updateSocialMediaAccount(@PathVariable("id") int id, @Valid SocialMediaAccount socialMediaAccount,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("socialMediaAccount", socialMediaAccount);
         this.socialMediaAccountService.update(socialMediaAccount);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class SocialMediaAccountController {
 
     @GetMapping("/removeSocialMediaAccount/{id}")
     public String deleteSocialMediaAccount(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         SocialMediaAccount socialMediaAccount = this.socialMediaAccountService.find(id);
         if (socialMediaAccount == null) {
             model.addAttribute("addMessage", "Invalid socialMediaAccount Id:" + id);
@@ -109,7 +109,7 @@ public class SocialMediaAccountController {
 
     @GetMapping("/editSocialMediaAccount/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         SocialMediaAccount socialMediaAccount = this.socialMediaAccountService.find(id);
         if (socialMediaAccount == null) {
             model.addAttribute("addMessage", "Invalid socialMediaAccount Id:" + id);
@@ -120,14 +120,6 @@ public class SocialMediaAccountController {
         return "updateSocialMediaAccount";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
+ 
 
 }

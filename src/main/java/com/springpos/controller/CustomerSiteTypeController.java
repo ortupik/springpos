@@ -45,7 +45,7 @@ public class CustomerSiteTypeController {
             return "index";
         }
         model.addAttribute("customerSiteType", new CustomerSiteType());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "customerSiteType";
     }
 
@@ -57,7 +57,7 @@ public class CustomerSiteTypeController {
             mv.setViewName("index");
         } else {
             mv.addObject("customerSiteType", new CustomerSiteType());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             customerSiteTypeList.clear();
             customerSiteTypeList = (ArrayList<CustomerSiteType>) this.customerSiteTypeService.findAll();
             mv.addObject("customerSiteTypes", this.customerSiteTypeService.findAll());
@@ -67,7 +67,7 @@ public class CustomerSiteTypeController {
 
     @PostMapping(value = "customerSiteType")
     public String save(@Valid CustomerSiteType customerSiteType, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class CustomerSiteTypeController {
     @RequestMapping("/updateCustomerSiteType/{id}")
     public String updateCustomerSiteType(@PathVariable("id") int id, @Valid CustomerSiteType customerSiteType,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("customerSiteType", customerSiteType);
         this.customerSiteTypeService.update(customerSiteType);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class CustomerSiteTypeController {
 
     @GetMapping("/removeCustomerSiteType/{id}")
     public String deleteCustomerSiteType(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         CustomerSiteType customerSiteType = this.customerSiteTypeService.find(id);
         if (customerSiteType == null) {
             model.addAttribute("addMessage", "Invalid customerSiteType Id:" + id);
@@ -109,7 +109,7 @@ public class CustomerSiteTypeController {
 
     @GetMapping("/editCustomerSiteType/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         CustomerSiteType customerSiteType = this.customerSiteTypeService.find(id);
         if (customerSiteType == null) {
             model.addAttribute("addMessage", "Invalid customerSiteType Id:" + id);
@@ -120,14 +120,5 @@ public class CustomerSiteTypeController {
         return "updateCustomerSiteType";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

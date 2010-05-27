@@ -45,7 +45,7 @@ public class IncidentContractorController {
             return "index";
         }
         model.addAttribute("incidentContractor", new IncidentContractor());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "incidentContractor";
     }
 
@@ -57,7 +57,7 @@ public class IncidentContractorController {
             mv.setViewName("index");
         } else {
             mv.addObject("incidentContractor", new IncidentContractor());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             incidentContractorList.clear();
             incidentContractorList = (ArrayList<IncidentContractor>) this.incidentContractorService.findAll();
             mv.addObject("incidentContractors", this.incidentContractorService.findAll());
@@ -67,7 +67,7 @@ public class IncidentContractorController {
 
     @PostMapping(value = "incidentContractor")
     public String save(@Valid IncidentContractor incidentContractor, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class IncidentContractorController {
     @RequestMapping("/updateIncidentContractor/{id}")
     public String updateIncidentContractor(@PathVariable("id") int id, @Valid IncidentContractor incidentContractor,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("incidentContractor", incidentContractor);
         this.incidentContractorService.update(incidentContractor);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class IncidentContractorController {
 
     @GetMapping("/removeIncidentContractor/{id}")
     public String deleteIncidentContractor(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         IncidentContractor incidentContractor = this.incidentContractorService.find(id);
         if (incidentContractor == null) {
             model.addAttribute("addMessage", "Invalid incidentContractor Id:" + id);
@@ -109,7 +109,7 @@ public class IncidentContractorController {
 
     @GetMapping("/editIncidentContractor/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         IncidentContractor incidentContractor = this.incidentContractorService.find(id);
         if (incidentContractor == null) {
             model.addAttribute("addMessage", "Invalid incidentContractor Id:" + id);
@@ -118,16 +118,6 @@ public class IncidentContractorController {
         }
         model.addAttribute("incidentContractor", incidentContractor);
         return "updateIncidentContractor";
-    }
-
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
     }
 
 }

@@ -45,7 +45,7 @@ public class PhotoTypeController {
             return "index";
         }
         model.addAttribute("photoType", new PhotoType());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "photoType";
     }
 
@@ -57,7 +57,7 @@ public class PhotoTypeController {
             mv.setViewName("index");
         } else {
             mv.addObject("photoType", new PhotoType());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             photoTypeList.clear();
             photoTypeList = (ArrayList<PhotoType>) this.photoTypeService.findAll();
             mv.addObject("photoTypes", this.photoTypeService.findAll());
@@ -67,7 +67,7 @@ public class PhotoTypeController {
 
     @PostMapping(value = "photoType")
     public String save(@Valid PhotoType photoType, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class PhotoTypeController {
     @RequestMapping("/updatePhotoType/{id}")
     public String updatePhotoType(@PathVariable("id") int id, @Valid PhotoType photoType,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("photoType", photoType);
         this.photoTypeService.update(photoType);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class PhotoTypeController {
 
     @GetMapping("/removePhotoType/{id}")
     public String deletePhotoType(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         PhotoType photoType = this.photoTypeService.find(id);
         if (photoType == null) {
             model.addAttribute("addMessage", "Invalid photoType Id:" + id);
@@ -109,7 +109,7 @@ public class PhotoTypeController {
 
     @GetMapping("/editPhotoType/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         PhotoType photoType = this.photoTypeService.find(id);
         if (photoType == null) {
             model.addAttribute("addMessage", "Invalid photoType Id:" + id);
@@ -120,14 +120,5 @@ public class PhotoTypeController {
         return "updatePhotoType";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

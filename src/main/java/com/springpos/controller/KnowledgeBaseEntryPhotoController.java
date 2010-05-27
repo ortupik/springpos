@@ -45,7 +45,7 @@ public class KnowledgeBaseEntryPhotoController {
             return "index";
         }
         model.addAttribute("knowledgeBaseEntryPhoto", new KnowledgeBaseEntryPhoto());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "knowledgeBaseEntryPhoto";
     }
 
@@ -57,7 +57,7 @@ public class KnowledgeBaseEntryPhotoController {
             mv.setViewName("index");
         } else {
             mv.addObject("knowledgeBaseEntryPhoto", new KnowledgeBaseEntryPhoto());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             knowledgeBaseEntryPhotoList.clear();
             knowledgeBaseEntryPhotoList = (ArrayList<KnowledgeBaseEntryPhoto>) this.knowledgeBaseEntryPhotoService.findAll();
             mv.addObject("knowledgeBaseEntryPhotos", this.knowledgeBaseEntryPhotoService.findAll());
@@ -67,7 +67,7 @@ public class KnowledgeBaseEntryPhotoController {
 
     @PostMapping(value = "knowledgeBaseEntryPhoto")
     public String save(@Valid KnowledgeBaseEntryPhoto knowledgeBaseEntryPhoto, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class KnowledgeBaseEntryPhotoController {
     @RequestMapping("/updateKnowledgeBaseEntryPhoto/{id}")
     public String updateKnowledgeBaseEntryPhoto(@PathVariable("id") int id, @Valid KnowledgeBaseEntryPhoto knowledgeBaseEntryPhoto,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("knowledgeBaseEntryPhoto", knowledgeBaseEntryPhoto);
         this.knowledgeBaseEntryPhotoService.update(knowledgeBaseEntryPhoto);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class KnowledgeBaseEntryPhotoController {
 
     @GetMapping("/removeKnowledgeBaseEntryPhoto/{id}")
     public String deleteKnowledgeBaseEntryPhoto(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         KnowledgeBaseEntryPhoto knowledgeBaseEntryPhoto = this.knowledgeBaseEntryPhotoService.find(id);
         if (knowledgeBaseEntryPhoto == null) {
             model.addAttribute("addMessage", "Invalid knowledgeBaseEntryPhoto Id:" + id);
@@ -109,7 +109,7 @@ public class KnowledgeBaseEntryPhotoController {
 
     @GetMapping("/editKnowledgeBaseEntryPhoto/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         KnowledgeBaseEntryPhoto knowledgeBaseEntryPhoto = this.knowledgeBaseEntryPhotoService.find(id);
         if (knowledgeBaseEntryPhoto == null) {
             model.addAttribute("addMessage", "Invalid knowledgeBaseEntryPhoto Id:" + id);
@@ -120,14 +120,5 @@ public class KnowledgeBaseEntryPhotoController {
         return "updateKnowledgeBaseEntryPhoto";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

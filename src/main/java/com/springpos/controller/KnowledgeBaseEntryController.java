@@ -45,7 +45,7 @@ public class KnowledgeBaseEntryController {
             return "index";
         }
         model.addAttribute("knowledgeBaseEntry", new KnowledgeBaseEntry());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "knowledgeBaseEntry";
     }
 
@@ -57,7 +57,7 @@ public class KnowledgeBaseEntryController {
             mv.setViewName("index");
         } else {
             mv.addObject("knowledgeBaseEntry", new KnowledgeBaseEntry());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             knowledgeBaseEntryList.clear();
             knowledgeBaseEntryList = (ArrayList<KnowledgeBaseEntry>) this.knowledgeBaseEntryService.findAll();
             mv.addObject("knowledgeBaseEntrys", this.knowledgeBaseEntryService.findAll());
@@ -67,7 +67,7 @@ public class KnowledgeBaseEntryController {
 
     @PostMapping(value = "knowledgeBaseEntry")
     public String save(@Valid KnowledgeBaseEntry knowledgeBaseEntry, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class KnowledgeBaseEntryController {
     @RequestMapping("/updateKnowledgeBaseEntry/{id}")
     public String updateKnowledgeBaseEntry(@PathVariable("id") int id, @Valid KnowledgeBaseEntry knowledgeBaseEntry,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("knowledgeBaseEntry", knowledgeBaseEntry);
         this.knowledgeBaseEntryService.update(knowledgeBaseEntry);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class KnowledgeBaseEntryController {
 
     @GetMapping("/removeKnowledgeBaseEntry/{id}")
     public String deleteKnowledgeBaseEntry(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         KnowledgeBaseEntry knowledgeBaseEntry = this.knowledgeBaseEntryService.find(id);
         if (knowledgeBaseEntry == null) {
             model.addAttribute("addMessage", "Invalid knowledgeBaseEntry Id:" + id);
@@ -109,7 +109,7 @@ public class KnowledgeBaseEntryController {
 
     @GetMapping("/editKnowledgeBaseEntry/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         KnowledgeBaseEntry knowledgeBaseEntry = this.knowledgeBaseEntryService.find(id);
         if (knowledgeBaseEntry == null) {
             model.addAttribute("addMessage", "Invalid knowledgeBaseEntry Id:" + id);
@@ -120,14 +120,5 @@ public class KnowledgeBaseEntryController {
         return "updateKnowledgeBaseEntry";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

@@ -45,7 +45,7 @@ public class KnowledgeBaseCategoryController {
             return "index";
         }
         model.addAttribute("knowledgeBaseCategory", new KnowledgeBaseCategory());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "knowledgeBaseCategory";
     }
 
@@ -57,7 +57,7 @@ public class KnowledgeBaseCategoryController {
             mv.setViewName("index");
         } else {
             mv.addObject("knowledgeBaseCategory", new KnowledgeBaseCategory());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             knowledgeBaseCategoryList.clear();
             knowledgeBaseCategoryList = (ArrayList<KnowledgeBaseCategory>) this.knowledgeBaseCategoryService.findAll();
             mv.addObject("knowledgeBaseCategorys", this.knowledgeBaseCategoryService.findAll());
@@ -67,7 +67,7 @@ public class KnowledgeBaseCategoryController {
 
     @PostMapping(value = "knowledgeBaseCategory")
     public String save(@Valid KnowledgeBaseCategory knowledgeBaseCategory, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class KnowledgeBaseCategoryController {
     @RequestMapping("/updateKnowledgeBaseCategory/{id}")
     public String updateKnowledgeBaseCategory(@PathVariable("id") int id, @Valid KnowledgeBaseCategory knowledgeBaseCategory,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("knowledgeBaseCategory", knowledgeBaseCategory);
         this.knowledgeBaseCategoryService.update(knowledgeBaseCategory);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class KnowledgeBaseCategoryController {
 
     @GetMapping("/removeKnowledgeBaseCategory/{id}")
     public String deleteKnowledgeBaseCategory(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         KnowledgeBaseCategory knowledgeBaseCategory = this.knowledgeBaseCategoryService.find(id);
         if (knowledgeBaseCategory == null) {
             model.addAttribute("addMessage", "Invalid knowledgeBaseCategory Id:" + id);
@@ -109,7 +109,7 @@ public class KnowledgeBaseCategoryController {
 
     @GetMapping("/editKnowledgeBaseCategory/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         KnowledgeBaseCategory knowledgeBaseCategory = this.knowledgeBaseCategoryService.find(id);
         if (knowledgeBaseCategory == null) {
             model.addAttribute("addMessage", "Invalid knowledgeBaseCategory Id:" + id);
@@ -120,14 +120,5 @@ public class KnowledgeBaseCategoryController {
         return "updateKnowledgeBaseCategory";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
-
+ 
 }

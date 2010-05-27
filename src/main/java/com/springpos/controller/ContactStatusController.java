@@ -45,7 +45,7 @@ public class ContactStatusController {
             return "index";
         }
         model.addAttribute("contactStatus", new ContactStatus());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "contactStatus";
     }
 
@@ -57,7 +57,7 @@ public class ContactStatusController {
             mv.setViewName("index");
         } else {
             mv.addObject("contactStatus", new ContactStatus());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             contactStatusList.clear();
             contactStatusList = (ArrayList<ContactStatus>) this.contactStatusService.findAll();
             mv.addObject("contactStatuss", this.contactStatusService.findAll());
@@ -67,7 +67,7 @@ public class ContactStatusController {
 
     @PostMapping(value = "contactStatus")
     public String save(@Valid ContactStatus contactStatus, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
             model.addAttribute("contactStatus", new ContactStatus());
@@ -83,7 +83,7 @@ public class ContactStatusController {
     @RequestMapping("/updateContactStatus/{id}")
     public String updateContactStatus(@PathVariable("id") int id, @Valid ContactStatus contactStatus,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("contactStatus", contactStatus);
         this.contactStatusService.update(contactStatus);
         model.addAttribute("addMessage", "Update Successful !");
@@ -93,7 +93,7 @@ public class ContactStatusController {
 
     @GetMapping("/removeContactStatus/{id}")
     public String deleteContactStatus(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ContactStatus contactStatus = this.contactStatusService.find(id);
         if (contactStatus == null) {
             model.addAttribute("addMessage", "Invalid contactStatus Id:" + id);
@@ -108,7 +108,7 @@ public class ContactStatusController {
 
     @GetMapping("/editContactStatus/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ContactStatus contactStatus = this.contactStatusService.find(id);
         if (contactStatus == null) {
             model.addAttribute("addMessage", "Invalid contactStatus Id:" + id);
@@ -119,14 +119,6 @@ public class ContactStatusController {
         return "updateContactStatus";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
 
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

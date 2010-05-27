@@ -45,7 +45,7 @@ public class PaymentStatusController {
             return "index";
         }
         model.addAttribute("paymentStatus", new PaymentStatus());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "paymentStatus";
     }
 
@@ -57,7 +57,7 @@ public class PaymentStatusController {
             mv.setViewName("index");
         } else {
             mv.addObject("paymentStatus", new PaymentStatus());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             paymentStatusList.clear();
             paymentStatusList = (ArrayList<PaymentStatus>) this.paymentStatusService.findAll();
             mv.addObject("paymentStatuss", this.paymentStatusService.findAll());
@@ -67,7 +67,7 @@ public class PaymentStatusController {
 
     @PostMapping(value = "paymentStatus")
     public String save(@Valid PaymentStatus paymentStatus, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class PaymentStatusController {
     @RequestMapping("/updatePaymentStatus/{id}")
     public String updatePaymentStatus(@PathVariable("id") int id, @Valid PaymentStatus paymentStatus,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("paymentStatus", paymentStatus);
         this.paymentStatusService.update(paymentStatus);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class PaymentStatusController {
 
     @GetMapping("/removePaymentStatus/{id}")
     public String deletePaymentStatus(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         PaymentStatus paymentStatus = this.paymentStatusService.find(id);
         if (paymentStatus == null) {
             model.addAttribute("addMessage", "Invalid paymentStatus Id:" + id);
@@ -109,7 +109,7 @@ public class PaymentStatusController {
 
     @GetMapping("/editPaymentStatus/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         PaymentStatus paymentStatus = this.paymentStatusService.find(id);
         if (paymentStatus == null) {
             model.addAttribute("addMessage", "Invalid paymentStatus Id:" + id);
@@ -120,14 +120,5 @@ public class PaymentStatusController {
         return "updatePaymentStatus";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

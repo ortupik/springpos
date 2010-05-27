@@ -45,7 +45,7 @@ public class CustomerSiteHwController {
             return "index";
         }
         model.addAttribute("customerSiteHw", new CustomerSiteHw());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "customerSiteHw";
     }
 
@@ -57,7 +57,7 @@ public class CustomerSiteHwController {
             mv.setViewName("index");
         } else {
             mv.addObject("customerSiteHw", new CustomerSiteHw());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             customerSiteHwList.clear();
             customerSiteHwList = (ArrayList<CustomerSiteHw>) this.customerSiteHwService.findAll();
             mv.addObject("customerSiteHws", this.customerSiteHwService.findAll());
@@ -67,7 +67,7 @@ public class CustomerSiteHwController {
 
     @PostMapping(value = "customerSiteHw")
     public String save(@Valid CustomerSiteHw customerSiteHw, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class CustomerSiteHwController {
     @RequestMapping("/updateCustomerSiteHw/{id}")
     public String updateCustomerSiteHw(@PathVariable("id") int id, @Valid CustomerSiteHw customerSiteHw,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("customerSiteHw", customerSiteHw);
         this.customerSiteHwService.update(customerSiteHw);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class CustomerSiteHwController {
 
     @GetMapping("/removeCustomerSiteHw/{id}")
     public String deleteCustomerSiteHw(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         CustomerSiteHw customerSiteHw = this.customerSiteHwService.find(id);
         if (customerSiteHw == null) {
             model.addAttribute("addMessage", "Invalid customerSiteHw Id:" + id);
@@ -109,7 +109,7 @@ public class CustomerSiteHwController {
 
     @GetMapping("/editCustomerSiteHw/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         CustomerSiteHw customerSiteHw = this.customerSiteHwService.find(id);
         if (customerSiteHw == null) {
             model.addAttribute("addMessage", "Invalid customerSiteHw Id:" + id);
@@ -120,14 +120,5 @@ public class CustomerSiteHwController {
         return "updateCustomerSiteHw";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

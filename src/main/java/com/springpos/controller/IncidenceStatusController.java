@@ -45,7 +45,7 @@ public class IncidenceStatusController {
             return "index";
         }
         model.addAttribute("incidentStatus", new IncidenceStatus());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "incidentStatus";
     }
 
@@ -57,7 +57,7 @@ public class IncidenceStatusController {
             mv.setViewName("index");
         } else {
             mv.addObject("incidentStatus", new IncidenceStatus());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             incidentStatusList.clear();
             incidentStatusList = (ArrayList<IncidenceStatus>) this.incidentStatusService.findAll();
             mv.addObject("incidentStatuss", this.incidentStatusService.findAll());
@@ -67,7 +67,7 @@ public class IncidenceStatusController {
 
     @PostMapping(value = "incidentStatus")
     public String save(@Valid IncidenceStatus incidentStatus, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class IncidenceStatusController {
     @RequestMapping("/updateIncidenceStatus/{id}")
     public String updateIncidenceStatus(@PathVariable("id") int id, @Valid IncidenceStatus incidentStatus,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("incidentStatus", incidentStatus);
         this.incidentStatusService.update(incidentStatus);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class IncidenceStatusController {
 
     @GetMapping("/removeIncidenceStatus/{id}")
     public String deleteIncidenceStatus(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         IncidenceStatus incidentStatus = this.incidentStatusService.find(id);
         if (incidentStatus == null) {
             model.addAttribute("addMessage", "Invalid incidentStatus Id:" + id);
@@ -109,7 +109,7 @@ public class IncidenceStatusController {
 
     @GetMapping("/editIncidenceStatus/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         IncidenceStatus incidentStatus = this.incidentStatusService.find(id);
         if (incidentStatus == null) {
             model.addAttribute("addMessage", "Invalid incidentStatus Id:" + id);
@@ -118,16 +118,6 @@ public class IncidenceStatusController {
         }
         model.addAttribute("incidentStatus", incidentStatus);
         return "updateIncidenceStatus";
-    }
-
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
     }
 
 }

@@ -45,7 +45,7 @@ public class HwManufacturerController {
             return "index";
         }
         model.addAttribute("hwManufacturer", new HwManufacturer());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "hwManufacturer";
     }
 
@@ -57,7 +57,7 @@ public class HwManufacturerController {
             mv.setViewName("index");
         } else {
             mv.addObject("hwManufacturer", new HwManufacturer());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             hwManufacturerList.clear();
             hwManufacturerList = (ArrayList<HwManufacturer>) this.hwManufacturerService.findAll();
             mv.addObject("hwManufacturers", this.hwManufacturerService.findAll());
@@ -67,7 +67,7 @@ public class HwManufacturerController {
 
     @PostMapping(value = "hwManufacturer")
     public String save(@Valid HwManufacturer hwManufacturer, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class HwManufacturerController {
     @RequestMapping("/updateHwManufacturer/{id}")
     public String updateHwManufacturer(@PathVariable("id") int id, @Valid HwManufacturer hwManufacturer,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("hwManufacturer", hwManufacturer);
         this.hwManufacturerService.update(hwManufacturer);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class HwManufacturerController {
 
     @GetMapping("/removeHwManufacturer/{id}")
     public String deleteHwManufacturer(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         HwManufacturer hwManufacturer = this.hwManufacturerService.find(id);
         if (hwManufacturer == null) {
             model.addAttribute("addMessage", "Invalid hwManufacturer Id:" + id);
@@ -109,7 +109,7 @@ public class HwManufacturerController {
 
     @GetMapping("/editHwManufacturer/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         HwManufacturer hwManufacturer = this.hwManufacturerService.find(id);
         if (hwManufacturer == null) {
             model.addAttribute("addMessage", "Invalid hwManufacturer Id:" + id);
@@ -120,14 +120,5 @@ public class HwManufacturerController {
         return "updateHwManufacturer";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

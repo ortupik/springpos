@@ -45,7 +45,7 @@ public class SkillController {
             return "index";
         }
         model.addAttribute("skill", new Skill());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "skill";
     }
 
@@ -57,7 +57,7 @@ public class SkillController {
             mv.setViewName("index");
         } else {
             mv.addObject("skill", new Skill());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             skillList.clear();
             skillList = (ArrayList<Skill>) this.skillService.findAll();
             mv.addObject("skills", this.skillService.findAll());
@@ -67,7 +67,7 @@ public class SkillController {
 
     @PostMapping(value = "skill")
     public String save(@Valid Skill skill, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class SkillController {
     @RequestMapping("/updateSkill/{id}")
     public String updateSkill(@PathVariable("id") int id, @Valid Skill skill,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("skill", skill);
         this.skillService.update(skill);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class SkillController {
 
     @GetMapping("/removeSkill/{id}")
     public String deleteSkill(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Skill skill = this.skillService.find(id);
         if (skill == null) {
             model.addAttribute("addMessage", "Invalid skill Id:" + id);
@@ -109,7 +109,7 @@ public class SkillController {
 
     @GetMapping("/editSkill/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Skill skill = this.skillService.find(id);
         if (skill == null) {
             model.addAttribute("addMessage", "Invalid skill Id:" + id);
@@ -120,14 +120,5 @@ public class SkillController {
         return "updateSkill";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

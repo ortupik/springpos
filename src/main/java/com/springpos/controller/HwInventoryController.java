@@ -45,7 +45,7 @@ public class HwInventoryController {
             return "index";
         }
         model.addAttribute("hwInventory", new HwInventory());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "hwInventory";
     }
 
@@ -57,7 +57,7 @@ public class HwInventoryController {
             mv.setViewName("index");
         } else {
             mv.addObject("hwInventory", new HwInventory());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             hwInventoryList.clear();
             hwInventoryList = (ArrayList<HwInventory>) this.hwInventoryService.findAll();
             mv.addObject("hwInventorys", this.hwInventoryService.findAll());
@@ -67,7 +67,7 @@ public class HwInventoryController {
 
     @PostMapping(value = "hwInventory")
     public String save(@Valid HwInventory hwInventory, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class HwInventoryController {
     @RequestMapping("/updateHwInventory/{id}")
     public String updateHwInventory(@PathVariable("id") int id, @Valid HwInventory hwInventory,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("hwInventory", hwInventory);
         this.hwInventoryService.update(hwInventory);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class HwInventoryController {
 
     @GetMapping("/removeHwInventory/{id}")
     public String deleteHwInventory(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         HwInventory hwInventory = this.hwInventoryService.find(id);
         if (hwInventory == null) {
             model.addAttribute("addMessage", "Invalid hwInventory Id:" + id);
@@ -109,7 +109,7 @@ public class HwInventoryController {
 
     @GetMapping("/editHwInventory/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         HwInventory hwInventory = this.hwInventoryService.find(id);
         if (hwInventory == null) {
             model.addAttribute("addMessage", "Invalid hwInventory Id:" + id);
@@ -118,16 +118,6 @@ public class HwInventoryController {
         }
         model.addAttribute("hwInventory", hwInventory);
         return "updateHwInventory";
-    }
-
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
     }
 
 }

@@ -45,7 +45,7 @@ public class ArticleAuthorController {
             return "index";
         }
         model.addAttribute("articleAuthor", new ArticleAuthor());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "articleAuthor";
     }
 
@@ -57,7 +57,7 @@ public class ArticleAuthorController {
             mv.setViewName("index");
         } else {
             mv.addObject("articleAuthor", new ArticleAuthor());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             articleAuthorList.clear();
             articleAuthorList = (ArrayList<ArticleAuthor>) this.articleAuthorService.findAll();
             mv.addObject("articleAuthors", this.articleAuthorService.findAll());
@@ -67,7 +67,7 @@ public class ArticleAuthorController {
 
     @PostMapping(value = "articleAuthor")
     public String save(@Valid ArticleAuthor articleAuthor, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class ArticleAuthorController {
     @RequestMapping("/updateArticleAuthor/{id}")
     public String updateArticleAuthor(@PathVariable("id") int id, @Valid ArticleAuthor articleAuthor,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("articleAuthor", articleAuthor);
         this.articleAuthorService.update(articleAuthor);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class ArticleAuthorController {
 
     @GetMapping("/removeArticleAuthor/{id}")
     public String deleteArticleAuthor(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ArticleAuthor articleAuthor = this.articleAuthorService.find(id);
         if (articleAuthor == null) {
             model.addAttribute("addMessage", "Invalid articleAuthor Id:" + id);
@@ -109,7 +109,7 @@ public class ArticleAuthorController {
 
     @GetMapping("/editArticleAuthor/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ArticleAuthor articleAuthor = this.articleAuthorService.find(id);
         if (articleAuthor == null) {
             model.addAttribute("addMessage", "Invalid articleAuthor Id:" + id);
@@ -120,14 +120,6 @@ public class ArticleAuthorController {
         return "updateArticleAuthor";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
+ 
 
 }

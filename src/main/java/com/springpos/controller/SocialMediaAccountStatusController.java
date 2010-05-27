@@ -45,7 +45,7 @@ public class SocialMediaAccountStatusController {
             return "index";
         }
         model.addAttribute("socialMediaAccountStatus", new SocialMediaAccountStatus());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "socialMediaAccountStatus";
     }
 
@@ -57,7 +57,7 @@ public class SocialMediaAccountStatusController {
             mv.setViewName("index");
         } else {
             mv.addObject("socialMediaAccountStatus", new SocialMediaAccountStatus());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             socialMediaAccountStatusList.clear();
             socialMediaAccountStatusList = (ArrayList<SocialMediaAccountStatus>) this.socialMediaAccountStatusService.findAll();
             mv.addObject("socialMediaAccountStatuss", this.socialMediaAccountStatusService.findAll());
@@ -67,7 +67,7 @@ public class SocialMediaAccountStatusController {
 
     @PostMapping(value = "socialMediaAccountStatus")
     public String save(@Valid SocialMediaAccountStatus socialMediaAccountStatus, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class SocialMediaAccountStatusController {
     @RequestMapping("/updateSocialMediaAccountStatus/{id}")
     public String updateSocialMediaAccountStatus(@PathVariable("id") int id, @Valid SocialMediaAccountStatus socialMediaAccountStatus,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("socialMediaAccountStatus", socialMediaAccountStatus);
         this.socialMediaAccountStatusService.update(socialMediaAccountStatus);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class SocialMediaAccountStatusController {
 
     @GetMapping("/removeSocialMediaAccountStatus/{id}")
     public String deleteSocialMediaAccountStatus(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         SocialMediaAccountStatus socialMediaAccountStatus = this.socialMediaAccountStatusService.find(id);
         if (socialMediaAccountStatus == null) {
             model.addAttribute("addMessage", "Invalid socialMediaAccountStatus Id:" + id);
@@ -109,7 +109,7 @@ public class SocialMediaAccountStatusController {
 
     @GetMapping("/editSocialMediaAccountStatus/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         SocialMediaAccountStatus socialMediaAccountStatus = this.socialMediaAccountStatusService.find(id);
         if (socialMediaAccountStatus == null) {
             model.addAttribute("addMessage", "Invalid socialMediaAccountStatus Id:" + id);
@@ -120,14 +120,6 @@ public class SocialMediaAccountStatusController {
         return "updateSocialMediaAccountStatus";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
+ 
 
 }

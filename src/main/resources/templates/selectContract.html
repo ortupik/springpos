@@ -26,9 +26,8 @@
                                         <th>Zip</th>
                                         <th>Contractor Status </th>
                                         <th>Contractor Type</th>
-                                        <th>Account Level Id</th>
                                         <th>Country</th>
-                                        <th>Delete</th>
+                                        <th>Assign</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,11 +40,10 @@
                                         <td th:text="${contractor.contractor_address}"> </td>
                                         <td th:text="${contractor.contractor_city}"> </td>
                                         <td th:text="${contractor.contractor_zip}"> </td>
-                                        <td th:text="${contractor.state_id}"> </td>
                                         <td th:text="${contractor.contractor_type_id}"> </td>
                                         <td th:text="${contractor.acc_level_id}"> </td>                                        
                                         <td th:text="${contractor.country_id}"> </td>
-                                        <td><a th:href="@{/removeContractor/{id}(id=${contractor.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                        <td><a th:href="@{/selectContractor/{id}(id=${contractor.id})}"  class="btn btn-success btn-rounded btn-sm  my-0">Select</a></td>
                                     </tr>
                                 </tbody>
                             </table>

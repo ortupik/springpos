@@ -45,7 +45,7 @@ public class IncidentTypeController {
             return "index";
         }
         model.addAttribute("incidentType", new IncidentType());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "incidentType";
     }
 
@@ -57,7 +57,7 @@ public class IncidentTypeController {
             mv.setViewName("index");
         } else {
             mv.addObject("incidentType", new IncidentType());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             incidentTypeList.clear();
             incidentTypeList = (ArrayList<IncidentType>) this.incidentTypeService.findAll();
             mv.addObject("incidentTypes", this.incidentTypeService.findAll());
@@ -67,7 +67,7 @@ public class IncidentTypeController {
 
     @PostMapping(value = "incidentType")
     public String save(@Valid IncidentType incidentType, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class IncidentTypeController {
     @RequestMapping("/updateIncidentType/{id}")
     public String updateIncidentType(@PathVariable("id") int id, @Valid IncidentType incidentType,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("incidentType", incidentType);
         this.incidentTypeService.update(incidentType);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class IncidentTypeController {
 
     @GetMapping("/removeIncidentType/{id}")
     public String deleteIncidentType(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         IncidentType incidentType = this.incidentTypeService.find(id);
         if (incidentType == null) {
             model.addAttribute("addMessage", "Invalid incidentType Id:" + id);
@@ -109,7 +109,7 @@ public class IncidentTypeController {
 
     @GetMapping("/editIncidentType/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         IncidentType incidentType = this.incidentTypeService.find(id);
         if (incidentType == null) {
             model.addAttribute("addMessage", "Invalid incidentType Id:" + id);
@@ -118,16 +118,6 @@ public class IncidentTypeController {
         }
         model.addAttribute("incidentType", incidentType);
         return "updateIncidentType";
-    }
-
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
     }
 
 }

@@ -45,7 +45,7 @@ public class ContractorTypeController {
             return "index";
         }
         model.addAttribute("contractorType", new ContractorType());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "contractorType";
     }
 
@@ -57,7 +57,7 @@ public class ContractorTypeController {
             mv.setViewName("index");
         } else {
             mv.addObject("contractorType", new ContractorType());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             contractorTypeList.clear();
             contractorTypeList = (ArrayList<ContractorType>) this.contractorTypeService.findAll();
             mv.addObject("contractorTypes", this.contractorTypeService.findAll());
@@ -67,7 +67,7 @@ public class ContractorTypeController {
 
     @PostMapping(value = "contractorType")
     public String save(@Valid ContractorType contractorType, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class ContractorTypeController {
     @RequestMapping("/updateContractorType/{id}")
     public String updateContractorType(@PathVariable("id") int id, @Valid ContractorType contractorType,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("contractorType", contractorType);
         this.contractorTypeService.update(contractorType);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class ContractorTypeController {
 
     @GetMapping("/removeContractorType/{id}")
     public String deleteContractorType(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ContractorType contractorType = this.contractorTypeService.find(id);
         if (contractorType == null) {
             model.addAttribute("addMessage", "Invalid contractorType Id:" + id);
@@ -109,7 +109,7 @@ public class ContractorTypeController {
 
     @GetMapping("/editContractorType/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ContractorType contractorType = this.contractorTypeService.find(id);
         if (contractorType == null) {
             model.addAttribute("addMessage", "Invalid contractorType Id:" + id);
@@ -120,14 +120,5 @@ public class ContractorTypeController {
         return "updateContractorType";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

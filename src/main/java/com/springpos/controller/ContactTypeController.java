@@ -45,7 +45,7 @@ public class ContactTypeController {
             return "index";
         }
         model.addAttribute("contactType", new ContactType());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "contactType";
     }
 
@@ -57,7 +57,7 @@ public class ContactTypeController {
             mv.setViewName("index");
         } else {
             mv.addObject("contactType", new ContactType());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             contactTypeList.clear();
             contactTypeList = (ArrayList<ContactType>) this.contactTypeService.findAll();
             mv.addObject("contactTypes", this.contactTypeService.findAll());
@@ -67,7 +67,7 @@ public class ContactTypeController {
 
     @PostMapping(value = "contactType")
     public String save(@Valid ContactType contactType, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class ContactTypeController {
     @RequestMapping("/updateContactType/{id}")
     public String updateContactType(@PathVariable("id") int id, @Valid ContactType contactType,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("contactType", contactType);
         this.contactTypeService.update(contactType);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class ContactTypeController {
 
     @GetMapping("/removeContactType/{id}")
     public String deleteContactType(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ContactType contactType = this.contactTypeService.find(id);
         if (contactType == null) {
             model.addAttribute("addMessage", "Invalid contactType Id:" + id);
@@ -109,7 +109,7 @@ public class ContactTypeController {
 
     @GetMapping("/editContactType/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ContactType contactType = this.contactTypeService.find(id);
         if (contactType == null) {
             model.addAttribute("addMessage", "Invalid contactType Id:" + id);
@@ -120,14 +120,5 @@ public class ContactTypeController {
         return "updateContactType";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

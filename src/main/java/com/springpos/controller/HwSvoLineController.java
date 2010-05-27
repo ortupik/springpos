@@ -45,7 +45,7 @@ public class HwSvoLineController {
             return "index";
         }
         model.addAttribute("hwSvoLine", new HwSvoLine());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "hwSvoLine";
     }
 
@@ -57,7 +57,7 @@ public class HwSvoLineController {
             mv.setViewName("index");
         } else {
             mv.addObject("hwSvoLine", new HwSvoLine());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             hwSvoLineList.clear();
             hwSvoLineList = (ArrayList<HwSvoLine>) this.hwSvoLineService.findAll();
             mv.addObject("hwSvoLines", this.hwSvoLineService.findAll());
@@ -67,7 +67,7 @@ public class HwSvoLineController {
 
     @PostMapping(value = "hwSvoLine")
     public String save(@Valid HwSvoLine hwSvoLine, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class HwSvoLineController {
     @RequestMapping("/updateHwSvoLine/{id}")
     public String updateHwSvoLine(@PathVariable("id") int id, @Valid HwSvoLine hwSvoLine,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("hwSvoLine", hwSvoLine);
         this.hwSvoLineService.update(hwSvoLine);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class HwSvoLineController {
 
     @GetMapping("/removeHwSvoLine/{id}")
     public String deleteHwSvoLine(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         HwSvoLine hwSvoLine = this.hwSvoLineService.find(id);
         if (hwSvoLine == null) {
             model.addAttribute("addMessage", "Invalid hwSvoLine Id:" + id);
@@ -109,7 +109,7 @@ public class HwSvoLineController {
 
     @GetMapping("/editHwSvoLine/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         HwSvoLine hwSvoLine = this.hwSvoLineService.find(id);
         if (hwSvoLine == null) {
             model.addAttribute("addMessage", "Invalid hwSvoLine Id:" + id);
@@ -120,14 +120,5 @@ public class HwSvoLineController {
         return "updateHwSvoLine";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

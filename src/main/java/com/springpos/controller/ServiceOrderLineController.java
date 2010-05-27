@@ -45,7 +45,7 @@ public class ServiceOrderLineController {
             return "index";
         }
         model.addAttribute("serviceOrderLine", new ServiceOrderLine());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "serviceOrderLine";
     }
 
@@ -57,7 +57,7 @@ public class ServiceOrderLineController {
             mv.setViewName("index");
         } else {
             mv.addObject("serviceOrderLine", new ServiceOrderLine());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             serviceOrderLineList.clear();
             serviceOrderLineList = (ArrayList<ServiceOrderLine>) this.serviceOrderLineService.findAll();
             mv.addObject("serviceOrderLines", this.serviceOrderLineService.findAll());
@@ -67,7 +67,7 @@ public class ServiceOrderLineController {
 
     @PostMapping(value = "serviceOrderLine")
     public String save(@Valid ServiceOrderLine serviceOrderLine, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class ServiceOrderLineController {
     @RequestMapping("/updateServiceOrderLine/{id}")
     public String updateServiceOrderLine(@PathVariable("id") int id, @Valid ServiceOrderLine serviceOrderLine,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("serviceOrderLine", serviceOrderLine);
         this.serviceOrderLineService.update(serviceOrderLine);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class ServiceOrderLineController {
 
     @GetMapping("/removeServiceOrderLine/{id}")
     public String deleteServiceOrderLine(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ServiceOrderLine serviceOrderLine = this.serviceOrderLineService.find(id);
         if (serviceOrderLine == null) {
             model.addAttribute("addMessage", "Invalid serviceOrderLine Id:" + id);
@@ -109,7 +109,7 @@ public class ServiceOrderLineController {
 
     @GetMapping("/editServiceOrderLine/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ServiceOrderLine serviceOrderLine = this.serviceOrderLineService.find(id);
         if (serviceOrderLine == null) {
             model.addAttribute("addMessage", "Invalid serviceOrderLine Id:" + id);
@@ -120,14 +120,6 @@ public class ServiceOrderLineController {
         return "updateServiceOrderLine";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
 
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

@@ -1,10 +1,21 @@
 package com.springpos.service.impl;
 
+import com.springpos.bean.Contact;
+import com.springpos.bean.Contractor;
+import com.springpos.bean.CustomerSite;
+import com.springpos.bean.Sequence;
+import com.springpos.bean.ServiceOrder;
 import com.springpos.bean.User;
 import com.springpos.bean.Sessions;
+import com.springpos.service.ContactService;
+import com.springpos.service.ContractorService;
+import com.springpos.service.CountryService;
+import com.springpos.service.CustomerSiteService;
 import org.springframework.stereotype.Service;
 import com.springpos.service.MainService;
+import com.springpos.service.ServiceOrderService;
 import com.springpos.service.SessionService;
+import com.springpos.service.StateService;
 import com.springpos.service.UserService;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -25,6 +36,8 @@ public class MainServiceImpl implements MainService {
 
     private String session;
 
+    private Sequence sequence;
+
     ModelAndView mv;
 
     String staticUser = "admin@gmail.com";
@@ -35,9 +48,41 @@ public class MainServiceImpl implements MainService {
 
     private int loggedOut = 0;
 
+    private ServiceOrderService serviceOrderService;
+    private CustomerSiteService customerSiteService;
+    private ContactService contactService;
     private UserService userService;
-
     private SessionService sessionService;
+    private ContractorService contractorService;
+
+    public void setSequence(Sequence sequence) {
+        this.sequence = sequence;
+    }
+
+    @Override
+    public Sequence getSequence() {
+        return this.sequence;
+    }
+
+    @Autowired
+    public void setContractorService(ContractorService contractorService) {
+        this.contractorService = contractorService;
+    }
+
+    @Autowired
+    public void setServiceOrderService(ServiceOrderService serviceOrderService) {
+        this.serviceOrderService = serviceOrderService;
+    }
+
+    @Autowired
+    public void setCustomerSiteService(CustomerSiteService customerSiteService) {
+        this.customerSiteService = customerSiteService;
+    }
+
+    @Autowired
+    public void setContactService(ContactService contactService) {
+        this.contactService = contactService;
+    }
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -149,4 +194,71 @@ public class MainServiceImpl implements MainService {
         this.loggedIn = loggedIn;
         this.loggedOut = loggedOut;
     }
+
+    @Override
+    public void setInstitution(Model institution) {
+        institution.addAttribute("institution", institutionName());
+        institution.addAttribute("nstitle", institutionName());
+        institution.addAttribute("motto", institutionMotto());
+    }
+
+    @Override
+    public void setInstitution(ModelAndView institution) {
+        institution.addObject("institution", institutionName());
+        institution.addObject("nstitle", institutionName());
+        institution.addObject("motto", institutionMotto());
+    }
+
+    @Override
+    public Sequence pageTwo(CustomerSite customer) {
+        if (this.sequence == null) {
+            this.sequence = new Sequence();
+        }
+        if (customer != null) {
+            this.sequence.setCustomer(customer);
+        }
+        return this.sequence;
+    }
+
+    @Override
+    public Sequence pageThree(ServiceOrder order) {
+        if (this.sequence == null) {
+            return null;
+        }
+        if (order != null) {
+            this.sequence.setServiceOrder(order);
+        }
+        return this.sequence;
+    }
+
+    @Override
+    public Sequence pageFour(Contractor contractor) {
+        if (this.sequence == null) {
+            return null;
+        }
+        if (contractor != null) {
+            this.sequence.setContractor(contractor);
+        }
+        return this.sequence;
+    }
+
+    @Override
+    public void destroySequence() {
+        this.sequence = null;
+    }
+
+    @Override
+    public String executeSequence() {
+        CustomerSite customer = this.customerSiteService.save(this.sequence.getCustomer());
+        Contractor contractor = this.contractorService.save(this.sequence.getContractor());
+        Contact cont=new Contact(customer);
+        Contact contact = this.contactService.save(cont);
+        ServiceOrder order =this.sequence.getServiceOrder();
+        if (customer == null || contact == null || order == null) {
+            this.customerSiteService.delete(customer);
+            this.contactService.delete(contact);
+        }
+        return null;
+    }
+
 }

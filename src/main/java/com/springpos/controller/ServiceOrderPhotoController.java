@@ -45,7 +45,7 @@ public class ServiceOrderPhotoController {
             return "index";
         }
         model.addAttribute("serviceOrderPhoto", new ServiceOrderPhoto());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "serviceOrderPhoto";
     }
 
@@ -57,7 +57,7 @@ public class ServiceOrderPhotoController {
             mv.setViewName("index");
         } else {
             mv.addObject("serviceOrderPhoto", new ServiceOrderPhoto());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             serviceOrderPhotoList.clear();
             serviceOrderPhotoList = (ArrayList<ServiceOrderPhoto>) this.serviceOrderPhotoService.findAll();
             mv.addObject("serviceOrderPhotos", this.serviceOrderPhotoService.findAll());
@@ -67,7 +67,7 @@ public class ServiceOrderPhotoController {
 
     @PostMapping(value = "serviceOrderPhoto")
     public String save(@Valid ServiceOrderPhoto serviceOrderPhoto, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class ServiceOrderPhotoController {
     @RequestMapping("/updateServiceOrderPhoto/{id}")
     public String updateServiceOrderPhoto(@PathVariable("id") int id, @Valid ServiceOrderPhoto serviceOrderPhoto,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("serviceOrderPhoto", serviceOrderPhoto);
         this.serviceOrderPhotoService.update(serviceOrderPhoto);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class ServiceOrderPhotoController {
 
     @GetMapping("/removeServiceOrderPhoto/{id}")
     public String deleteServiceOrderPhoto(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ServiceOrderPhoto serviceOrderPhoto = this.serviceOrderPhotoService.find(id);
         if (serviceOrderPhoto == null) {
             model.addAttribute("addMessage", "Invalid serviceOrderPhoto Id:" + id);
@@ -109,7 +109,7 @@ public class ServiceOrderPhotoController {
 
     @GetMapping("/editServiceOrderPhoto/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ServiceOrderPhoto serviceOrderPhoto = this.serviceOrderPhotoService.find(id);
         if (serviceOrderPhoto == null) {
             model.addAttribute("addMessage", "Invalid serviceOrderPhoto Id:" + id);
@@ -120,14 +120,5 @@ public class ServiceOrderPhotoController {
         return "updateServiceOrderPhoto";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

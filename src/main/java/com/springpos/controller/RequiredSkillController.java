@@ -45,7 +45,7 @@ public class RequiredSkillController {
             return "index";
         }
         model.addAttribute("requiredSkill", new RequiredSkill());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "requiredSkill";
     }
 
@@ -57,7 +57,7 @@ public class RequiredSkillController {
             mv.setViewName("index");
         } else {
             mv.addObject("requiredSkill", new RequiredSkill());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             requiredSkillList.clear();
             requiredSkillList = (ArrayList<RequiredSkill>) this.requiredSkillService.findAll();
             mv.addObject("requiredSkills", this.requiredSkillService.findAll());
@@ -67,7 +67,7 @@ public class RequiredSkillController {
 
     @PostMapping(value = "requiredSkill")
     public String save(@Valid RequiredSkill requiredSkill, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class RequiredSkillController {
     @RequestMapping("/updateRequiredSkill/{id}")
     public String updateRequiredSkill(@PathVariable("id") int id, @Valid RequiredSkill requiredSkill,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("requiredSkill", requiredSkill);
         this.requiredSkillService.update(requiredSkill);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class RequiredSkillController {
 
     @GetMapping("/removeRequiredSkill/{id}")
     public String deleteRequiredSkill(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         RequiredSkill requiredSkill = this.requiredSkillService.find(id);
         if (requiredSkill == null) {
             model.addAttribute("addMessage", "Invalid requiredSkill Id:" + id);
@@ -109,7 +109,7 @@ public class RequiredSkillController {
 
     @GetMapping("/editRequiredSkill/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         RequiredSkill requiredSkill = this.requiredSkillService.find(id);
         if (requiredSkill == null) {
             model.addAttribute("addMessage", "Invalid requiredSkill Id:" + id);
@@ -120,14 +120,5 @@ public class RequiredSkillController {
         return "updateRequiredSkill";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

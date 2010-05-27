@@ -86,7 +86,7 @@ public class ContactController {
         model.addAttribute("countries", this.countryService.findAll());
         model.addAttribute("states", this.stateService.findAll());
         model.addAttribute("contact", new Contact());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "contact";
     }
 
@@ -98,7 +98,7 @@ public class ContactController {
             mv.setViewName("index");
         } else {
             mv.addObject("contact", new Contact());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             contactList.clear();          
             mv.addObject("contacts",this.contactService.findAll());
         }
@@ -107,7 +107,7 @@ public class ContactController {
 
     @PostMapping(value = "contact")
     public String save(@Valid Contact contact, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
             model.addAttribute("contact", new Contact());
@@ -131,7 +131,7 @@ public class ContactController {
     @RequestMapping("/updateContact/{id}")
     public String updateContact(@PathVariable("id") int id, @Valid Contact contact,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("contact", contact);
         this.contactService.update(contact);
         model.addAttribute("addMessage", "Update Successful !");
@@ -141,7 +141,7 @@ public class ContactController {
 
     @GetMapping("/removeContact/{id}")
     public String deleteContact(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Contact contact = this.contactService.find(id);
         if (contact == null) {
             model.addAttribute("addMessage", "Invalid contact Id:" + id);
@@ -156,7 +156,7 @@ public class ContactController {
 
     @GetMapping("/editContact/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Contact contact = this.contactService.find(id);
         if (contact == null) {
             model.addAttribute("addMessage", "Invalid contact Id:" + id);
@@ -167,14 +167,5 @@ public class ContactController {
         return "updateContact";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

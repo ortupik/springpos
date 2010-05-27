@@ -45,7 +45,7 @@ public class CountryController {
             return "index";
         }
         model.addAttribute("country", new Country());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "country";
     }
 
@@ -57,7 +57,7 @@ public class CountryController {
             mv.setViewName("index");
         } else {
             mv.addObject("country", new Country());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             countryList.clear();
             countryList = (ArrayList<Country>) this.countryService.findAll();
             mv.addObject("countrys", this.countryService.findAll());
@@ -67,7 +67,7 @@ public class CountryController {
 
     @PostMapping(value = "country")
     public String save(@Valid Country country, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class CountryController {
     @RequestMapping("/updateCountry/{id}")
     public String updateCountry(@PathVariable("id") int id, @Valid Country country,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("country", country);
         this.countryService.update(country);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class CountryController {
 
     @GetMapping("/removeCountry/{id}")
     public String deleteCountry(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Country country = this.countryService.find(id);
         if (country == null) {
             model.addAttribute("addMessage", "Invalid country Id:" + id);
@@ -109,7 +109,7 @@ public class CountryController {
 
     @GetMapping("/editCountry/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Country country = this.countryService.find(id);
         if (country == null) {
             model.addAttribute("addMessage", "Invalid country Id:" + id);
@@ -120,14 +120,5 @@ public class CountryController {
         return "updateCountry";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

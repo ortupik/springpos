@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class ServiceOrderLine implements Serializable {
 
     @Id
-    @Column(name = "svo_LINE_ID")
+    @Column(name = "svo_line_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "svo_id")

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form action="#"  th:object="${serviceOrder}" th:action="@{/page3}" method="post">
+
+                        <div class ="form-group">
+                            <label>Service Type</label>
+                            <select  placeholder="Select Service Type" type="text" class="form-control" th:field="*{svo_type_id}" id="svo_type_id" required="">
+                                <option class="form-control" th:each="serviceType : ${serviceTypes}"
+                                        th:value="${serviceType.id}"
+                                        th:utext="${serviceType.svc_type}">                                            
+                                </option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('svo_type_id')}" th:errors="*{svo_type_id}"></span>
+                        </div>
+
+                        <div class ="form-group">
+                            <label>Hardware Needed</label>
+                            <textarea placeholder="Hardware Needed..." type="text" class="form-control" th:field="*{work_request}" id="work_request" required=""></textarea>
+                            <span th:if="${#fields.hasErrors('work_request')}" th:errors="*{work_request}"></span>
+                        </div>
+
+
+                        <div class ="form-group">
+                            <label>Other Comments</label>
+                            <textarea placeholder="Other Comments..." type="text" class="form-control" th:field="*{work_summary}" id="work_summary" required=""></textarea>
+                            <span th:if="${#fields.hasErrors('work_summary')}" th:errors="*{work_summary}"></span>
+                        </div>                        
+                        <button type="submit" class="btn btn-success">Next</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->     
+    </body>
+</html>

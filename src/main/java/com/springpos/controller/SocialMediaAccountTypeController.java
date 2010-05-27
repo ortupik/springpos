@@ -45,7 +45,7 @@ public class SocialMediaAccountTypeController {
             return "index";
         }
         model.addAttribute("socialMediaAccountType", new SocialMediaAccountType());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "socialMediaAccountType";
     }
 
@@ -57,7 +57,7 @@ public class SocialMediaAccountTypeController {
             mv.setViewName("index");
         } else {
             mv.addObject("socialMediaAccountType", new SocialMediaAccountType());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             socialMediaAccountTypeList.clear();
             socialMediaAccountTypeList = (ArrayList<SocialMediaAccountType>) this.socialMediaAccountTypeService.findAll();
             mv.addObject("socialMediaAccountTypes", this.socialMediaAccountTypeService.findAll());
@@ -67,7 +67,7 @@ public class SocialMediaAccountTypeController {
 
     @PostMapping(value = "socialMediaAccountType")
     public String save(@Valid SocialMediaAccountType socialMediaAccountType, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class SocialMediaAccountTypeController {
     @RequestMapping("/updateSocialMediaAccountType/{id}")
     public String updateSocialMediaAccountType(@PathVariable("id") int id, @Valid SocialMediaAccountType socialMediaAccountType,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("socialMediaAccountType", socialMediaAccountType);
         this.socialMediaAccountTypeService.update(socialMediaAccountType);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class SocialMediaAccountTypeController {
 
     @GetMapping("/removeSocialMediaAccountType/{id}")
     public String deleteSocialMediaAccountType(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         SocialMediaAccountType socialMediaAccountType = this.socialMediaAccountTypeService.find(id);
         if (socialMediaAccountType == null) {
             model.addAttribute("addMessage", "Invalid socialMediaAccountType Id:" + id);
@@ -109,7 +109,7 @@ public class SocialMediaAccountTypeController {
 
     @GetMapping("/editSocialMediaAccountType/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         SocialMediaAccountType socialMediaAccountType = this.socialMediaAccountTypeService.find(id);
         if (socialMediaAccountType == null) {
             model.addAttribute("addMessage", "Invalid socialMediaAccountType Id:" + id);
@@ -120,14 +120,5 @@ public class SocialMediaAccountTypeController {
         return "updateSocialMediaAccountType";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

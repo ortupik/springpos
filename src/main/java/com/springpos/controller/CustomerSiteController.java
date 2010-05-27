@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.springpos.service.CustomerSiteService;
 import com.springpos.service.StateService;
@@ -30,7 +29,8 @@ public class CustomerSiteController {
     private StateService stateService;
     private MainService mainService;
     private ContactService contactService;
-
+    private CustomerSite cust = null;
+    
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomerSiteController.class);
 
     ArrayList<CustomerSite> customerSiteList = new ArrayList();
@@ -68,7 +68,7 @@ public class CustomerSiteController {
         model.addAttribute("customerSite", new CustomerSite());
         model.addAttribute("countries", this.countryService.findAll());
         model.addAttribute("states", this.stateService.findAll());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "customerSite";
     }
 
@@ -80,7 +80,7 @@ public class CustomerSiteController {
             mv.setViewName("index");
         } else {
             mv.addObject("customerSite", new CustomerSite());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             customerSiteList.clear();
             customerSiteList = (ArrayList<CustomerSite>) this.customerSiteService.findAll();
             mv.addObject("customerSites", this.customerSiteService.findAll());
@@ -88,45 +88,30 @@ public class CustomerSiteController {
         return mv;
     }
 
-    @PostMapping(value = "customerSite")
+    @RequestMapping(value = "customerSite")
     public String save(@Valid CustomerSite customerSite, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
             model.addAttribute("customerSite", new CustomerSite());
             return "customerSite";
         }
-        CustomerSite cust = customerSiteService.save(customerSite);
-        Contact cont = new Contact(cust);
-        contactService.save(cont);
-        model.addAttribute("customerSite", new CustomerSite());
-        model.addAttribute("addMessage", " CustomerSite Added Successfull ");
-        return "redirect:/customerSite";
-    }
-    
-    
-     @PostMapping(value = "customerSite")
-    public String next(@Valid CustomerSite customerSite, BindingResult result, Model model) {
-        setInstitution(model);
-        if (result.hasErrors()) {
-            model.addAttribute("addMessage", result.toString());
-
-            model.addAttribute("customerSite", new CustomerSite());
-            return "customerSite";
+        cust = customerSiteService.save(customerSite);
+        if (cust != null) {
+            Contact cont = new Contact(cust);
+            contactService.save(cont);
         }
-        CustomerSite cust = customerSiteService.save(customerSite);
-        Contact cont = new Contact(cust);
-        contactService.save(cont);
         model.addAttribute("customerSite", new CustomerSite());
         model.addAttribute("addMessage", " CustomerSite Added Successfull ");
         return "redirect:/customerSite";
     }
-
+   
+ 
     @RequestMapping("/updateCustomerSite/{id}")
     public String updateCustomerSite(@PathVariable("id") int id, @Valid CustomerSite customerSite,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("customerSite", customerSite);
         this.customerSiteService.update(customerSite);
         model.addAttribute("addMessage", "Update Successful !");
@@ -136,7 +121,7 @@ public class CustomerSiteController {
 
     @GetMapping("/removeCustomerSite/{id}")
     public String deleteCustomerSite(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         CustomerSite customerSite = this.customerSiteService.find(id);
         if (customerSite == null) {
             model.addAttribute("addMessage", "Invalid customerSite Id:" + id);
@@ -151,7 +136,7 @@ public class CustomerSiteController {
 
     @GetMapping("/editCustomerSite/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         CustomerSite customerSite = this.customerSiteService.find(id);
         if (customerSite == null) {
             model.addAttribute("addMessage", "Invalid customerSite Id:" + id);
@@ -162,14 +147,6 @@ public class CustomerSiteController {
         return "updateCustomerSite";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
+  
 
 }

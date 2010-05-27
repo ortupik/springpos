@@ -45,7 +45,7 @@ public class AssignmentController {
             return "index";
         }
         model.addAttribute("assignment", new Assignment());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "assignment";
     }
 
@@ -57,7 +57,7 @@ public class AssignmentController {
             mv.setViewName("index");
         } else {
             mv.addObject("assignment", new Assignment());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             assignmentList.clear();
             assignmentList = (ArrayList<Assignment>) this.assignmentService.findAll();
             mv.addObject("assignments", this.assignmentService.findAll());
@@ -67,7 +67,7 @@ public class AssignmentController {
 
     @PostMapping(value = "assignment")
     public String save(@Valid Assignment assignment, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class AssignmentController {
     @RequestMapping("/updateAssignment/{id}")
     public String updateAssignment(@PathVariable("id") int id, @Valid Assignment assignment,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("assignment", assignment);
         this.assignmentService.update(assignment);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class AssignmentController {
 
     @GetMapping("/removeAssignment/{id}")
     public String deleteAssignment(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Assignment assignment = this.assignmentService.find(id);
         if (assignment == null) {
             model.addAttribute("addMessage", "Invalid assignment Id:" + id);
@@ -109,7 +109,7 @@ public class AssignmentController {
 
     @GetMapping("/editAssignment/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Assignment assignment = this.assignmentService.find(id);
         if (assignment == null) {
             model.addAttribute("addMessage", "Invalid assignment Id:" + id);
@@ -120,14 +120,6 @@ public class AssignmentController {
         return "updateAssignment";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
+   
 
 }

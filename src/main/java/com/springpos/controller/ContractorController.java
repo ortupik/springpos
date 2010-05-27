@@ -76,7 +76,7 @@ public class ContractorController {
         model.addAttribute("countries", this.countryService.findAll());
         model.addAttribute("states", this.stateService.findAll());
         model.addAttribute("contractor", new Contractor());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "contractor";
     }
 
@@ -88,7 +88,7 @@ public class ContractorController {
             mv.setViewName("index");
         } else {
             mv.addObject("contractor", new Contractor());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             contractorList.clear();
             contractorList = (ArrayList<Contractor>) this.contractorService.findAll();
             mv.addObject("contractors", this.contractorService.findAll());
@@ -98,7 +98,7 @@ public class ContractorController {
 
     @PostMapping(value = "contractor")
     public String save(@Valid Contractor contractor, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -115,7 +115,7 @@ public class ContractorController {
     @RequestMapping("/updateContractor/{id}")
     public String updateContractor(@PathVariable("id") int id, @Valid Contractor contractor,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("contractor", contractor);
         this.contractorService.update(contractor);
         model.addAttribute("addMessage", "Update Successful !");
@@ -125,7 +125,7 @@ public class ContractorController {
 
     @GetMapping("/removeContractor/{id}")
     public String deleteContractor(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Contractor contractor = this.contractorService.find(id);
         if (contractor == null) {
             model.addAttribute("addMessage", "Invalid contractor Id:" + id);
@@ -140,7 +140,7 @@ public class ContractorController {
 
     @GetMapping("/editContractor/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Contractor contractor = this.contractorService.find(id);
         if (contractor == null) {
             model.addAttribute("addMessage", "Invalid contractor Id:" + id);
@@ -151,14 +151,6 @@ public class ContractorController {
         return "updateContractor";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
 
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

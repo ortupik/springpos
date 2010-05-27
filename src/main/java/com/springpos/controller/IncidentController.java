@@ -45,7 +45,7 @@ public class IncidentController {
             return "index";
         }
         model.addAttribute("incident", new Incident());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "incident";
     }
 
@@ -57,7 +57,7 @@ public class IncidentController {
             mv.setViewName("index");
         } else {
             mv.addObject("incident", new Incident());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             incidentList.clear();
             incidentList = (ArrayList<Incident>) this.incidentService.findAll();
             mv.addObject("incidents", this.incidentService.findAll());
@@ -67,7 +67,7 @@ public class IncidentController {
 
     @PostMapping(value = "incident")
     public String save(@Valid Incident incident, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class IncidentController {
     @RequestMapping("/updateIncident/{id}")
     public String updateIncident(@PathVariable("id") int id, @Valid Incident incident,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("incident", incident);
         this.incidentService.update(incident);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class IncidentController {
 
     @GetMapping("/removeIncident/{id}")
     public String deleteIncident(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Incident incident = this.incidentService.find(id);
         if (incident == null) {
             model.addAttribute("addMessage", "Invalid incident Id:" + id);
@@ -109,7 +109,7 @@ public class IncidentController {
 
     @GetMapping("/editIncident/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Incident incident = this.incidentService.find(id);
         if (incident == null) {
             model.addAttribute("addMessage", "Invalid incident Id:" + id);
@@ -120,14 +120,5 @@ public class IncidentController {
         return "updateIncident";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
-
+ 
 }

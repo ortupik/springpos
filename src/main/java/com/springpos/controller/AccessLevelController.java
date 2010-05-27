@@ -45,7 +45,7 @@ public class AccessLevelController {
             return "index";
         }
         model.addAttribute("accessLevel", new AccessLevel());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "accessLevel";
     }
 
@@ -57,7 +57,7 @@ public class AccessLevelController {
             mv.setViewName("index");
         } else {
             mv.addObject("accessLevel", new AccessLevel());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             accessLevelList.clear();
             accessLevelList = (ArrayList<AccessLevel>) this.accessLevelService.findAll();
             mv.addObject("accessLevels", this.accessLevelService.findAll());
@@ -67,7 +67,7 @@ public class AccessLevelController {
 
     @PostMapping(value = "accessLevel")
     public String save(@Valid AccessLevel accessLevel, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class AccessLevelController {
     @RequestMapping("/updateAccessLevel/{id}")
     public String updateAccessLevel(@PathVariable("id") int id, @Valid AccessLevel accessLevel,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("accessLevel", accessLevel);
         this.accessLevelService.update(accessLevel);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class AccessLevelController {
 
     @GetMapping("/removeAccessLevel/{id}")
     public String deleteAccessLevel(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         AccessLevel accessLevel = this.accessLevelService.find(id);
         if (accessLevel == null) {
             model.addAttribute("addMessage", "Invalid accessLevel Id:" + id);
@@ -109,7 +109,7 @@ public class AccessLevelController {
 
     @GetMapping("/editAccessLevel/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         AccessLevel accessLevel = this.accessLevelService.find(id);
         if (accessLevel == null) {
             model.addAttribute("addMessage", "Invalid accessLevel Id:" + id);
@@ -119,16 +119,6 @@ public class AccessLevelController {
         model.addAttribute("accessLevel", accessLevel);
         return "updateAccessLevel";
     }
-
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("title", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
+   
 
 }

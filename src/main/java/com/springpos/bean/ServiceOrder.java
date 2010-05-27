@@ -29,6 +29,8 @@ public class ServiceOrder implements Serializable {
     private int cust_site_id;
     @Column(name = "svo_status_id")
     private int svo_status_id;
+    @Column(name = "svo_type_id")
+    private int svo_type_id;
 
     public int getId() {
         return id;
@@ -84,6 +86,14 @@ public class ServiceOrder implements Serializable {
 
     public void setSvo_status_id(int svo_status_id) {
         this.svo_status_id = svo_status_id;
+    }
+
+    public int getSvo_type_id() {
+        return svo_type_id;
+    }
+
+    public void setSvo_type_id(int svo_type_id) {
+        this.svo_type_id = svo_type_id;
     }
 
 }

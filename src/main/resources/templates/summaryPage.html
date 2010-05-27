@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form action="#"  th:object="${summary}" th:action="@{/summaryPage}" method="post">
+                        <div class ="form-group">
+                            <label>Company Name</label>
+                            <input type="text" class ="form-control" placeholder="Company Name" id="companyName" th:field="*{companyName}" required="">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class ="form-group">
+                                    <label>Date Received</label>
+                                    <input type="date" class ="form-control" placeholder="" id="dateRecieved" th:field="*{dateRecieved}" required="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class ="form-group">
+                                    <label>Date Scheduled </label>
+                                    <input type="date" class ="form-control" placeholder="" id="dateScheduled" th:field="*{dateScheduled}" required="">
+                                </div>
+                            </div>
+                        </div>    
+                        <div class ="form-group">
+                            <label>Store#</label>
+                            <input type="text" class ="form-control" placeholder="" id="store" th:field="*{store}" required="">
+                        </div>
+
+
+                        <div class ="form-group">
+                            <label>Contractor</label>
+                            <input type="text" class ="form-control" placeholder="City" id="contractor" th:field="*{contractor}" required="">
+                        </div>
+
+                        <div class ="form-group">
+                            <label>Client Contact</label>
+                            <input type="text" class ="form-control" placeholder="" id="clientContact" th:field="*{clientContact}" required="">
+                        </div>
+                        
+                        <div class ="form-group">
+                            <label>Service</label>
+                            <input type="text" class ="form-control" placeholder="" id="service" th:field="*{service}" required="">
+                        </div>
+
+                        <div class ="form-group">
+                            <label>Hardware Needed</label>
+                            <textarea placeholder="Hardware Needed..." type="text" class="form-control" th:field="*{hardwareNeeded}" id="hardwareNeeded" required=""></textarea>
+                            <span th:if="${#fields.hasErrors('hardwareNeeded')}" th:errors="*{hardwareNeeded}"></span>
+                        </div>
+
+
+                        <div class ="form-group">
+                            <label>Other Comments</label>
+                            <textarea placeholder="Other Comments..." type="text" class="form-control" th:field="*{otherComments}" id="otherComments" required=""></textarea>
+                            <span th:if="${#fields.hasErrors('otherComments')}" th:errors="*{otherComments}"></span>
+                        </div>   
+
+                        <br>
+                        <button type="submit" class="btn btn-success"> Next </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->     
+    </body>
+</html>

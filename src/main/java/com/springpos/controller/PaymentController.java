@@ -45,7 +45,7 @@ public class PaymentController {
             return "index";
         }
         model.addAttribute("payment", new Payment());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "payment";
     }
 
@@ -57,7 +57,7 @@ public class PaymentController {
             mv.setViewName("index");
         } else {
             mv.addObject("payment", new Payment());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             paymentList.clear();
             paymentList = (ArrayList<Payment>) this.paymentService.findAll();
             mv.addObject("payments", this.paymentService.findAll());
@@ -67,7 +67,7 @@ public class PaymentController {
 
     @PostMapping(value = "payment")
     public String save(@Valid Payment payment, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class PaymentController {
     @RequestMapping("/updatePayment/{id}")
     public String updatePayment(@PathVariable("id") int id, @Valid Payment payment,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("payment", payment);
         this.paymentService.update(payment);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class PaymentController {
 
     @GetMapping("/removePayment/{id}")
     public String deletePayment(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Payment payment = this.paymentService.find(id);
         if (payment == null) {
             model.addAttribute("addMessage", "Invalid payment Id:" + id);
@@ -109,7 +109,7 @@ public class PaymentController {
 
     @GetMapping("/editPayment/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Payment payment = this.paymentService.find(id);
         if (payment == null) {
             model.addAttribute("addMessage", "Invalid payment Id:" + id);
@@ -118,16 +118,6 @@ public class PaymentController {
         }
         model.addAttribute("payment", payment);
         return "updatePayment";
-    }
-
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
     }
 
 }

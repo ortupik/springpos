@@ -45,7 +45,7 @@ public class SvcController {
             return "index";
         }
         model.addAttribute("svc", new Svc());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "svc";
     }
 
@@ -57,7 +57,7 @@ public class SvcController {
             mv.setViewName("index");
         } else {
             mv.addObject("svc", new Svc());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             svcList.clear();
             svcList = (ArrayList<Svc>) this.svcService.findAll();
             mv.addObject("svcs", this.svcService.findAll());
@@ -67,7 +67,7 @@ public class SvcController {
 
     @PostMapping(value = "svc")
     public String save(@Valid Svc svc, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class SvcController {
     @RequestMapping("/updateSvc/{id}")
     public String updateSvc(@PathVariable("id") int id, @Valid Svc svc,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("svc", svc);
         this.svcService.update(svc);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class SvcController {
 
     @GetMapping("/removeSvc/{id}")
     public String deleteSvc(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Svc svc = this.svcService.find(id);
         if (svc == null) {
             model.addAttribute("addMessage", "Invalid svc Id:" + id);
@@ -109,7 +109,7 @@ public class SvcController {
 
     @GetMapping("/editSvc/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         Svc svc = this.svcService.find(id);
         if (svc == null) {
             model.addAttribute("addMessage", "Invalid svc Id:" + id);
@@ -120,14 +120,5 @@ public class SvcController {
         return "updateSvc";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

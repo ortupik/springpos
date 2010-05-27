@@ -45,7 +45,7 @@ public class StateController {
             return "index";
         }
         model.addAttribute("state", new State());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "state";
     }
 
@@ -57,7 +57,7 @@ public class StateController {
             mv.setViewName("index");
         } else {
             mv.addObject("state", new State());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             stateList.clear();
             stateList = (ArrayList<State>) this.stateService.findAll();
             mv.addObject("states", this.stateService.findAll());
@@ -67,7 +67,7 @@ public class StateController {
 
     @PostMapping(value = "state")
     public String save(@Valid State state, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class StateController {
     @RequestMapping("/updateState/{id}")
     public String updateState(@PathVariable("id") int id, @Valid State state,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("state", state);
         this.stateService.update(state);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class StateController {
 
     @GetMapping("/removeState/{id}")
     public String deleteState(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         State state = this.stateService.find(id);
         if (state == null) {
             model.addAttribute("addMessage", "Invalid state Id:" + id);
@@ -109,7 +109,7 @@ public class StateController {
 
     @GetMapping("/editState/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         State state = this.stateService.find(id);
         if (state == null) {
             model.addAttribute("addMessage", "Invalid state Id:" + id);
@@ -120,14 +120,5 @@ public class StateController {
         return "updateState";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

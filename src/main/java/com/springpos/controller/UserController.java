@@ -38,7 +38,7 @@ public class UserController {
     @RequestMapping("loginPage")
     public String loginPage(Model model) {
         model.addAttribute("user", new User());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "loginPage";
     }
 
@@ -48,7 +48,7 @@ public class UserController {
             return "index";
         }
         model.addAttribute("user", new User());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "user";
     }
 
@@ -87,7 +87,7 @@ public class UserController {
         if (mainService.getLoggedIn() == null) {
             return "index";
         }
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
             model.addAttribute("user", new User());
@@ -113,7 +113,7 @@ public class UserController {
             mv.setViewName("index");
         }
         mv.addObject("user", new User());
-        setInstitution(mv);
+        mainService.setInstitution(mv);
         mv.addObject("users", this.userService.findAll());
         return mv;
     }
@@ -124,7 +124,7 @@ public class UserController {
         if (mainService.getLoggedIn() == null) {
             return "index";
         }
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("user", user);
         this.userService.update(user);
         model.addAttribute("addMessage", "Update Successful !");
@@ -134,7 +134,7 @@ public class UserController {
 
     @GetMapping("/removeUser/{id}")
     public String deleteUser(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (mainService.getLoggedIn() == null) {
             return "index";
         }
@@ -152,7 +152,7 @@ public class UserController {
 
     @GetMapping("/editUser/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (mainService.getLoggedIn() == null) {
             return "index";
         }
@@ -164,16 +164,6 @@ public class UserController {
         }
         model.addAttribute("user", user);
         return "updateUser";
-    }
-
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
     }
 
 }

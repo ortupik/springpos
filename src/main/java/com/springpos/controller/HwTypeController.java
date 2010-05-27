@@ -45,7 +45,7 @@ public class HwTypeController {
             return "index";
         }
         model.addAttribute("hwType", new HwType());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "hwType";
     }
 
@@ -57,7 +57,7 @@ public class HwTypeController {
             mv.setViewName("index");
         } else {
             mv.addObject("hwType", new HwType());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             hwTypeList.clear();
             hwTypeList = (ArrayList<HwType>) this.hwTypeService.findAll();
             mv.addObject("hwTypes", this.hwTypeService.findAll());
@@ -67,7 +67,7 @@ public class HwTypeController {
 
     @PostMapping(value = "hwType")
     public String save(@Valid HwType hwType, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class HwTypeController {
     @RequestMapping("/updateHwType/{id}")
     public String updateHwType(@PathVariable("id") int id, @Valid HwType hwType,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("hwType", hwType);
         this.hwTypeService.update(hwType);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class HwTypeController {
 
     @GetMapping("/removeHwType/{id}")
     public String deleteHwType(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         HwType hwType = this.hwTypeService.find(id);
         if (hwType == null) {
             model.addAttribute("addMessage", "Invalid hwType Id:" + id);
@@ -109,7 +109,7 @@ public class HwTypeController {
 
     @GetMapping("/editHwType/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         HwType hwType = this.hwTypeService.find(id);
         if (hwType == null) {
             model.addAttribute("addMessage", "Invalid hwType Id:" + id);
@@ -120,14 +120,5 @@ public class HwTypeController {
         return "updateHwType";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
-
+ 
 }

@@ -45,7 +45,7 @@ public class ServiceTypeController {
             return "index";
         }
         model.addAttribute("serviceType", new ServiceType());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "serviceType";
     }
 
@@ -57,7 +57,7 @@ public class ServiceTypeController {
             mv.setViewName("index");
         } else {
             mv.addObject("serviceType", new ServiceType());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             serviceTypeList.clear();
             serviceTypeList = (ArrayList<ServiceType>) this.serviceTypeService.findAll();
             mv.addObject("serviceTypes", this.serviceTypeService.findAll());
@@ -67,7 +67,7 @@ public class ServiceTypeController {
 
     @PostMapping(value = "serviceType")
     public String save(@Valid ServiceType serviceType, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class ServiceTypeController {
     @RequestMapping("/updateServiceType/{id}")
     public String updateServiceType(@PathVariable("id") int id, @Valid ServiceType serviceType,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("serviceType", serviceType);
         this.serviceTypeService.update(serviceType);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class ServiceTypeController {
 
     @GetMapping("/removeServiceType/{id}")
     public String deleteServiceType(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ServiceType serviceType = this.serviceTypeService.find(id);
         if (serviceType == null) {
             model.addAttribute("addMessage", "Invalid serviceType Id:" + id);
@@ -109,7 +109,7 @@ public class ServiceTypeController {
 
     @GetMapping("/editServiceType/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ServiceType serviceType = this.serviceTypeService.find(id);
         if (serviceType == null) {
             model.addAttribute("addMessage", "Invalid serviceType Id:" + id);
@@ -120,14 +120,5 @@ public class ServiceTypeController {
         return "updateServiceType";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

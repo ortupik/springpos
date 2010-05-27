@@ -45,7 +45,7 @@ public class CustomerSiteStatusController {
             return "index";
         }
         model.addAttribute("customerSiteStatus", new CustomerSiteStatus());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "customerSiteStatus";
     }
 
@@ -57,7 +57,7 @@ public class CustomerSiteStatusController {
             mv.setViewName("index");
         } else {
             mv.addObject("customerSiteStatus", new CustomerSiteStatus());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             customerSiteStatusList.clear();
             customerSiteStatusList.addAll(this.customerSiteStatusService.findAll());
             mv.addObject("customerSiteStatuss", this.customerSiteStatusService.findAll());
@@ -67,7 +67,7 @@ public class CustomerSiteStatusController {
 
     @PostMapping(value = "customerSiteStatus")
     public String save(@Valid CustomerSiteStatus customerSiteStatus, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class CustomerSiteStatusController {
     @RequestMapping("/updateCustomerSiteStatus/{id}")
     public String updateCustomerSiteStatus(@PathVariable("id") int id, @Valid CustomerSiteStatus customerSiteStatus,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("customerSiteStatus", customerSiteStatus);
         this.customerSiteStatusService.update(customerSiteStatus);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class CustomerSiteStatusController {
 
     @GetMapping("/removeCustomerSiteStatus/{id}")
     public String deleteCustomerSiteStatus(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         CustomerSiteStatus customerSiteStatus = this.customerSiteStatusService.find(id);
         if (customerSiteStatus == null) {
             model.addAttribute("addMessage", "Invalid customerSiteStatus Id:" + id);
@@ -109,7 +109,7 @@ public class CustomerSiteStatusController {
 
     @GetMapping("/editCustomerSiteStatus/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         CustomerSiteStatus customerSiteStatus = this.customerSiteStatusService.find(id);
         if (customerSiteStatus == null) {
             model.addAttribute("addMessage", "Invalid customerSiteStatus Id:" + id);
@@ -120,14 +120,5 @@ public class CustomerSiteStatusController {
         return "updateCustomerSiteStatus";
     }
 
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
-    }
 
 }

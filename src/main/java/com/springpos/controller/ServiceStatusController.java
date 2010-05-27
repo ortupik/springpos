@@ -45,7 +45,7 @@ public class ServiceStatusController {
             return "index";
         }
         model.addAttribute("serviceStatus", new ServiceStatus());
-        setInstitution(model);
+        mainService.setInstitution(model);
         return "serviceStatus";
     }
 
@@ -57,7 +57,7 @@ public class ServiceStatusController {
             mv.setViewName("index");
         } else {
             mv.addObject("serviceStatus", new ServiceStatus());
-            setInstitution(mv);
+            mainService.setInstitution(mv);
             serviceStatusList.clear();
             serviceStatusList = (ArrayList<ServiceStatus>) this.serviceStatusService.findAll();
             mv.addObject("serviceStatuss", this.serviceStatusService.findAll());
@@ -67,7 +67,7 @@ public class ServiceStatusController {
 
     @PostMapping(value = "serviceStatus")
     public String save(@Valid ServiceStatus serviceStatus, BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
 
@@ -84,7 +84,7 @@ public class ServiceStatusController {
     @RequestMapping("/updateServiceStatus/{id}")
     public String updateServiceStatus(@PathVariable("id") int id, @Valid ServiceStatus serviceStatus,
             BindingResult result, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         model.addAttribute("serviceStatus", serviceStatus);
         this.serviceStatusService.update(serviceStatus);
         model.addAttribute("addMessage", "Update Successful !");
@@ -94,7 +94,7 @@ public class ServiceStatusController {
 
     @GetMapping("/removeServiceStatus/{id}")
     public String deleteServiceStatus(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ServiceStatus serviceStatus = this.serviceStatusService.find(id);
         if (serviceStatus == null) {
             model.addAttribute("addMessage", "Invalid serviceStatus Id:" + id);
@@ -109,7 +109,7 @@ public class ServiceStatusController {
 
     @GetMapping("/editServiceStatus/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        setInstitution(model);
+        mainService.setInstitution(model);
         ServiceStatus serviceStatus = this.serviceStatusService.find(id);
         if (serviceStatus == null) {
             model.addAttribute("addMessage", "Invalid serviceStatus Id:" + id);
@@ -118,16 +118,6 @@ public class ServiceStatusController {
         }
         model.addAttribute("serviceStatus", serviceStatus);
         return "updateServiceStatus";
-    }
-
-    void setInstitution(Model institution) {
-        institution.addAttribute("institution", this.mainService.institutionName());
-        institution.addAttribute("motto", this.mainService.institutionMotto());
-    }
-
-    void setInstitution(ModelAndView institution) {
-        institution.addObject("institution", this.mainService.institutionName());
-        institution.addObject("motto", this.mainService.institutionMotto());
     }
 
 }

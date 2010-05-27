@@ -2,14 +2,14 @@
 <html lang="en">
     <head>
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-        <title th:text="${nstitle}">Spring App</title>
+
     </head>
     <body>
         <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
         <div class="container" id="form">
             <div class="row justify-content-center">
-                <div class="col-md-12">
-                    <form action="#"  th:object="${customerSite}" th:action="@{/newOrder}" method="post">
+                <div class="col-md-6">
+                    <form action="#"  th:object="${customerSite}" th:action="@{/page2}" method="post">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class ="form-group">
@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class ="form-group">
                             <label>Company City </label>
                             <input type="text" class ="form-control" placeholder="Company City" id="cust_site_city" th:field="*{cust_site_city}" required="">
@@ -49,23 +49,21 @@
 
                         <div class ="form-group">
                             <label>Country</label>
-                            <input  placeholder="Country" type="text" list="countryList" class="form-control" th:field="*{country_id}" id="country_id" required="">
-                            <datalist id="countryList">      
+                            <select  placeholder="Country" class="form-control" th:field="*{country_id}" id="country_id" required="">
                                 <option class="form-control" th:each="country : ${countries}"
                                         th:value="${country.id}"
                                         th:utext="${country.country_name}"></option>
-                            </datalist>
+                            </select>
                             <span th:if="${#fields.hasErrors('country_id')}" th:errors="*{country_id}"></span>
                         </div>
 
                         <div class ="form-group">
                             <label>State</label>
-                            <input placeholder="State" type="text" list="stateList" class="form-control" name="hidden" th:field="*{state_id}" id="state_id" required="">
-                            <datalist id="stateList">      
+                            <select class="form-control" th:field="*{state_id}" id="state_id" required="">
                                 <option class="form-control" th:each="state : ${states}"
                                         th:value="${state.id}"
                                         th:utext="${state.state_name}"></option>
-                            </datalist>
+                            </select>
                             <span th:if="${#fields.hasErrors('state_id')}" th:errors="*{state_id}"></span>
                         </div>
 

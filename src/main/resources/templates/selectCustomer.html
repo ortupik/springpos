@@ -23,7 +23,7 @@
                                         <th>City</th>
                                         <th>Country Id </th>
                                         <th>State Id</th>
-                                        <th>Choose</th>
+                                        <th>Select</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -35,10 +35,11 @@
                                         <td th:text="${customerSite.cust_site_city}"> </td>
                                         <td th:text="${customerSite.country_id}"> </td>
                                         <td th:text="${customerSite.state_id}"> </td>
-                                        <td><a th:href="@{/bookCustomerSite/{id}(id=${customerSite.id})}" class="btn btn-danger btn-rounded btn-sm  my-0">Select</a></td>
+                                        <td><a th:href="@{/selectCustomer/{id}(id=${customerSite.id})}"  class="btn btn-success btn-rounded btn-sm  my-0">Select</a></td>
                                     </tr>
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
