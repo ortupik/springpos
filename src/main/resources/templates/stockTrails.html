@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+
+        <title>View Stock Trail</title>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+    <body>
+        <div class="container"  >
+            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+            <span th:text="${addMessage}"></span>
+            <div th:switch="${stockTrails}">
+                <h2 th:case="null">No Stock Trail!</h2>
+                <div th:case="*">
+                    <h2>Stock Trail</h2>
+                    <table class="table table-striped table-bordered table-condensed">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Id</th>
+                                <th>Category</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Transaction Date</th>
+                                <th>Transaction Timestamp</th>
+                                <th>Status</th>
+                                <th>User</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="stockTrail : ${stockTrails}">
+                                <td th:text="${stockTrail.id}"><a href="/stockTrail/${stockTrail.id}">Id</a></td>
+                                <td th:text="${stockTrail.categoryName}"></td>
+                                <td th:text="${stockTrail.productName}"></td>
+                                <td th:text="${stockTrail.quantity}"></td>
+                                <td th:text="${stockTrail.tranDate}"></td>
+                                <td th:text="${stockTrail.ctime}"></td>
+                                <td th:text="${stockTrail.status}"></td>
+                                <td th:text="${stockTrail.userId}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+    </body>
+</html>

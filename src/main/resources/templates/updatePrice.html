@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <title>Add Prices</title>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+    <body>
+        <div class="container"  >
+            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+            <h2>Price Details</h2>
+            <span th:text="${addMessage}"></span>
+            <div>
+                <form class="form-horizontal" action="#" th:action="@{/updatePrice/{id}(id=${price.id})}" th:object="${price}">
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="form-group">
+                        <div class="col-xs-10">                         
+                            <input  list="categoryList" class="form-control" type="hidden" th:field="*{categoryName}" id="categoryName" required="">
+                            <datalist id="categoryList" th:each="category : ${categorys}">      
+                                <option class="form-control" th:each="category : ${categorys}"
+                                        th:value="${category.categoryName}"
+                                        th:utext="${category.categoryName}"></option>
+                            </datalist>
+                            <span th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-10">                                    
+                            <label class="control-label">Select Product : </label>
+                            <input  list="productList" class="form-control" name="hidden" th:field="*{productName}" id="productName" required="" autocomplete="false">
+                            <datalist id="productList" th:each="product : ${products}">      
+                                <option class="form-control" th:each="product : ${products}"
+                                        th:value="${product.productName}"
+                                        th:utext="${product.productName}"></option>
+                            </datalist>
+                            <span th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Buying Price : </label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="buyingPrice" th:field="*{buyingPrice}" required=""/>
+                            <span th:if="${#fields.hasErrors('buyingPrice')}" th:errors="*{buyingPrice}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Selling Price : </label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="sellingPrice" th:field="*{sellingPrice}" required=""/>
+                            <span th:if="${#fields.hasErrors('sellingPrice')}" th:errors="*{sellingPrice}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button type="Save" class="btn btn-default">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

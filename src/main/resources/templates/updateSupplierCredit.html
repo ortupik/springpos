@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <title>Add Supplier Credit</title>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+    <body>
+        <div class="container"  >
+            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+            <h2>Supplier Credit Details</h2>
+            <span th:text="${addMessage}"></span>
+            <div>
+                <form class="form-horizontal" action="#" th:action="@{/updateSupplierCredit/{id}(id=${supplierCredit.id})}" th:object="${supplierCredit}">
+                    <input type="hidden" th:field="*{id}"/>
+                     <div class="form-group">
+                        <label class="col-xs-2 control-label">Select Supplier ID : </label>
+                          <div class="col-xs-10">
+                            <input type="text" class="form-control" id="supplierId" th:field="*{supplierId}" required=""/>
+                            <span th:if="${#fields.hasErrors('supplierId')}" th:errors="*{supplierId}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Stock Id : </label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="saleId" th:field="*{saleId}" required=""/>
+                            <span th:if="${#fields.hasErrors('saleId')}" th:errors="*{saleId}"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Amount Owed : </label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="amountOwed" th:field="*{amountOwed}" required=""/>
+                            <span th:if="${#fields.hasErrors('amountOwed')}" th:errors="*{amountOwed}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Amount Paid : </label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="amountPaid" th:field="*{amountPaid}" required=""/>
+                            <span th:if="${#fields.hasErrors('amountPaid')}" th:errors="*{amountPaid}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button type="Save" class="btn btn-default">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

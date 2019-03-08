@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <title>Update Users</title>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+    <body>
+        <div class="container"  >
+            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+            <h2>User Details</h2>
+            <span th:text="${addMessage}"></span>
+            <div>
+                <form class="form-horizontal" action="#" th:action="@{/updateUser/{id}(id=${user.id})}" th:object="${user}">
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">User Id : </label>
+                        <div class="col-xs-10">
+                            <input type="email" class="form-control" id="email" th:field="*{email}" required=""/>
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">First Names : </label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required=""/>
+                            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Last Names : </label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required=""/>
+                            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Roles: </label>
+                        <div class="col-xs-10">
+                            <select class="form-control" th:field="*{roles}" id="roles" required="">
+                                <option class="form-control" value="" > ----- </option>
+                                <option class="form-control" value="Admin" > Admin </option>
+                                <option class="form-control" value="User" > User </option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Password: </label>
+                        <div class="col-xs-10">
+                            <input type="password" class="form-control" id="password" th:field="*{password}" required=""/>
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button type="Save" class="btn btn-default">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+
+        <title>Update Stock</title>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+    <body>
+        <div class="container"  >
+            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+            <span th:text="${addMessage}"></span>
+            <div th:switch="${stocks}">
+                <h2 th:case="null">No stock yet!</h2>
+                <div th:case="*">
+                    <h2>Stock List</h2>
+                    <table class="table table-striped table-bordered table-condensed">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Id</th>
+                                <th>Category</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="stock : ${stocks}">
+                                <td th:text="${stock.id}"><a href="/stock/${stock.id}">Id</a></td>
+                                <td th:text="${stock.categoryName}">Category</td>
+                                <td th:text="${stock.productName}">Product</td>
+                                <td th:text="${stock.quantity}">Quantity</td>
+                                <td><a th:href="@{/removeStock/{id}(id=${stock.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+    </body>
+</html>

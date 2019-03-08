@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+
+        <title>Update Customer Credit</title>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+    <body>
+        <div class="container"  >
+            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+            <span th:text="${addMessage}"></span>
+            <div th:switch="${customerCredits}">
+                <h2 th:case="null">No Customer Credit yet!</h2>
+                <div th:case="*">
+                    <h2>Summarized Customer Credit List</h2>
+                    <a href="#" th:href="@{/summariseCustomerCredit}" class="btn btn-primary btn-rounded my-0">Summarise Customer Credit</a>
+                    <table class="table table-striped table-bordered table-condensed">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Id</th>
+                                <th>Customer Id</th>
+                                <th>Amount Owed</th>
+                                <th>Amount Paid</th>
+                                 <th>Status</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="customerCredit : ${customerCredits}">
+                                <td th:text="${customerCredit.id}"></td>
+                                <td th:text="${customerCredit.customerId}"></td>
+                                <td th:text="${customerCredit.saleId}"></td>
+                                <td th:text="${customerCredit.amountOwed}"></td>
+                                <td th:text="${customerCredit.amountPaid}"></td>
+                                <td th:text="${customerCredit.status}"></td>
+                                <td><a th:href="@{/editCustomerCredit/{id}(id=${customerCredit.id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
+                                <td><a th:href="@{/removeCustomerCredit/{id}(id=${customerCredit.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+    </body>
+</html>

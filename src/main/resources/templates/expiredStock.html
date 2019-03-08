@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <title>Update Damaged Stock</title>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+    <body>
+        <div class="container"  >
+            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+            <h2>Damaged Stock Details</h2>
+            <span th:text="${addMessage}"></span>
+            <div>
+                <form class="form-horizontal"  action="#"  th:object="${expiredStock}" th:action="@{/expiredStock}" method="post">
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="form-group">
+                        <div class="col-xs-10">                                    
+                            <label class="control-label">Select Product : </label>
+                            <input  list="productList" class="form-control" name="hidden" th:field="*{productName}" id="productName" required="" autocomplete="false">
+                            <datalist id="productList" th:each="product : ${products}">      
+                                <option class="form-control" th:each="product : ${products}"
+                                        th:value="${product.productName}"
+                                        th:utext="${product.productName}"></option>
+                            </datalist>
+                            <span th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Quantity : </label>
+                        <div class="col-xs-10">
+                            <input type="number" class="form-control" id="quantity" th:field="*{quantity}"/>
+                            <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <button type="Save"  class="btn btn-primary btn-rounded my-0">Save</button>
+                        </div> 
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <title>Add Categories</title>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+    <body>
+        <div class="container"  >
+            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+            <h2>Category Details</h2>
+            <span th:text="${addMessage}"></span>
+            <div>
+                <form class="form-horizontal" action="#" th:action="@{/updateCategory/{id}(id=${category.id})}" th:object="${category}">
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Category : </label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="categoryName" th:field="*{categoryName}" required=""/>
+                            <span th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button type="Save" class="btn btn-default">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

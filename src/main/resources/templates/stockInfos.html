@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+
+        <title>Update Stock Info</title>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+    <body>
+        <div class="container"  >
+            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+            <span th:text="${addMessage}"></span>
+            <div th:switch="${stockInfos}">
+                <h2 th:case="null">No Stock Info yet!</h2>
+               <a href="#" th:href="@{/stockInfoPdf}" class="btn btn-primary btn-rounded my-0">Generate PDF</a>
+                     <div th:case="*">
+                    <h2>Stock Info List</h2>
+                    <table class="table table-striped table-bordered table-condensed">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Id</th>
+                                <th>Category</th>
+                                <th>Product Name</th>
+                                <th>Opening Stock</th>
+                                <th>Opening Date</th>
+                                <th>Closing Stock</th>
+                                <th>Closing Date</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="stockInfo : ${stockInfos}">
+                                <td th:text="${stockInfo.id}">Id</td>
+                                <td th:text="${stockInfo.categoryName}"></td>
+                                <td th:text="${stockInfo.productName}"></td>
+                                <td th:text="${stockInfo.openingStock}"></td>
+                                <td th:text="${stockInfo.tranDate}"></td>
+                                <td th:text="${stockInfo.closingStock}"></td>
+                                <td th:text="${stockInfo.ltranDate}"></td>
+                                <td><a th:href="@{/editStockInfo/{id}(id=${stockInfo.id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Close</a></td>
+                                <td><a th:href="@{/removeStockInfo/{id}(id=${stockInfo.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+    </body>
+</html>

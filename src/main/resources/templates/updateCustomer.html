@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <title>Add Customers</title>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+    <body>
+        <div class="container"  >
+            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+            <h2>Customer Details</h2>
+            <span th:text="${addMessage}"></span>
+            <div>
+                <form class="form-horizontal" action="#" th:action="@{/updateCustomer/{id}(id=${customer.id})}" th:object="${customer}">
+                    <input type="hidden" th:field="*{id}"/>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Customer ID : </label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="customerId" th:field="*{customerId}" required=""/>
+                            <span th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Customer Name: </label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="customerName" th:field="*{customerName}" required=""/>
+                            <span th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"> Customer Phone : </label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="customerPhone" th:field="*{customerPhone}" required=""/>
+                            <span th:if="${#fields.hasErrors('customerPhone')}" th:errors="*{customerPhone}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"> Customer Email : </label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="customerEmail" th:field="*{customerEmail}" required=""/>
+                            <span th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <button type="Save" class="btn btn-default">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
