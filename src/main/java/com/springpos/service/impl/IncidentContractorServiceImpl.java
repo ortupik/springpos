@@ -5,33 +5,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springpos.bean.Incident;
+import com.springpos.bean.IncidentContractor;
 import java.util.Optional;
-import com.springpos.repository.IncidentRepository;
-import com.springpos.service.IncidentService;
+import com.springpos.repository.IncidentContractorRepository;
+import com.springpos.service.IncidentContractorService;
 
 @Service
-public class IncidentContractorServiceImpl implements IncidentService {
+public class IncidentContractorServiceImpl implements IncidentContractorService {
 
-    private IncidentRepository bizRepository;
+    private IncidentContractorRepository bizRepository;
 
     @Autowired
-    public void setBizRepository(IncidentRepository bizRepository) {
+    public void setBizRepository(IncidentContractorRepository bizRepository) {
         this.bizRepository = bizRepository;
     }
 
     @Override
-    public Incident save(Incident entity) {
+    public IncidentContractor save(IncidentContractor entity) {
         return bizRepository.save(entity);
     }
 
     @Override
-    public Incident update(Incident entity) {
+    public IncidentContractor update(IncidentContractor entity) {
         return bizRepository.save(entity);
     }
 
     @Override
-    public void delete(Incident entity) {
+    public void delete(IncidentContractor entity) {
         bizRepository.delete(entity);
     }
 
@@ -41,19 +41,19 @@ public class IncidentContractorServiceImpl implements IncidentService {
     }
 
     @Override
-    public Incident find(int id) {
-        Optional<Incident> opdata = bizRepository.findById(id);
+    public IncidentContractor find(int id) {
+        Optional<IncidentContractor> opdata = bizRepository.findById(id);
         return opdata.get();
     }
 
     @Override
-    public List<Incident> findAll() {
+    public List<IncidentContractor> findAll() {
         return bizRepository.findAll();
     }
 
 
     @Override
-    public void deleteInBatch(List<Incident> categories) {
+    public void deleteInBatch(List<IncidentContractor> categories) {
         bizRepository.deleteInBatch(categories);
     }
 

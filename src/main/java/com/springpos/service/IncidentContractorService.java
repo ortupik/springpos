@@ -8,5 +8,5 @@ import com.springpos.generic.GenericService;
 
  */
 public interface IncidentContractorService  extends GenericService<IncidentContractor>{
-    IncidentContractor findById(long id); 
+ 
 }
