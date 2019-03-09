@@ -5,33 +5,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springpos.bean.Hw;
+import com.springpos.bean.IncidenceStatus;
 import java.util.Optional;
-import com.springpos.repository.HwRepository;
-import com.springpos.service.HwService;
+import com.springpos.repository.IncidenceStatusRepository;
+import com.springpos.service.IncidenceStatusService;
 
 @Service
-public class IncidenceStatusServiceImpl implements HwService {
+public class IncidenceStatusServiceImpl implements IncidenceStatusService {
 
-    private HwRepository bizRepository;
+    private IncidenceStatusRepository bizRepository;
 
     @Autowired
-    public void setBizRepository(HwRepository bizRepository) {
+    public void setBizRepository(IncidenceStatusRepository bizRepository) {
         this.bizRepository = bizRepository;
     }
 
     @Override
-    public Hw save(Hw entity) {
+    public IncidenceStatus save(IncidenceStatus entity) {
         return bizRepository.save(entity);
     }
 
     @Override
-    public Hw update(Hw entity) {
+    public IncidenceStatus update(IncidenceStatus entity) {
         return bizRepository.save(entity);
     }
 
     @Override
-    public void delete(Hw entity) {
+    public void delete(IncidenceStatus entity) {
         bizRepository.delete(entity);
     }
 
@@ -41,19 +41,19 @@ public class IncidenceStatusServiceImpl implements HwService {
     }
 
     @Override
-    public Hw find(int id) {
-        Optional<Hw> opdata = bizRepository.findById(id);
+    public IncidenceStatus find(int id) {
+        Optional<IncidenceStatus> opdata = bizRepository.findById(id);
         return opdata.get();
     }
 
     @Override
-    public List<Hw> findAll() {
+    public List<IncidenceStatus> findAll() {
         return bizRepository.findAll();
     }
 
 
     @Override
-    public void deleteInBatch(List<Hw> categories) {
+    public void deleteInBatch(List<IncidenceStatus> categories) {
         bizRepository.deleteInBatch(categories);
     }
 

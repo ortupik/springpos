@@ -5,33 +5,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springpos.bean.Hw;
+import com.springpos.bean.HwInventory;
 import java.util.Optional;
-import com.springpos.repository.HwRepository;
-import com.springpos.service.HwService;
+import com.springpos.repository.HwInventoryRepository;
+import com.springpos.service.HwInventoryService;
 
 @Service
-public class HwInventoryServiceImpl implements HwService {
+public class HwInventoryServiceImpl implements HwInventoryService {
 
-    private HwRepository bizRepository;
+    private HwInventoryRepository bizRepository;
 
     @Autowired
-    public void setBizRepository(HwRepository bizRepository) {
+    public void setBizRepository(HwInventoryRepository bizRepository) {
         this.bizRepository = bizRepository;
     }
 
     @Override
-    public Hw save(Hw entity) {
+    public HwInventory save(HwInventory entity) {
         return bizRepository.save(entity);
     }
 
     @Override
-    public Hw update(Hw entity) {
+    public HwInventory update(HwInventory entity) {
         return bizRepository.save(entity);
     }
 
     @Override
-    public void delete(Hw entity) {
+    public void delete(HwInventory entity) {
         bizRepository.delete(entity);
     }
 
@@ -41,19 +41,19 @@ public class HwInventoryServiceImpl implements HwService {
     }
 
     @Override
-    public Hw find(int id) {
-        Optional<Hw> opdata = bizRepository.findById(id);
+    public HwInventory find(int id) {
+        Optional<HwInventory> opdata = bizRepository.findById(id);
         return opdata.get();
     }
 
     @Override
-    public List<Hw> findAll() {
+    public List<HwInventory> findAll() {
         return bizRepository.findAll();
     }
 
 
     @Override
-    public void deleteInBatch(List<Hw> categories) {
+    public void deleteInBatch(List<HwInventory> categories) {
         bizRepository.deleteInBatch(categories);
     }
 

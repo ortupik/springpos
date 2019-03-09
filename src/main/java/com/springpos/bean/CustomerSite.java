@@ -1,16 +1,29 @@
 package com.springpos.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "CUSTOMER_SITE")
 public class CustomerSite implements Serializable {
+
+    /*@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "state_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private State state;*/
 
     @Id
     @Column(name = "cust_site_id")
@@ -34,8 +47,10 @@ public class CustomerSite implements Serializable {
     private int cust_site_type_id;
     @Column(name = "country_id")
     private int country_id;
-    @Column(name = "state_id")
-    private int state_id;
+   // @Column(name = "state_id")
+   // private int state_id;
+    @Transient
+    private String storeId;
 
     public int getId() {
         return id;
@@ -117,17 +132,13 @@ public class CustomerSite implements Serializable {
         this.country_id = country_id;
     }
 
-    public int getState_id() {
-        return state_id;
+    public String getStoreId() {
+        return storeId;
     }
 
-    public void setState_id(int state_id) {
-        this.state_id = state_id;
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 
-    @Override
-    public String toString() {
-        return "CustomerSite{" + "id=" + id + ", cust_site_name=" + cust_site_name + ", cust_site_address=" + cust_site_address + ", cust_site_city=" + cust_site_city + ", cust_site_zip=" + cust_site_zip + ", cust_site_phone=" + cust_site_phone + ", cust_site_email=" + cust_site_email + ", cust_site_status_id=" + cust_site_status_id + ", cust_site_type_id=" + cust_site_type_id + ", country_id=" + country_id + ", state_id=" + state_id + '}';
-    }
 
 }

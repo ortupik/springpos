@@ -5,33 +5,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springpos.bean.HwInventory;
+import com.springpos.bean.HwInventoryStatus;
 import java.util.Optional;
-import com.springpos.repository.HwInventoryRepository;
-import com.springpos.service.HwInventoryService;
+import com.springpos.repository.HwInventoryStatusRepository;
+import com.springpos.service.HwInventoryStatusService;
 
 @Service
-public class HwInventoryStatusServiceImpl implements HwInventoryService {
+public class HwInventoryStatusServiceImpl implements HwInventoryStatusService {
 
-    private HwInventoryRepository bizRepository;
+    private HwInventoryStatusRepository bizRepository;
 
     @Autowired
-    public void setBizRepository(HwInventoryRepository bizRepository) {
+    public void setBizRepository(HwInventoryStatusRepository bizRepository) {
         this.bizRepository = bizRepository;
     }
 
     @Override
-    public HwInventory save(HwInventory entity) {
+    public HwInventoryStatus save(HwInventoryStatus entity) {
         return bizRepository.save(entity);
     }
 
     @Override
-    public HwInventory update(HwInventory entity) {
+    public HwInventoryStatus update(HwInventoryStatus entity) {
         return bizRepository.save(entity);
     }
 
     @Override
-    public void delete(HwInventory entity) {
+    public void delete(HwInventoryStatus entity) {
         bizRepository.delete(entity);
     }
 
@@ -41,19 +41,19 @@ public class HwInventoryStatusServiceImpl implements HwInventoryService {
     }
 
     @Override
-    public HwInventory find(int id) {
-        Optional<HwInventory> opdata = bizRepository.findById(id);
+    public HwInventoryStatus find(int id) {
+        Optional<HwInventoryStatus> opdata = bizRepository.findById(id);
         return opdata.get();
     }
 
     @Override
-    public List<HwInventory> findAll() {
+    public List<HwInventoryStatus> findAll() {
         return bizRepository.findAll();
     }
 
 
     @Override
-    public void deleteInBatch(List<HwInventory> categories) {
+    public void deleteInBatch(List<HwInventoryStatus> categories) {
         bizRepository.deleteInBatch(categories);
     }
 

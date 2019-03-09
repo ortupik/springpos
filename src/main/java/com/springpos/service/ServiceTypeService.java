@@ -5,5 +5,5 @@ import com.springpos.generic.GenericService;
 
 
 public interface ServiceTypeService extends GenericService<ServiceType> {
-    ServiceType findById(long id ); 
+
 }

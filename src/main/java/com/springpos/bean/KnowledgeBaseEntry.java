@@ -22,8 +22,8 @@ public class KnowledgeBaseEntry implements Serializable {
     private String kb_soruces;
     @Column(name = "kb_content", nullable = false)
     private String kb_content;
-    @Column(name = "kb_id")
-    private int kb_id;
+    @Column(name = "kb_cat_id")
+    private int kb_cat_id;
 
     public int getId() {
         return id;
@@ -57,17 +57,19 @@ public class KnowledgeBaseEntry implements Serializable {
         this.kb_content = kb_content;
     }
 
-    public int getKb_id() {
-        return kb_id;
+    public int getKb_cat_id() {
+        return kb_cat_id;
     }
 
-    public void setKb_id(int kb_id) {
-        this.kb_id = kb_id;
+    public void setKb_cat_id(int kb_cat_id) {
+        this.kb_cat_id = kb_cat_id;
     }
 
     @Override
     public String toString() {
-        return "KnowledgeBaseEntry{" + "id=" + id + ", kb_title=" + kb_title + ", kb_soruces=" + kb_soruces + ", kb_content=" + kb_content + ", kb_id=" + kb_id + '}';
+        return "KnowledgeBaseEntry{" + "id=" + id + ", kb_title=" + kb_title + ", kb_soruces=" + kb_soruces + ", kb_content=" + kb_content + ", kb_cat_id=" + kb_cat_id + '}';
     }
+
+
 
 }

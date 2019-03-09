@@ -16,6 +16,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ServiceOrderRepository  extends JpaRepository<ServiceOrder, Integer>{
-    ServiceOrder findById(long id); 
-    
+     
 }

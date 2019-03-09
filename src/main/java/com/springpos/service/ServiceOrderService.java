@@ -8,5 +8,5 @@ import com.springpos.generic.GenericService;
 
  */
 public interface ServiceOrderService  extends GenericService<ServiceOrder>{
-    ServiceOrder findById(long id);
+
 }
