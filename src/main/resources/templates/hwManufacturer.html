@@ -9,19 +9,19 @@
         <div class="container" id="form">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <form action="#"  th:object="${contractor}" th:action="@{/contractor}" method="post">
+                    <form action="#"  th:object="${hwManufacturer}" th:action="@{/hwManufacturer}" method="post">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class ="form-group">
                                     <label>First Name</label>
-                                    <input type="text" class ="form-control" placeholder="First Name" id="contractor_fname" th:field="*{contractor_fname}" required="">
+                                    <input type="text" class ="form-control" placeholder="First Name" id="hwManufacturer_fname" th:field="*{hwManufacturer_fname}" required="">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class ="form-group">
                                     <label>Last Name</label>
-                                    <input type="text" class ="form-control" placeholder="Last Name" id="contractor_lname" th:field="*{contractor_lname}" required="">
+                                    <input type="text" class ="form-control" placeholder="Last Name" id="hwManufacturer_lname" th:field="*{hwManufacturer_lname}" required="">
                                 </div>
                             </div>
                         </div>
@@ -29,27 +29,27 @@
 
                         <div class ="form-group">
                             <label>Email</label>
-                            <input type="email" class ="form-control" placeholder="Add Email" id="contractor_email" th:field="*{contractor_email}" required="">
+                            <input type="email" class ="form-control" placeholder="Add Email" id="hwManufacturer_email" th:field="*{hwManufacturer_email}" required="">
                         </div>
 
                         <div class ="form-group">
                             <label>Phone Number</label>
-                            <input type="text" class ="form-control" placeholder="Phone Number" id="contractor_username" th:field="*{contractor_username}" required="">
+                            <input type="text" class ="form-control" placeholder="Phone Number" id="hwManufacturer_username" th:field="*{hwManufacturer_username}" required="">
                         </div>
 
                         <div class ="form-group">
                             <label>Street Address</label>
-                            <input type="address" class ="form-control" placeholder="Street Address" id="contractor_address" th:field="*{contractor_address}" required="">
+                            <input type="address" class ="form-control" placeholder="Street Address" id="hwManufacturer_address" th:field="*{hwManufacturer_address}" required="">
                         </div>
 
                         <div class ="form-group">
                             <label>City</label>
-                            <input type="text" class ="form-control" placeholder="City" id="contractor_city" th:field="*{contractor_city}" required="">
+                            <input type="text" class ="form-control" placeholder="City" id="hwManufacturer_city" th:field="*{hwManufacturer_city}" required="">
                         </div>
 
                         <div class ="form-group">
                             <label>Zip code</label>
-                            <input type="text" class ="form-control" placeholder="Zip code" id="contractor_zip" th:field="*{contractor_zip}" required="">
+                            <input type="text" class ="form-control" placeholder="Zip code" id="hwManufacturer_zip" th:field="*{hwManufacturer_zip}" required="">
                         </div>
 
 
@@ -77,26 +77,26 @@
 
                         <div class="form-group">
                             <div class="col-xs-10">
-                                <label class="control-label">Contractor Status : </label>
-                                <input  type="text"  placeholder="Contractor Status" list="statusList" class="form-control" name="hidden" th:field="*{contractor_status_id}" id="contractor_status_id" required="">
+                                <label class="control-label">Hardware Manufacturer Status : </label>
+                                <input  type="text"  placeholder="Hardware Manufacturer Status" list="statusList" class="form-control" name="hidden" th:field="*{hwManufacturer_status_id}" id="hwManufacturer_status_id" required="">
                                 <datalist id="statusList">      
-                                    <option class="form-control" th:each="contractorStatus : ${contractorStatuss}"
-                                            th:value="${contractorStatus.id}"
-                                            th:utext="${contractorStatus.contractor_status}"></option>
+                                    <option class="form-control" th:each="hwManufacturerStatus : ${hwManufacturerStatuss}"
+                                            th:value="${hwManufacturerStatus.id}"
+                                            th:utext="${hwManufacturerStatus.hw_manu_status}"></option>
                                 </datalist>
-                                <span th:if="${#fields.hasErrors('contractor_status_id')}" th:errors="*{contractor_status_id}"></span>
+                                <span th:if="${#fields.hasErrors('hwManufacturer_status_id')}" th:errors="*{hwManufacturer_status_id}"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-10">
-                                <label class="control-label">Contractor Type : </label>
-                                <input  type="text" placeholder="Contractor Type" list="typeList" class="form-control" name="hidden" th:field="*{contractor_type_id}" id="contractor_type_id" required="">
+                                <label class="control-label">Hardware Manufacturer Type : </label>
+                                <input  type="text" placeholder="Hardware Manufacturer Type" list="typeList" class="form-control" name="hidden" th:field="*{hwManufacturer_type_id}" id="hwManufacturer_type_id" required="">
                                 <datalist id="typeList">      
-                                    <option class="form-control" th:each="contractorType : ${contractorTypes}"
-                                            th:value="${contractorType.id}"
-                                            th:utext="${contractorType.contractor_type}"></option>
+                                    <option class="form-control" th:each="hwManufacturerType : ${hwManufacturerTypes}"
+                                            th:value="${hwManufacturerType.id}"
+                                            th:utext="${hwManufacturerType.hwManufacturer_type}"></option>
                                 </datalist>
-                                <span th:if="${#fields.hasErrors('contractor_type_id')}" th:errors="*{contractor_type_id}"></span>
+                                <span th:if="${#fields.hasErrors('hwManufacturer_type_id')}" th:errors="*{hwManufacturer_type_id}"></span>
                             </div>
                         </div>
                         <br>

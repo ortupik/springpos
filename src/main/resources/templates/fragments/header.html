@@ -63,7 +63,16 @@
                             <a href="#" class="list-group-item ">Search</a>
                             <a href="#" class="list-group-item ">Add</a>
                         </div>
+                        <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#hardware">
+                            Other <i class="fas fa-plus-circle"></i>
+                        </a>
 
+                        <div id="hardware" class="collapse">
+                            <a href="#" th:href="@{/country/new}"  class="list-group-item ">Add Countries</a>
+                            <a href="#" th:href="@{/state/new}" class="list-group-item ">Add States</a>
+                            <a href="#" th:href="@{/countrys}" class="list-group-item ">View Countries</a>
+                            <a href="#" th:href="@{/states}" class="list-group-item ">View States</a>
+                        </div>
 
                         <!-- Knowledge base -->
                         <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#kb">
