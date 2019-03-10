@@ -39,6 +39,5 @@ public class SocialMediaAccountStatus implements Serializable {
     public String toString() {
         return "SocialMediaAccountStatus{" + "id=" + id + ", sm_acct_status=" + sm_acct_status + '}';
     }
-    
-    
+
 }

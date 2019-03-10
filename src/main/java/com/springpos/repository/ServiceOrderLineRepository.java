@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
-
+ *
  */
 @Repository
-public interface ServiceOrderLineRepository  extends JpaRepository<ServiceOrderLine, Integer>{
-    
+public interface ServiceOrderLineRepository extends JpaRepository<ServiceOrderLine, Integer> {
+
 }

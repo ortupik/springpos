@@ -51,11 +51,9 @@ public class HwManufacturerStatusServiceImpl implements HwManufacturerStatusServ
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<HwManufacturerStatus> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

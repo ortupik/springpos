@@ -39,5 +39,5 @@ public class SocialMediaAccountType implements Serializable {
     public String toString() {
         return "SocialMediaAccountType{" + "id=" + id + ", sm_acct_type=" + sm_acct_type + '}';
     }
-    
+
 }

@@ -65,8 +65,6 @@ public class CustomerSiteController {
         return mv;
     }
 
-
-
     @PostMapping(value = "customerSite")
     public String save(@Valid CustomerSite customerSite, BindingResult result, Model model) {
         setInstitution(model);

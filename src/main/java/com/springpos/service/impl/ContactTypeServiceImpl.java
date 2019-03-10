@@ -51,11 +51,9 @@ public class ContactTypeServiceImpl implements ContactTypeService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<ContactType> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

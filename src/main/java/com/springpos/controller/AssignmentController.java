@@ -65,8 +65,6 @@ public class AssignmentController {
         return mv;
     }
 
-
-
     @PostMapping(value = "assignment")
     public String save(@Valid Assignment assignment, BindingResult result, Model model) {
         setInstitution(model);

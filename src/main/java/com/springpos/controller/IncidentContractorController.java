@@ -65,8 +65,6 @@ public class IncidentContractorController {
         return mv;
     }
 
-
-
     @PostMapping(value = "incidentContractor")
     public String save(@Valid IncidentContractor incidentContractor, BindingResult result, Model model) {
         setInstitution(model);

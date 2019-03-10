@@ -65,8 +65,6 @@ public class ServiceOrderPhotoController {
         return mv;
     }
 
-
-
     @PostMapping(value = "serviceOrderPhoto")
     public String save(@Valid ServiceOrderPhoto serviceOrderPhoto, BindingResult result, Model model) {
         setInstitution(model);

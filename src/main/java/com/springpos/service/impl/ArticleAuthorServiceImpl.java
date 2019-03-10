@@ -51,11 +51,9 @@ public class ArticleAuthorServiceImpl implements ArticleAuthorService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<ArticleAuthor> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

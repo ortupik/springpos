@@ -5,8 +5,8 @@ import com.springpos.generic.GenericService;
 
 /**
  *
-
+ *
  */
-public interface SocialMediaAccountTypeService  extends GenericService<SocialMediaAccountType>{
-    
+public interface SocialMediaAccountTypeService extends GenericService<SocialMediaAccountType> {
+
 }

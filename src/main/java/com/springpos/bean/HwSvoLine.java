@@ -49,6 +49,5 @@ public class HwSvoLine implements Serializable {
     public String toString() {
         return "HwSvoLine{" + "id=" + id + ", cust_site_hw_id=" + cust_site_hw_id + ", svo_line_id=" + svo_line_id + '}';
     }
-    
-    
+
 }

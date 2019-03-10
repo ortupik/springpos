@@ -5,8 +5,8 @@ import com.springpos.generic.GenericService;
 
 /**
  *
-
+ *
  */
-public interface IncidentContractorService  extends GenericService<IncidentContractor>{
- 
+public interface IncidentContractorService extends GenericService<IncidentContractor> {
+
 }

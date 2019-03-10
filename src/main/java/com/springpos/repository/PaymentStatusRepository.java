@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
-
+ *
  */
 @Repository
-public interface PaymentStatusRepository  extends JpaRepository<PaymentStatus, Integer>{
- 
+public interface PaymentStatusRepository extends JpaRepository<PaymentStatus, Integer> {
+
 }

@@ -65,8 +65,6 @@ public class PaymentTypeController {
         return mv;
     }
 
-
-
     @PostMapping(value = "paymentType")
     public String save(@Valid PaymentType paymentType, BindingResult result, Model model) {
         setInstitution(model);

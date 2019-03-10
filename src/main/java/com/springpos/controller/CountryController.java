@@ -65,8 +65,6 @@ public class CountryController {
         return mv;
     }
 
-
-
     @PostMapping(value = "country")
     public String save(@Valid Country country, BindingResult result, Model model) {
         setInstitution(model);

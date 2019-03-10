@@ -6,9 +6,9 @@ import com.springpos.bean.HwSvoLine;
 
 /**
  *
-
+ *
  */
 @Repository
-public interface HwSvoLineRepository extends JpaRepository<HwSvoLine,Integer>{
-  
+public interface HwSvoLineRepository extends JpaRepository<HwSvoLine, Integer> {
+
 }

@@ -51,11 +51,9 @@ public class CustomerSiteStatusServiceImpl implements CustomerSiteStatusService 
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<CustomerSiteStatus> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

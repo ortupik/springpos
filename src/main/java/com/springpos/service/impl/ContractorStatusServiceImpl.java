@@ -51,11 +51,9 @@ public class ContractorStatusServiceImpl implements ContractorStatusService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<ContractorStatus> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

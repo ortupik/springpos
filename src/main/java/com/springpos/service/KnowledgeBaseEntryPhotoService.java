@@ -5,8 +5,8 @@ import com.springpos.generic.GenericService;
 
 /**
  *
-
+ *
  */
-public interface KnowledgeBaseEntryPhotoService extends GenericService<KnowledgeBaseEntryPhoto>{
-    
+public interface KnowledgeBaseEntryPhotoService extends GenericService<KnowledgeBaseEntryPhoto> {
+
 }

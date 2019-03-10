@@ -5,8 +5,8 @@ import com.springpos.generic.GenericService;
 
 /**
  *
-
+ *
  */
-public interface SvcService  extends GenericService<Svc>{
-    
+public interface SvcService extends GenericService<Svc> {
+
 }

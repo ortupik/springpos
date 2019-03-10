@@ -70,6 +70,4 @@ public class KnowledgeBaseEntry implements Serializable {
         return "KnowledgeBaseEntry{" + "id=" + id + ", kb_title=" + kb_title + ", kb_soruces=" + kb_soruces + ", kb_content=" + kb_content + ", kb_cat_id=" + kb_cat_id + '}';
     }
 
-
-
 }

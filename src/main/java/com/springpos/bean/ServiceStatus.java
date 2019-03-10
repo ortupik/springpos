@@ -39,6 +39,5 @@ public class ServiceStatus implements Serializable {
     public String toString() {
         return "ServiceStatus{" + "id=" + id + ", svo_status=" + svo_status + '}';
     }
-    
-    
+
 }

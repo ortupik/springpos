@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CONTACT_STATUS")
+@Table(name = "CUSTOMER_SITE_TYPE")
 public class CustomerSiteType implements Serializable {
 
     @Id

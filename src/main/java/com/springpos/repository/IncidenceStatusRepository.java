@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
-
+ *
  */
 @Repository
-public interface IncidenceStatusRepository  extends JpaRepository<IncidenceStatus, Integer>{
-    
+public interface IncidenceStatusRepository extends JpaRepository<IncidenceStatus, Integer> {
+
 }

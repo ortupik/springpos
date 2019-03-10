@@ -51,11 +51,9 @@ public class HwProviderServiceImpl implements HwProviderService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<HwProvider> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

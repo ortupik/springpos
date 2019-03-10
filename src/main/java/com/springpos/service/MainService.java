@@ -14,7 +14,7 @@ public interface MainService {
     public String getLoggedIn();
 
     public String getLoggedOut();
-    
+
     public String getAccessPermition();
 
     public Model sessionLoggedIn(Model model);

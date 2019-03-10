@@ -65,8 +65,6 @@ public class ServiceTypeController {
         return mv;
     }
 
-
-
     @PostMapping(value = "serviceType")
     public String save(@Valid ServiceType serviceType, BindingResult result, Model model) {
         setInstitution(model);

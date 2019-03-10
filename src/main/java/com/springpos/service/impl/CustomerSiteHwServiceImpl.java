@@ -51,11 +51,9 @@ public class CustomerSiteHwServiceImpl implements CustomerSiteHwService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<CustomerSiteHw> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

@@ -6,6 +6,6 @@ import com.springpos.generic.GenericService;
 /**
  *
  */
-public interface PaymentTypeService extends GenericService<PaymentType> {   
-    
+public interface PaymentTypeService extends GenericService<PaymentType> {
+
 }

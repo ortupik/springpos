@@ -51,11 +51,9 @@ public class HwManufacturerServiceImpl implements HwManufacturerService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<HwManufacturer> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

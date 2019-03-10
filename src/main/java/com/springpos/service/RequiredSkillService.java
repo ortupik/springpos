@@ -5,8 +5,8 @@ import com.springpos.generic.GenericService;
 
 /**
  *
-
+ *
  */
-public interface RequiredSkillService  extends GenericService<RequiredSkill>{
-   
+public interface RequiredSkillService extends GenericService<RequiredSkill> {
+
 }

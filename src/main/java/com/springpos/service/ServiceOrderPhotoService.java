@@ -5,7 +5,7 @@ import com.springpos.generic.GenericService;
 
 /**
  *
-
+ *
  */
 public interface ServiceOrderPhotoService extends GenericService<ServiceOrderPhoto> {
 

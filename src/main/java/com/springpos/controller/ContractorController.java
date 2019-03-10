@@ -17,12 +17,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.springpos.service.ContractorService;
+import com.springpos.service.ContractorStatusService;
+import com.springpos.service.ContractorTypeService;
+import com.springpos.service.CountryService;
+import com.springpos.service.StateService;
 
 @Controller
 public class ContractorController {
 
     private ContractorService contractorService;
-
+    private ContractorTypeService typeService;
+    private ContractorStatusService statusService;
+    private CountryService countryService;
+    private StateService stateService;
     private MainService mainService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ContractorController.class);
@@ -39,11 +46,35 @@ public class ContractorController {
         this.mainService = mainService;
     }
 
+    @Autowired
+    public void setTypeService(ContractorTypeService typeService) {
+        this.typeService = typeService;
+    }
+
+    @Autowired
+    public void setStatusService(ContractorStatusService statusService) {
+        this.statusService = statusService;
+    }
+
+    @Autowired
+    public void setCountryService(CountryService countryService) {
+        this.countryService = countryService;
+    }
+
+    @Autowired
+    public void setStateService(StateService stateService) {
+        this.stateService = stateService;
+    }
+
     @RequestMapping("contractor/new")
     public String contractorPage(Model model) {
         if (mainService.getLoggedIn() == null) {
             return "index";
         }
+        model.addAttribute("contractorTypes", this.typeService.findAll());
+        model.addAttribute("contractorStatuss", this.statusService.findAll());
+        model.addAttribute("countries", this.countryService.findAll());
+        model.addAttribute("states", this.stateService.findAll());
         model.addAttribute("contractor", new Contractor());
         setInstitution(model);
         return "contractor";
@@ -64,8 +95,6 @@ public class ContractorController {
         }
         return mv;
     }
-
-
 
     @PostMapping(value = "contractor")
     public String save(@Valid Contractor contractor, BindingResult result, Model model) {

@@ -51,11 +51,9 @@ public class PaymentServiceImpl implements PaymentService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<Payment> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

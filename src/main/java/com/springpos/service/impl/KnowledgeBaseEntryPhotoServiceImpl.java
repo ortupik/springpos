@@ -51,11 +51,9 @@ public class KnowledgeBaseEntryPhotoServiceImpl implements KnowledgeBaseEntryPho
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<KnowledgeBaseEntryPhoto> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
-
+ *
  */
 @Repository
-public interface ContractorStatusRepository  extends JpaRepository<ContractorStatus, Integer>{
+public interface ContractorStatusRepository extends JpaRepository<ContractorStatus, Integer> {
 
 }

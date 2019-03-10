@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
-
+ *
  */
 @Repository
-public interface HwInventoryRepository extends JpaRepository<HwInventory,Integer>{
-    
+public interface HwInventoryRepository extends JpaRepository<HwInventory, Integer> {
+
 }

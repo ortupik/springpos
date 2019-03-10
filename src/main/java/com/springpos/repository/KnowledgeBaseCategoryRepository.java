@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
-
+ *
  */
 @Repository
-public interface KnowledgeBaseCategoryRepository  extends JpaRepository<KnowledgeBaseCategory, Integer>{
+public interface KnowledgeBaseCategoryRepository extends JpaRepository<KnowledgeBaseCategory, Integer> {
 
 }

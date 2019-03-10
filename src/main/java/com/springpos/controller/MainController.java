@@ -19,7 +19,6 @@ public class MainController {
     private HwService hwService;
 
     private MainService mainService;
-  
 
     @Autowired
     public void setCategoryService(HwService hwService) {
@@ -30,7 +29,6 @@ public class MainController {
     public void setMainService(MainService mainService) {
         this.mainService = mainService;
     }
-
 
     @RequestMapping("/")
     public ModelAndView index() {

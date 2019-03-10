@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+        <title th:text="${nstitle}">Spring App</title>
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form class="form-horizontal"  action="#"  th:object="${contactType}" th:action="@{/contactType}" method="post">
+                        <input type="hidden" th:field="*{id}"/>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">Contact Type : </label>
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control" id="contact_type" th:field="*{contact_type}" required=""/>
+                                <span th:if="${#fields.hasErrors('contact_type')}" th:errors="*{contact_type}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="Save" class="btn btn-primary btn-rounded my-0">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->   
+    </body>
+</html>

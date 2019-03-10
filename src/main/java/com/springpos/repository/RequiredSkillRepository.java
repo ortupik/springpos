@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
-
+ *
  */
 @Repository
-public interface RequiredSkillRepository  extends JpaRepository<RequiredSkill, Integer>{
-   
+public interface RequiredSkillRepository extends JpaRepository<RequiredSkill, Integer> {
+
 }

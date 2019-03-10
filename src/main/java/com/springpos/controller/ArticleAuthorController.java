@@ -65,8 +65,6 @@ public class ArticleAuthorController {
         return mv;
     }
 
-
-
     @PostMapping(value = "articleAuthor")
     public String save(@Valid ArticleAuthor articleAuthor, BindingResult result, Model model) {
         setInstitution(model);

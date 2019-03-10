@@ -51,11 +51,9 @@ public class AssignmentStatusServiceImpl implements AssignmentStatusService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<AssignmentStatus> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

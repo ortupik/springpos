@@ -18,7 +18,7 @@ public class ArticleAuthor implements Serializable {
     private int id;
     @Column(name = "kb_id")
     private String kb_id;
-     @Column(name = "contractor_id")
+    @Column(name = "contractor_id")
     private String contractor_id;
 
     public int getId() {

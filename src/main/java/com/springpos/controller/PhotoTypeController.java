@@ -65,8 +65,6 @@ public class PhotoTypeController {
         return mv;
     }
 
-
-
     @PostMapping(value = "photoType")
     public String save(@Valid PhotoType photoType, BindingResult result, Model model) {
         setInstitution(model);

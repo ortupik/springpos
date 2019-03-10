@@ -1,6 +1,5 @@
 package com.springpos.service.impl;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,11 +51,9 @@ public class ServiceStatusServiceImpl implements ServiceStatusService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<ServiceStatus> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

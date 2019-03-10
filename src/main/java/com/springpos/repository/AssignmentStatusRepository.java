@@ -11,10 +11,9 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
-
+ *
  */
-@Repository 
-public interface AssignmentStatusRepository  extends JpaRepository<AssignmentStatus, Integer>{
-    
-    
+@Repository
+public interface AssignmentStatusRepository extends JpaRepository<AssignmentStatus, Integer> {
+
 }

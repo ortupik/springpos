@@ -24,7 +24,6 @@ public class CustomerSite implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private State state;*/
-
     @Id
     @Column(name = "cust_site_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,10 +46,26 @@ public class CustomerSite implements Serializable {
     private int cust_site_type_id;
     @Column(name = "country_id")
     private int country_id;
-   // @Column(name = "state_id")
-   // private int state_id;
+    @Column(name = "state_id")
+    private int state_id;
     @Transient
     private String storeId;
+
+    public CustomerSite() {
+    }
+
+    public CustomerSite(Contact contact) {
+        this.cust_site_name = contact.getContact_fname();
+        this.cust_site_address = contact.getZip();
+        this.cust_site_city = contact.getCity();
+        this.cust_site_zip = contact.getZip();
+        this.cust_site_phone = contact.getContact_phone();
+        this.cust_site_email = contact.getContact_email();
+        this.cust_site_status_id = contact.getContact_status_id();
+        this.cust_site_type_id = contact.getContact_type_id();
+        this.country_id = contact.getCountry();
+        this.state_id = contact.getState();
+    }
 
     public int getId() {
         return id;
@@ -140,5 +155,12 @@ public class CustomerSite implements Serializable {
         this.storeId = storeId;
     }
 
+    public int getState_id() {
+        return state_id;
+    }
+
+    public void setState_id(int state_id) {
+        this.state_id = state_id;
+    }
 
 }

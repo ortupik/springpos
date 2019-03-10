@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "HW_MANUFACTURER_STATUS")
+@Table(name = "HW_MODEL_STATUS")
 public class HwModelStatus implements Serializable {
 
     @Id

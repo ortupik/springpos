@@ -65,8 +65,6 @@ public class ContractorTypeController {
         return mv;
     }
 
-
-
     @PostMapping(value = "contractorType")
     public String save(@Valid ContractorType contractorType, BindingResult result, Model model) {
         setInstitution(model);

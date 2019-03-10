@@ -65,8 +65,6 @@ public class StateController {
         return mv;
     }
 
-
-
     @PostMapping(value = "state")
     public String save(@Valid State state, BindingResult result, Model model) {
         setInstitution(model);

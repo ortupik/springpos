@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.springpos.bean.Contact;
+import com.springpos.bean.ContactStatus;
+import com.springpos.bean.ContactType;
+import com.springpos.bean.CustomerSite;
 import com.springpos.service.MainService;
 import java.util.ArrayList;
 import javax.validation.Valid;
@@ -17,13 +20,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.springpos.service.ContactService;
+import com.springpos.service.ContactStatusService;
+import com.springpos.service.ContactTypeService;
+import com.springpos.service.CountryService;
+import com.springpos.service.CustomerSiteService;
+import com.springpos.service.StateService;
 
 @Controller
 public class ContactController {
 
     private ContactService contactService;
-
+    private ContactTypeService typeService;
+    private ContactStatusService statusService;
+    private CountryService countryService;
+    private StateService stateService;
     private MainService mainService;
+    private CustomerSiteService customerSiteService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ContactController.class);
 
@@ -39,11 +51,40 @@ public class ContactController {
         this.mainService = mainService;
     }
 
+    @Autowired
+    public void setTypeService(ContactTypeService typeService) {
+        this.typeService = typeService;
+    }
+
+    @Autowired
+    public void setStatusService(ContactStatusService statusService) {
+        this.statusService = statusService;
+    }
+
+    @Autowired
+    public void setCountryService(CountryService countryService) {
+        this.countryService = countryService;
+    }
+
+    @Autowired
+    public void setStateService(StateService stateService) {
+        this.stateService = stateService;
+    }
+
+    @Autowired
+    public void setCustomerSiteService(CustomerSiteService customerSiteService) {
+        this.customerSiteService = customerSiteService;
+    }
+
     @RequestMapping("contact/new")
     public String contactPage(Model model) {
         if (mainService.getLoggedIn() == null) {
             return "index";
         }
+        model.addAttribute("contactTypes", this.typeService.findAll());
+        model.addAttribute("contactStatuss", this.statusService.findAll());
+        model.addAttribute("countries", this.countryService.findAll());
+        model.addAttribute("states", this.stateService.findAll());
         model.addAttribute("contact", new Contact());
         setInstitution(model);
         return "contact";
@@ -59,24 +100,35 @@ public class ContactController {
             mv.addObject("contact", new Contact());
             setInstitution(mv);
             contactList.clear();
-            contactList = (ArrayList<Contact>) this.contactService.findAll();
-            mv.addObject("contacts", this.contactService.findAll());
+            for (Contact con : this.contactService.findAll()) {
+                ContactType type = typeService.find(con.getContact_type_id());
+                con.setType(type.getContact_type());
+                ContactStatus status = statusService.find(con.getContact_status_id());
+                con.setStatus(status.getContact_status());
+                contactList.add(con);
+            }
+            mv.addObject("contacts", contactList);
         }
         return mv;
     }
-
-
 
     @PostMapping(value = "contact")
     public String save(@Valid Contact contact, BindingResult result, Model model) {
         setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
-
             model.addAttribute("contact", new Contact());
             return "contact";
         }
-        contactService.save(contact);
+        CustomerSite cust = new CustomerSite(contact);
+        if (cust == null) {
+            model.addAttribute("addMessage", contact.toString());
+            model.addAttribute("contact", new Contact());
+            return "contact";
+        }
+        CustomerSite newCust = customerSiteService.save(cust);
+        contact.setCust_site_id(newCust.getCust_site_status_id());
+        Contact contac = contactService.save(contact);
         model.addAttribute("contact", new Contact());
         model.addAttribute("addMessage", " Contact Added Successfull ");
         return "contact";

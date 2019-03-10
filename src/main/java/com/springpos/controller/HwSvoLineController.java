@@ -65,8 +65,6 @@ public class HwSvoLineController {
         return mv;
     }
 
-
-
     @PostMapping(value = "hwSvoLine")
     public String save(@Valid HwSvoLine hwSvoLine, BindingResult result, Model model) {
         setInstitution(model);

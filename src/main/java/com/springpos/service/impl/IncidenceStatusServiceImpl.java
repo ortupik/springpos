@@ -51,11 +51,9 @@ public class IncidenceStatusServiceImpl implements IncidenceStatusService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<IncidenceStatus> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

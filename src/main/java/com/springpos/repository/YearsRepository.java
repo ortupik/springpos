@@ -6,7 +6,7 @@ import com.springpos.bean.Years;
 import java.util.List;
 
 @Repository
-public interface YearsRepository extends JpaRepository<Years,Integer>{
+public interface YearsRepository extends JpaRepository<Years, Integer> {
 
     List<Years> findByYears(int years);
 }

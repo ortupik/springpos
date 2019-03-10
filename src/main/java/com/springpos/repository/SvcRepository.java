@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.springpos.bean.Svc;
 
 @Repository
-public interface SvcRepository extends JpaRepository<Svc,Integer>{
-   
+public interface SvcRepository extends JpaRepository<Svc, Integer> {
+
 }

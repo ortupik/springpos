@@ -65,8 +65,6 @@ public class ContactTypeController {
         return mv;
     }
 
-
-
     @PostMapping(value = "contactType")
     public String save(@Valid ContactType contactType, BindingResult result, Model model) {
         setInstitution(model);

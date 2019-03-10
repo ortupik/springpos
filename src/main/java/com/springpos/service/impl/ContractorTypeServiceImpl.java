@@ -51,11 +51,9 @@ public class ContractorTypeServiceImpl implements ContractorTypeService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<ContractorType> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

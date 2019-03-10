@@ -65,8 +65,6 @@ public class SvcController {
         return mv;
     }
 
-
-
     @PostMapping(value = "svc")
     public String save(@Valid Svc svc, BindingResult result, Model model) {
         setInstitution(model);

@@ -51,11 +51,9 @@ public class HwModelServiceImpl implements HwModelService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<HwModel> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.springpos.bean.Hw;
 
 @Repository
-public interface HwRepository extends JpaRepository<Hw,Integer>{
-   
+public interface HwRepository extends JpaRepository<Hw, Integer> {
 
 }

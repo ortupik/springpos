@@ -65,8 +65,6 @@ public class ServiceOrderLineController {
         return mv;
     }
 
-
-
     @PostMapping(value = "serviceOrderLine")
     public String save(@Valid ServiceOrderLine serviceOrderLine, BindingResult result, Model model) {
         setInstitution(model);

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "CONTACT")
@@ -25,11 +26,31 @@ public class Contact implements Serializable {
     @Column(name = "contact_email")
     private String contact_email;
     @Column(name = "contact_status_id")
-    private String contact_status_id;
+    private int contact_status_id;
     @Column(name = "contact_type_id")
-    private String contact_type_id;
+    private int contact_type_id;
     @Column(name = "cust_site_id")
     private int cust_site_id;
+    @Transient
+    private String city;
+    @Transient
+    private String zip;
+    @Transient
+    private int state;
+    @Transient
+    private int country;
+    @Transient
+    private String status;
+    @Transient
+    private String type;
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
 
     public int getId() {
         return id;
@@ -71,19 +92,19 @@ public class Contact implements Serializable {
         this.contact_email = contact_email;
     }
 
-    public String getContact_status_id() {
+    public int getContact_status_id() {
         return contact_status_id;
     }
 
-    public void setContact_status_id(String contact_status_id) {
+    public void setContact_status_id(int contact_status_id) {
         this.contact_status_id = contact_status_id;
     }
 
-    public String getContact_type_id() {
+    public int getContact_type_id() {
         return contact_type_id;
     }
 
-    public void setContact_type_id(String contact_type_id) {
+    public void setContact_type_id(int contact_type_id) {
         this.contact_type_id = contact_type_id;
     }
 
@@ -93,6 +114,46 @@ public class Contact implements Serializable {
 
     public void setCust_site_id(int cust_site_id) {
         this.cust_site_id = cust_site_id;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public int getCountry() {
+        return country;
+    }
+
+    public void setCountry(int country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

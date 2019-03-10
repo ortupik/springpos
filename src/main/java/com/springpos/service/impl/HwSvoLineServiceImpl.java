@@ -51,11 +51,9 @@ public class HwSvoLineServiceImpl implements HwSvoLineService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<HwSvoLine> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

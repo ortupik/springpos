@@ -51,11 +51,9 @@ public class ContractorSkillServiceImpl implements ContractorSkillService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<ContractorSkill> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

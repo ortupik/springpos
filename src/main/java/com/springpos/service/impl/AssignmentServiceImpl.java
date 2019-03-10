@@ -51,11 +51,9 @@ public class AssignmentServiceImpl implements AssignmentService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<Assignment> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

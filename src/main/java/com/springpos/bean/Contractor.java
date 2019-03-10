@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "CONTRACTOR")
@@ -44,13 +45,23 @@ public class Contractor implements Serializable {
     @Column(name = "contractor_status_id")
     private int contractor_status_id;
     @Column(name = "country_id")
-    private String country_id;
+    private int country_id;
     @Column(name = "state_id")
     private int state_id;
     @Column(name = "contractor_type_id")
     private int contractor_type_id;
     @Column(name = "acc_level_id")
     private int acc_level_id;
+    @Transient
+    private String fullnames;
+
+    public String getFullnames() {
+        return fullnames;
+    }
+
+    public void setFullnames(String fullnames) {
+        this.fullnames = this.contractor_fname + " " + this.contractor_lname + " (" + this.contractor_email + ")";
+    }
 
     public int getId() {
         return id;
@@ -164,11 +175,11 @@ public class Contractor implements Serializable {
         this.contractor_status_id = contractor_status_id;
     }
 
-    public String getCountry_id() {
+    public int getCountry_id() {
         return country_id;
     }
 
-    public void setCountry_id(String country_id) {
+    public void setCountry_id(int country_id) {
         this.country_id = country_id;
     }
 

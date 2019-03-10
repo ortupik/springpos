@@ -44,6 +44,5 @@ public class ServiceOrderLine implements Serializable {
     public void setSvc_id(int svc_id) {
         this.svc_id = svc_id;
     }
-    
-    
+
 }

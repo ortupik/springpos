@@ -44,7 +44,6 @@ public class MainServiceImpl implements MainService {
         this.userService = userService;
     }
 
-
     @Autowired
     public void setSessionService(SessionService sessionService) {
         this.sessionService = sessionService;
@@ -60,7 +59,7 @@ public class MainServiceImpl implements MainService {
         return "";
     }
 
-     String getUser() {
+    String getUser() {
         return loggedIn;
     }
 
@@ -107,10 +106,10 @@ public class MainServiceImpl implements MainService {
     public String getLoggedOut() {
         if (getLoggedIn() == null) {
             return "redirect:/";
-        }  
+        }
         session = null;
         this.loggedIn = null;
-        loggedOut="Logged Out";
+        loggedOut = "Logged Out";
         return "redirect:/";
     }
 

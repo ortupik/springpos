@@ -51,11 +51,9 @@ public class AccessLevelServiceImpl implements AccessLevelService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<AccessLevel> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

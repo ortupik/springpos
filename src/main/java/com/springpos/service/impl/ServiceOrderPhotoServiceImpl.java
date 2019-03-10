@@ -51,11 +51,9 @@ public class ServiceOrderPhotoServiceImpl implements ServiceOrderPhotoService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<ServiceOrderPhoto> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

@@ -11,10 +11,9 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
-
+ *
  */
-
 @Repository
-public interface ServiceOrderRepository  extends JpaRepository<ServiceOrder, Integer>{
-     
+public interface ServiceOrderRepository extends JpaRepository<ServiceOrder, Integer> {
+
 }

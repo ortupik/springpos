@@ -65,8 +65,6 @@ public class AccessLevelController {
         return mv;
     }
 
-
-
     @PostMapping(value = "accessLevel")
     public String save(@Valid AccessLevel accessLevel, BindingResult result, Model model) {
         setInstitution(model);

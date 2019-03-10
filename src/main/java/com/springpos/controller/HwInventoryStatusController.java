@@ -65,8 +65,6 @@ public class HwInventoryStatusController {
         return mv;
     }
 
-
-
     @PostMapping(value = "hwInventoryStatus")
     public String save(@Valid HwInventoryStatus hwInventoryStatus, BindingResult result, Model model) {
         setInstitution(model);

@@ -5,8 +5,8 @@ import com.springpos.generic.GenericService;
 
 /**
  *
-
+ *
  */
-public interface ServiceStatusService  extends GenericService<ServiceStatus>{
+public interface ServiceStatusService extends GenericService<ServiceStatus> {
 
 }

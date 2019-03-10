@@ -19,7 +19,7 @@ public class ServiceOrderPhoto implements Serializable {
     @Column(name = "svo_photo_title", nullable = false)
     private String svo_photo_title;
     @Column(name = "svo_photo", nullable = false, columnDefinition = "longblob")
-    private byte[] svo_photo;    
+    private byte[] svo_photo;
     @Column(name = "svo_line_id")
     private int svo_line_id;
     @Column(name = "photo_type_id")

@@ -65,8 +65,6 @@ public class HwModelStatusController {
         return mv;
     }
 
-
-
     @PostMapping(value = "hwModelStatus")
     public String save(@Valid HwModelStatus hwModelStatus, BindingResult result, Model model) {
         setInstitution(model);

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.springpos.bean.ContractorSkill;
+import com.springpos.service.ContractorService;
 import com.springpos.service.MainService;
 import java.util.ArrayList;
 import javax.validation.Valid;
@@ -17,17 +18,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.springpos.service.ContractorSkillService;
+import com.springpos.service.SkillService;
 
 @Controller
 public class ContractorSkillController {
 
     private ContractorSkillService contractorSkillService;
+    private SkillService skillService;
+    private ContractorService contractorService;
 
     private MainService mainService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ContractorSkillController.class);
 
     ArrayList<ContractorSkill> contractorSkillList = new ArrayList();
+
+    @Autowired
+    public void setSkillService(SkillService skillService) {
+        this.skillService = skillService;
+    }
+
+    @Autowired
+    public void setContractorService(ContractorService contractorService) {
+        this.contractorService = contractorService;
+    }
 
     @Autowired
     public void setContractorSkillService(ContractorSkillService contractorSkillService) {
@@ -44,6 +58,8 @@ public class ContractorSkillController {
         if (mainService.getLoggedIn() == null) {
             return "index";
         }
+        model.addAttribute("contractors", contractorService.findAll());
+        model.addAttribute("skills", skillService.findAll());
         model.addAttribute("contractorSkill", new ContractorSkill());
         setInstitution(model);
         return "contractorSkill";
@@ -64,8 +80,6 @@ public class ContractorSkillController {
         }
         return mv;
     }
-
-
 
     @PostMapping(value = "contractorSkill")
     public String save(@Valid ContractorSkill contractorSkill, BindingResult result, Model model) {

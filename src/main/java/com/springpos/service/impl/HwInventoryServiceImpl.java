@@ -51,11 +51,9 @@ public class HwInventoryServiceImpl implements HwInventoryService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<HwInventory> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

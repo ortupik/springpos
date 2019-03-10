@@ -65,20 +65,17 @@ public class ContactStatusController {
         return mv;
     }
 
-
-
     @PostMapping(value = "contactStatus")
     public String save(@Valid ContactStatus contactStatus, BindingResult result, Model model) {
         setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
-
             model.addAttribute("contactStatus", new ContactStatus());
             return "contactStatus";
         }
         contactStatusService.save(contactStatus);
         model.addAttribute("contactStatus", new ContactStatus());
-        model.addAttribute("addMessage", " ContactStatus Added Successfull ");
+        model.addAttribute("addMessage", " Contact Status Added Successfull ");
         return "contactStatus";
 
     }

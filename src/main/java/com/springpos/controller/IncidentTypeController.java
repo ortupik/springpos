@@ -65,8 +65,6 @@ public class IncidentTypeController {
         return mv;
     }
 
-
-
     @PostMapping(value = "incidentType")
     public String save(@Valid IncidentType incidentType, BindingResult result, Model model) {
         setInstitution(model);

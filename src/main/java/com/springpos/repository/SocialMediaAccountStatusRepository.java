@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
-
+ *
  */
 @Repository
-public interface SocialMediaAccountStatusRepository extends JpaRepository<SocialMediaAccountStatus,Integer>{
-  
+public interface SocialMediaAccountStatusRepository extends JpaRepository<SocialMediaAccountStatus, Integer> {
+
 }

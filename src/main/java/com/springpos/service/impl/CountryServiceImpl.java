@@ -22,9 +22,8 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country save(Country entity) {
-       return bizRepository.save(entity);
+        return bizRepository.save(entity);
     }
-  
 
     @Override
     public Country update(Country entity) {
@@ -52,12 +51,9 @@ public class CountryServiceImpl implements CountryService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<Country> country) {
         bizRepository.deleteInBatch(country);
     }
-
- 
 
 }

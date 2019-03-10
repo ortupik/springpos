@@ -65,8 +65,6 @@ public class ServiceStatusController {
         return mv;
     }
 
-
-
     @PostMapping(value = "serviceStatus")
     public String save(@Valid ServiceStatus serviceStatus, BindingResult result, Model model) {
         setInstitution(model);

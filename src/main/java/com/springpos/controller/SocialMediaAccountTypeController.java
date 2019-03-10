@@ -65,8 +65,6 @@ public class SocialMediaAccountTypeController {
         return mv;
     }
 
-
-
     @PostMapping(value = "socialMediaAccountType")
     public String save(@Valid SocialMediaAccountType socialMediaAccountType, BindingResult result, Model model) {
         setInstitution(model);

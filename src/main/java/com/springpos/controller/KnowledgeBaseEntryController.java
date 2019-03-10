@@ -65,8 +65,6 @@ public class KnowledgeBaseEntryController {
         return mv;
     }
 
-
-
     @PostMapping(value = "knowledgeBaseEntry")
     public String save(@Valid KnowledgeBaseEntry knowledgeBaseEntry, BindingResult result, Model model) {
         setInstitution(model);

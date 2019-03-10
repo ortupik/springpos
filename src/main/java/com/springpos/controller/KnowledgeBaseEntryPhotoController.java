@@ -65,8 +65,6 @@ public class KnowledgeBaseEntryPhotoController {
         return mv;
     }
 
-
-
     @PostMapping(value = "knowledgeBaseEntryPhoto")
     public String save(@Valid KnowledgeBaseEntryPhoto knowledgeBaseEntryPhoto, BindingResult result, Model model) {
         setInstitution(model);

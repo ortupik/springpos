@@ -22,7 +22,7 @@ public class HwModel implements Serializable {
     private int hw_type_id;
     @Column(name = "hw_manu_id")
     private int hw_manu_id;
-     @Column(name = "hw_model_status_id")
+    @Column(name = "hw_model_status_id")
     private int hw_model_status_id;
 
     public int getId() {

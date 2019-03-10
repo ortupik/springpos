@@ -51,11 +51,9 @@ public class IncidentServiceImpl implements IncidentService {
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<Incident> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

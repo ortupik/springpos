@@ -19,7 +19,7 @@ public class KnowledgeBaseEntryPhoto implements Serializable {
     @Column(name = "kb_photo_title", nullable = false)
     private String kb_photo_title;
     @Column(name = "kb_photo", nullable = false, columnDefinition = "longblob")
-    private byte[] kbPhoto;    
+    private byte[] kbPhoto;
     @Column(name = "kb_id")
     private int kb_id;
     @Column(name = "photo_type_id")

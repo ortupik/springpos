@@ -17,7 +17,7 @@ public class Payment implements Serializable {
     @Column(name = "pmt_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "amt",precision=10, scale=2)
+    @Column(name = "amt", precision = 10, scale = 2)
     private Double amt;
     @Column(name = "date_paid")
     private Date datePaid;
@@ -80,8 +80,5 @@ public class Payment implements Serializable {
     public String toString() {
         return "Payment{" + "id=" + id + ", amt=" + amt + ", datePaid=" + datePaid + ", pmtTypeId=" + pmtTypeId + ", pmtStatusId=" + pmtStatusId + ", svoId=" + svoId + '}';
     }
-
-    
-   
 
 }

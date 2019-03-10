@@ -51,11 +51,9 @@ public class IncidentContractorServiceImpl implements IncidentContractorService 
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<IncidentContractor> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

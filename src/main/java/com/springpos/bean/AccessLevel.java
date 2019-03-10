@@ -18,7 +18,7 @@ public class AccessLevel implements Serializable {
     private int id;
     @Column(name = "acc_level_name")
     private String acc_level_name;
-     @Column(name = "acc_level_desc")
+    @Column(name = "acc_level_desc")
     private String acc_level_desc;
 
     public int getId() {
@@ -49,6 +49,5 @@ public class AccessLevel implements Serializable {
     public String toString() {
         return "AccessLevel{" + "id=" + id + ", acc_level_name=" + acc_level_name + ", acc_level_desc=" + acc_level_desc + '}';
     }
-     
 
 }

@@ -1,193 +1,114 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
     <head lang="en">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-        <meta http-equiv="Pragma" content="no-cache" />
-        <meta http-equiv="Expires" content="0" />       
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-        <!-- Bootstrap core CSS -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Material Design Bootstrap -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.1/css/mdb.min.css" rel="stylesheet">  
-        <!-- JQuery -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.1/js/mdb.min.js"></script>
-        <style>
-            /* The Modal (background) */
-            .modal {
-                display: none; /* Hidden by default */
-                position: fixed; /* Stay in place */
-                z-index: 1; /* Sit on top */
-                padding-top: 100px; /* Location of the box */
-                left: 0;
-                top: 0;
-                width: 90%; /* Full width */
-                height: 100%; /* Full height */
-                overflow: auto; /* Enable scroll if needed */
-                background-color: rgb(0, 0, 0); /* Fallback color */
-                background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-            }
-
-            /* Modal Content */
-            .modal-content {
-                background-color: #fefefe;
-                margin: auto;
-                padding: 20px;
-                border: 1px solid #888;
-                width: 40%;
-            }
-
-            /* The Close Button */
-            .close {
-                color: #aaaaaa;
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-            }
-
-            .close:hover, .close:focus {
-                color: #000;
-                text-decoration: none;
-                cursor: pointer;
-            }
-            .container{
-                margin:0px 0px 0px 0px;
-                min-width:100%;
-            }
-        </style>
-
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Spring App</title>
     </head>
-
     <body>
-        <div class="container" th:switch="${access}">
-            <div th:case="'accessGranted'">
-                <div th:fragment="header">
-                    <nav class="navbar navbar-expand-lg navbar-dark danger-color">
-                        <a class="navbar-brand" href="/"><img src="../../static/images/business.jpg" height="40" width="40" style="border-radius:8px;" th:src="@{/images/business.jpg}" class="img-responsive" /></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-                                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <!-- Collapsible content -->
-                        <div class="collapse navbar-collapse" id="basicExampleNav">
-                            <!-- Links -->
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" th:href="@{/epos}">Point Of Sale</a>
-                                </li>
+        <div th:fragment="header">
+            <div class="d-flex" id="wrapper">
+                <div class="bg-light border-right pre-scrollable" id="sidebar-wrapper" style="background-color: #cacbce !important;">
+                    <div class="sidebar-heading"></div>
+                    <div class="sidebar-heading"></div>
+                    <!-- Nav Bar Items -->
+                    <div id="nav" class="list-group list-group-flush">
+                        <!-- Home -->
+                        <a href="#" class="list-group-item list-group-item-action bg-light" >Home</a>
 
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false">Categories</a>
-                                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#" th:href="@{/category/new}">Add Categories</a>
-                                        <a class="dropdown-item" href="#" th:href="@{/categories}">View Categories</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false">Products</a>
-                                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink"> 
-                                        <a href="#" class="dropdown-item" th:href="@{/products}">View Products</a>
-                                        <a href="#" class="dropdown-item" th:href="@{/product/new}">Add product</a>
-                                        <a href="#" class="dropdown-item" th:href="@{/units/new}">Set Units Of Measurement</a>
-                                        <a href="#" class="dropdown-item" th:href="@{/units}">View Units Of Measurement</a>
-                                        <a href="#" class="dropdown-item" th:href="@{/price/new}">Set Prices</a>
-                                        <a href="#" class="dropdown-item" th:href="@{/prices}">View Prices</a>
-                                    </div>
-                                </li>
+                        <!-- Service Order -->
+                        <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#so">
+                            Service Order <i class="fas fa-plus-circle"></i>
+                        </a>
 
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false">Trails</a>
-                                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink"> 
-                                        <a href="#" class="dropdown-item" th:href="@{/stockTrails}">Stock Trail</a>
-                                        <a href="#" class="dropdown-item" th:href="@{/priceTrails}">Price Trail </a>
-                                        <a href="#" class="dropdown-item" th:href="@{/auditTrails}">Audit Trail</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false">Stock</a>
-                                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink"> 
-                                        <a href="#" class="dropdown-item" th:href="@{/stockReceive/new}">Receive Stock</a> 
-                                        <a href="#" class="dropdown-item" th:href="@{/stockReceives}">View Stock Received</a> 
-                                        <a href="#" class="dropdown-item" th:href="@{/stock/new}">Add Current Stock</a>
-                                        <a href="#" class="dropdown-item" th:href="@{/stocks}">View Current Stock</a>
-                                        <a href="#" class="dropdown-item" th:href="@{/damagedStock/new}">Add Damaged Stock</a>
-                                        <a href="#" class="dropdown-item" th:href="@{/damagedStocks}">View Damaged Stock</a>
-                                        <a href="#" class="dropdown-item" th:href="@{/expiredStock/new}">Add Expired Stock</a>
-                                        <a href="#" class="dropdown-item" th:href="@{/expiredStocks}">View Expired Stock</a>
-                                    </div>
-                                </li>
-
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false">Open / Close Stock</a>
-                                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#" th:href="@{/openStock}">Open Stock</a>
-                                        <a class="dropdown-item" href="#" th:href="@{/stockInfos}">View & Close Stock Info</a>
-                                    </div>
-                                </li> 
-
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false">Sales</a>
-                                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#" th:href="@{/summarisedSales}"> Summarized Sales</a>                                    
-                                        <a class="dropdown-item" href="#" th:href="@{/detailedSales}">Detailed Sales</a>
-                                    </div>
-                                </li>                         
-
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false">Manage People</a>
-                                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#" th:href="@{/supplier/new}">Add Suppliers</a>
-                                        <a class="dropdown-item" href="#" th:href="@{/suppliers}">View Suppliers</a>
-                                        <a class="dropdown-item" href="#" th:href="@{/customer/new}">Add Customers</a>
-                                        <a class="dropdown-item" href="#" th:href="@{/customers}">View Customers</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false">Manage Users</a>
-                                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#" th:href="@{/register}">Add User</a>
-                                        <a class="dropdown-item" href="#" th:href="@{/users}">View Users</a>
-                                    </div>
-                                </li>
-
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false">Credits & Payment</a>
-                                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#" th:href="@{/supplierCredit/new}">Add External Supplier Credit</a>
-                                        <a class="dropdown-item" href="#" th:href="@{/supplierCredits}">View Detailed Supplier Credit</a>
-                                         <a class="dropdown-item" href="#" th:href="@{/summarySupplierCredits}">View Summarized Supplier Credit</a>
-                                        <a class="dropdown-item" href="#" th:href="@{/customerCredit/new}">Add Customer Credit</a>
-                                        <a class="dropdown-item" href="#" th:href="@{/customerCredits}">View Detailed Customer Credit</a>
-                                       <a class="dropdown-item" href="#" th:href="@{/summaryCustomerCredits}">View Summarized Customer Credit</a>
-                                    </div>
-                                </li>
-
-                                <li class="nav-item dropdown">
-                                    <a  class="btn btn-primary btn-rounded my-0" href="#" th:href="@{/logout}">Logout</a>
-                                </li>
-
-                            </ul>
+                        <div id="so" class="collapse">
+                            <a  href="#" class="list-group-item ">Search</a>
+                            <a  href="#" th:href="@{/createOrder}" class="list-group-item ">Create</a>
+                            <a href="#" th:href="@{/newIncident}" class="list-group-item ">Incident</a>
                         </div>
-                    </nav>
+
+
+                        <!-- Customer -->
+                        <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#customer">
+                            Customer <i class="fas fa-plus-circle"></i>
+                        </a>
+
+                        <div id="customer" class="collapse">
+                            <a href="#" th:href="@{/contacts}" class="list-group-item ">Search</a>
+                            <a href="#" th:href="@{/contact/new}" class="list-group-item " >Add</a>
+                        </div>
+
+
+                        <!-- Contractor -->
+                        <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#contractor">
+                            Contractor <i class="fas fa-plus-circle"></i>
+                        </a>
+
+                        <div id="contractor" class="collapse">
+                            <a href="#" th:href="@{/contractors}" class="list-group-item ">Search</a>
+                            <a href="#" th:href="@{/contractor/new}" class="list-group-item ">Add</a>
+                        </div>
+
+
+                        <!-- Hardware -->
+                        <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#hardware">
+                            Hardware <i class="fas fa-plus-circle"></i>
+                        </a>
+
+                        <div id="hardware" class="collapse">
+                            <a href="#" class="list-group-item ">Search</a>
+                            <a href="#" class="list-group-item ">Add</a>
+                        </div>
+
+
+                        <!-- Knowledge base -->
+                        <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#kb">
+                            Knowledge Base <i class="fas fa-plus-circle"></i>
+                        </a>
+
+                        <div id="kb" class="collapse">
+                            <a href="#" class="list-group-item ">Search</a>
+                            <a href="#" class="list-group-item ">Add</a>
+                        </div>
+
+                        <!-- Reports -->
+                        <a href="#" class="list-group-item list-group-item-action bg-light" >Reports</a>
+
+                        <!-- DB Management -->
+                        <a href="#" class="list-group-item list-group-item-action bg-light" >DB Management</a>
+                        <!-- Logout -->
+                        <a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+                    </div>
                 </div>
             </div>
+
+            <div class="container w-responsive"  >           
+                <div id="page-content-wrapper">
+                    <div class="col-sm-12" id="topbar">
+                        <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #cacbce !important;">
+                            <div class="col-sm-12" id="valeriebar1"></div>
+                            <button class="btn btn-primary" id="menu-toggle"><span class="dark-blue-text"><i
+                                        class="fa fa-bars fa-1x"></i></span></button></button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <div class="col-sm-12" id="valeriebar1"></div>
+                    </div>
+                    <div class="container-fluid" id="form">
+                        <h1 class="mt-4 text-center">Spring POS</h1>
+                        <center> <span th:text="${addMessage}" ></span> </center>>
+                    </div>
+                </div>
+            </div> 
         </div>
     </body>
 </html>

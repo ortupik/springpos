@@ -5,10 +5,8 @@ import com.springpos.generic.GenericService;
 
 /**
  *
-
+ *
  */
-    
-public interface HwSvoLineService  extends GenericService<HwSvoLine>{
+public interface HwSvoLineService extends GenericService<HwSvoLine> {
 
-    
 }

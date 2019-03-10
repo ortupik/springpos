@@ -51,11 +51,9 @@ public class KnowledgeBaseCategoryServiceImpl implements KnowledgeBaseCategorySe
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<KnowledgeBaseCategory> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

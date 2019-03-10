@@ -65,8 +65,6 @@ public class HwManufacturerController {
         return mv;
     }
 
-
-
     @PostMapping(value = "hwManufacturer")
     public String save(@Valid HwManufacturer hwManufacturer, BindingResult result, Model model) {
         setInstitution(model);

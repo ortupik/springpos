@@ -65,8 +65,6 @@ public class RequiredSkillController {
         return mv;
     }
 
-
-
     @PostMapping(value = "requiredSkill")
     public String save(@Valid RequiredSkill requiredSkill, BindingResult result, Model model) {
         setInstitution(model);

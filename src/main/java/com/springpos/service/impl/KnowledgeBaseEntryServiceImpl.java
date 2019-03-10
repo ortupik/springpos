@@ -51,11 +51,9 @@ public class KnowledgeBaseEntryServiceImpl implements KnowledgeBaseEntryService 
         return bizRepository.findAll();
     }
 
-
     @Override
     public void deleteInBatch(List<KnowledgeBaseEntry> categories) {
         bizRepository.deleteInBatch(categories);
     }
-
 
 }

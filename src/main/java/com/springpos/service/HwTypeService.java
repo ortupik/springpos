@@ -5,9 +5,8 @@ import com.springpos.generic.GenericService;
 
 /**
  *
-
+ *
  */
-public interface HwTypeService  extends GenericService<HwType>{
+public interface HwTypeService extends GenericService<HwType> {
 
-    
 }

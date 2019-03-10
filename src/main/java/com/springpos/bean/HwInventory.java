@@ -89,6 +89,5 @@ public class HwInventory implements Serializable {
     public String toString() {
         return "HwInventory{" + "id=" + id + ", hw_inv_cost=" + hw_inv_cost + ", hw_serial_number=" + hw_serial_number + ", hw_mac_address=" + hw_mac_address + ", hw_provider_id=" + hw_provider_id + ", hw_inv_status_id=" + hw_inv_status_id + ", hw_id=" + hw_id + '}';
     }
-    
-    
+
 }
