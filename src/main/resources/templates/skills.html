@@ -1,39 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <head lang="en">
-
-        <title th:text="${nstitle}">Skills</title>
+<html lang="en">
+    <head>
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+        <title th:text="${nstitle}">Spring App</title>
     </head>
     <body>
-        <div class="container"  >
-            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-            <span th:text="${addMessage}"></span>
-            <div th:switch="${skills}">
-                <h2 th:case="null">No skills yet!</h2>
-                <div th:case="*">
-                    <h2>Skill List</h2>
-                    <table class="table table-striped table-bordered table-condensed">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Id</th>
-                                <th>Skill Name</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="skill : ${skills}">
-                                <td th:text="${skill.id}"><a href="/skill/${skill.id}">Id</a></td>
-                                <td th:text="${skill.skillName}">Skill Name</td>
-                                <td><a th:href="@{/editSkill/{id}(id=${skill.id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
-                                <td><a th:href="@{/removeSkill/{id}(id=${skill.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div th:switch="${skills}">
+                        <h2 th:case="null">No skills yet!</h2>
+                        <div th:case="*">
+                            <h2>Skill List</h2>
+                            <table class="table table-striped table-bordered table-condensed">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Skill Name</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="skill : ${skills}">
+                                        <td th:text="${skill.id}"><a href="/skill/${skill.id}">Id</a></td>
+                                        <td th:text="${skill.skillName}">Skill Name</td>
+                                        <td><a th:href="@{/editSkill/{id}(id=${skill.id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
+                                        <td><a th:href="@{/removeSkill/{id}(id=${skill.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->   
     </body>
 </html>

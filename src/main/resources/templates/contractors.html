@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+        <title th:text="${nstitle}"></title>
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div th:switch="${contractors}">
+                        <h2 th:case="null">No Contractor  yet!</h2>
+                        <div th:case="*">
+                            <h2>Contractor  List</h2>
+                            <table class="table table-striped table-bordered table-condensed">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>First Name </th>
+                                        <th>Last Name </th>
+                                        <th>Email Address </th>
+                                        <th>Phone Number </th>
+                                        <th>Address</th>
+                                        <th>City </th>
+                                        <th>Zip</th>
+                                        <th>Contractor Status </th>
+                                        <th>Contractor Type</th>
+                                        <th>Account Level Id</th>
+                                        <th>Country</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="contractor : ${contractors}">
+                                        <td th:text="${contractor.id}"><a href="/contractor/${contractor.id}">Id</a></td>
+                                        <td th:text="${contractor.contractor_fname}"> </td>
+                                        <td th:text="${contractor.contractor_lname}"> </td>
+                                        <td th:text="${contractor.contractor_email}"> </td>
+                                        <td th:text="${contractor.contractor_phone}"> </td>
+                                        <td th:text="${contractor.contractor_address}"> </td>
+                                        <td th:text="${contractor.contractor_city}"> </td>
+                                        <td th:text="${contractor.contractor_zip}"> </td>
+                                        <td th:text="${contractor.state_id}"> </td>
+                                        <td th:text="${contractor.contractor_type_id}"> </td>
+                                        <td th:text="${contractor.acc_level_id}"> </td>                                        
+                                        <td th:text="${contractor.country_id}"> </td>
+                                        <td><a th:href="@{/removeContractor/{id}(id=${contractor.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->   
+    </body>
+</html>

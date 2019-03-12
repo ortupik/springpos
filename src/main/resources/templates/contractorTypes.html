@@ -18,7 +18,6 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Contractor Type</th>
-                                        <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
@@ -26,8 +25,7 @@
                                     <tr th:each="contractorType : ${contractorType}">
                                         <td th:text="${contractorType.id}"><a href="/contractorType/${contractorType.id}">Id</a></td>
                                         <td th:text="${contractorType.contractor_type}">Contractor Type </td>
-                                        <td><a th:href="@{/editContractorType/{id}(id=${contractorType.id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
-                                        <td><a th:href="@{/removeContractorType/{id}(id=${contractorType.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                       <td><a th:href="@{/removeContractorType/{id}(id=${contractorType.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

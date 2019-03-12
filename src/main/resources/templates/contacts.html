@@ -38,7 +38,6 @@
                                         <td th:text="${contact.contact_status_id}"> </td>
                                         <td th:text="${contact.contact_type_id}"> </td>
                                         <td th:text="${contact.cust_site_id}"> </td>
-                                        <td><a th:href="@{/editContact/{id}(id=${contact.id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
                                         <td><a th:href="@{/removeContact/{id}(id=${contact.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>

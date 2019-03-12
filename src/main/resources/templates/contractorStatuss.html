@@ -18,16 +18,13 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Contractor Status</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                       <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr th:each="contractorStatus : ${contractorStatuss}">
                                         <td th:text="${contractorStatus.id}"><a href="/contractorStatus/${contractorStatus.id}">Id</a></td>
-                                        <td th:text="${contractorStatus.contractor_status}">Contractor Status </td>
-                                        <td><a th:href="@{/editContractorStatus/{id}(id=${contractorStatus.id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
-                                        <td><a th:href="@{/removeContractorStatus/{id}(id=${contractorStatus.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                       <td><a th:href="@{/removeContractorStatus/{id}(id=${contractorStatus.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

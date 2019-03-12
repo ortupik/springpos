@@ -18,15 +18,13 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Contact Type</th>
-                                        <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="contactType : ${contactType}">
+                                    <tr th:each="contactType : ${contactTypes}">
                                         <td th:text="${contactType.id}"><a href="/contactType/${contactType.id}">Id</a></td>
                                         <td th:text="${contactType.contact_type}">Contact Type </td>
-                                        <td><a th:href="@{/editContactType/{id}(id=${contactType.id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
                                         <td><a th:href="@{/removeContactType/{id}(id=${contactType.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>

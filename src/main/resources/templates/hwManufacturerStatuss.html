@@ -18,7 +18,6 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Status</th>
-                                        <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
@@ -26,7 +25,6 @@
                                     <tr th:each="hwManufacturerStatus : ${hwManufacturerStatuss}">
                                         <td th:text="${hwManufacturerStatus.id}"><a href="/hwManufacturerStatus/${hwManufacturerStatus.id}">Id</a></td>
                                         <td th:text="${hwManufacturerStatus.hw_manu_status}"></td>
-                                        <td><a th:href="@{/editHwManufacturerStatus/{id}(id=${hwManufacturerStatus.id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
                                         <td><a th:href="@{/removeHwManufacturerStatus/{id}(id=${hwManufacturerStatus.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>

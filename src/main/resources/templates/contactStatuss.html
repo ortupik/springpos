@@ -18,7 +18,6 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Contact Status</th>
-                                        <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
@@ -26,7 +25,6 @@
                                     <tr th:each="contactStatus : ${contactStatuss}">
                                         <td th:text="${contactStatus.id}"><a href="/contactStatus/${contactStatus.id}">Id</a></td>
                                         <td th:text="${contactStatus.contact_status}">Contact Status </td>
-                                        <td><a th:href="@{/editContactStatus/{id}(id=${contactStatus.id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
                                         <td><a th:href="@{/removeContactStatus/{id}(id=${contactStatus.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
