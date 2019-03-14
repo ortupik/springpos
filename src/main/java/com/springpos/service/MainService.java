@@ -15,8 +15,12 @@ public interface MainService {
 
     public String getLoggedOut();
 
-    public String getAccessPermition();
+    public int getAccessPermition();
+
+    public void setAccessPermition();
 
     public Model sessionLoggedIn(Model model);
+
+    public String encryptStuff(String crap);
 
 }

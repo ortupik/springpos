@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+        <title th:text="${nstitle}">Spring App</title>
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <form action="#"  th:object="${customerSite}" th:action="@{/customerSite}" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class ="form-group">
+                                    <label>Company Name</label>
+                                    <input type="text" class ="form-control" placeholder="Company Name" id="cust_site_name" th:field="*{cust_site_name}" required="">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class ="form-group">
+                                    <label>Company Street Address</label>
+                                    <input type="text" class ="form-control" placeholder="Company Street Address" id="cust_site_address" th:field="*{cust_site_address}" required="">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class ="form-group">
+                            <label>Company City </label>
+                            <input type="text" class ="form-control" placeholder="Company City" id="cust_site_city" th:field="*{cust_site_city}" required="">
+                        </div>
+
+                        <div class ="form-group">
+                            <label>Phone Number</label>
+                            <input type="text" class ="form-control" placeholder="Phone Number" id="cust_site_phone" th:field="*{cust_site_phone}" required="">
+                        </div>
+
+
+                        <div class ="form-group">
+                            <label>City</label>
+                            <input type="text" class ="form-control" placeholder="City" id="cust_site_city" th:field="*{cust_site_city}" required="">
+                        </div>
+
+                        <div class ="form-group">
+                            <label>Zip Code</label>
+                            <input type="text" class ="form-control" placeholder="Zip code" id="cust_site_zip" th:field="*{cust_site_zip}" required="">
+                        </div>
+
+                        <div class ="form-group">
+                            <label>Country</label>
+                            <input  placeholder="Country" type="text" list="countryList" class="form-control" th:field="*{country_id}" id="country_id" required="">
+                            <datalist id="countryList">      
+                                <option class="form-control" th:each="country : ${countries}"
+                                        th:value="${country.id}"
+                                        th:utext="${country.country_name}"></option>
+                            </datalist>
+                            <span th:if="${#fields.hasErrors('country_id')}" th:errors="*{country_id}"></span>
+                        </div>
+
+                        <div class ="form-group">
+                            <label>State</label>
+                            <input placeholder="State" type="text" list="stateList" class="form-control" name="hidden" th:field="*{state_id}" id="state_id" required="">
+                            <datalist id="stateList">      
+                                <option class="form-control" th:each="state : ${states}"
+                                        th:value="${state.id}"
+                                        th:utext="${state.state_name}"></option>
+                            </datalist>
+                            <span th:if="${#fields.hasErrors('state_id')}" th:errors="*{state_id}"></span>
+                        </div>
+
+                        <div class ="form-group">
+                            <label>Contact Name</label>
+                            <input type="text" class ="form-control" placeholder="Contact Name" id="contactName" th:field="*{contactName}" required="">
+                        </div>
+                        <div class ="form-group">
+                            <label>Contact Phone</label>
+                            <input type="text" class ="form-control" placeholder="Contact Phone" id="contactPhone" th:field="*{contactPhone}" required="">
+                        </div>
+                        <div class ="form-group">
+                            <label>Contact Email</label>
+                            <input type="email" class ="form-control" placeholder="Contact Email" id="contactEmail" th:field="*{contactEmail}" required="">
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-success"> Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->     
+    </body>
+</html>

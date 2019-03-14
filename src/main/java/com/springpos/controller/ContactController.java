@@ -99,15 +99,8 @@ public class ContactController {
         } else {
             mv.addObject("contact", new Contact());
             setInstitution(mv);
-            contactList.clear();
-            for (Contact con : this.contactService.findAll()) {
-                ContactType type = typeService.find(con.getContact_type_id());
-                con.setType(type.getContact_type());
-                ContactStatus status = statusService.find(con.getContact_status_id());
-                con.setStatus(status.getContact_status());
-                contactList.add(con);
-            }
-            mv.addObject("contacts", contactList);
+            contactList.clear();          
+            mv.addObject("contacts",this.contactService.findAll());
         }
         return mv;
     }
@@ -120,7 +113,7 @@ public class ContactController {
             model.addAttribute("contact", new Contact());
             return "contact";
         }
-        CustomerSite cust = new CustomerSite(contact);
+        CustomerSite cust = new CustomerSite();
         if (cust == null) {
             model.addAttribute("addMessage", contact.toString());
             model.addAttribute("contact", new Contact());

@@ -1,5 +1,7 @@
 package com.springpos.controller;
 
+import com.springpos.bean.CustomerSite;
+import com.springpos.service.CustomerSiteService;
 import com.springpos.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,10 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.springpos.service.HwService;
 
-/**
- *
- * @author nospaniol
- */
 @Controller
 public class MainController {
 
@@ -20,9 +18,16 @@ public class MainController {
 
     private MainService mainService;
 
+    private CustomerSiteService customerSiteService;
+
     @Autowired
-    public void setCategoryService(HwService hwService) {
+    public void setHwService(HwService hwService) {
         this.hwService = hwService;
+    }
+
+    @Autowired
+    public void setCustomerSiteService(CustomerSiteService customerSiteService) {
+        this.customerSiteService = customerSiteService;
     }
 
     @Autowired
@@ -33,6 +38,30 @@ public class MainController {
     @RequestMapping("/")
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView("index");
+        setInstitution(mv);
+        return mv;
+    }
+
+    @RequestMapping("/createOrder")
+    public ModelAndView createOrder() {
+        ModelAndView mv = new ModelAndView("createOrder");
+        setInstitution(mv);
+        return mv;
+    }
+
+    @RequestMapping("/newCustomer")
+    public ModelAndView newOrder() {
+        ModelAndView mv = new ModelAndView("newOrder");
+        mv.addObject("customerSite", new CustomerSite());
+        setInstitution(mv);
+        return mv;
+    }
+
+    @RequestMapping("/regularCustomer")
+    public ModelAndView regularCustomer() {
+        ModelAndView mv = new ModelAndView("regularCustomer");
+        mv.addObject("customerSite", new CustomerSite());
+        mv.addObject("customerSites", this.customerSiteService.findAll());
         setInstitution(mv);
         return mv;
     }

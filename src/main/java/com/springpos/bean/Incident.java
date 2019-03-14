@@ -20,7 +20,7 @@ public class Incident implements Serializable {
     @Column(name = "incident_date")
     private Date incident_date;
     @Column(name = "incident")
-    private String incident;
+    private String incidentName;
     @Column(name = "incident_status_id")
     private int incident_status_id;
     @Column(name = "svo_id")
@@ -44,12 +44,12 @@ public class Incident implements Serializable {
         this.incident_date = incident_date;
     }
 
-    public String getIncident() {
-        return incident;
+    public String getIncidentName() {
+        return incidentName;
     }
 
-    public void setIncident(String incident) {
-        this.incident = incident;
+    public void setIncidentName(String incidentName) {
+        this.incidentName = incidentName;
     }
 
     public int getIncident_status_id() {
@@ -76,9 +76,6 @@ public class Incident implements Serializable {
         this.incident_type_id = incident_type_id;
     }
 
-    @Override
-    public String toString() {
-        return "Incident{" + "id=" + id + ", incident_date=" + incident_date + ", incident=" + incident + ", incident_status_id=" + incident_status_id + ", svo_id=" + svo_id + ", incident_type_id=" + incident_type_id + '}';
-    }
+
 
 }

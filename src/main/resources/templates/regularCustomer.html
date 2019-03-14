@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+        <title th:text="${nstitle}">Spring App</title>
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div th:switch="${customerSites}">
+                        <h2 th:case="null">No Customers  yet!</h2>
+                        <div th:case="*">
+                            <h2>Customers</h2>
+                            <table class="table table-striped table-bordered table-condensed">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Company Name </th>
+                                        <th>Company Address </th>
+                                        <th>Phone Number </th>
+                                        <th>City</th>
+                                        <th>Country Id </th>
+                                        <th>State Id</th>
+                                        <th>Choose</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="customerSite : ${customerSites}">
+                                        <td th:text="${customerSite.id}"><a href="/customerSite/${customerSite.id}">Id</a></td>
+                                        <td th:text="${customerSite.cust_site_name}"> </td>
+                                        <td th:text="${customerSite.cust_site_address}"> </td>
+                                        <td th:text="${customerSite.cust_site_phone}"> </td>
+                                        <td th:text="${customerSite.cust_site_city}"> </td>
+                                        <td th:text="${customerSite.country_id}"> </td>
+                                        <td th:text="${customerSite.state_id}"> </td>
+                                        <td><a th:href="@{/bookCustomerSite/{id}(id=${customerSite.id})}" class="btn btn-danger btn-rounded btn-sm  my-0">Select</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->   
+    </body>
+</html>

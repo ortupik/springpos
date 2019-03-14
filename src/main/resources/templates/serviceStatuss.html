@@ -9,23 +9,23 @@
         <div class="container" id="form">
             <div class="row justify-content-center">
                 <div class="col-md-12">
-                    <div th:switch="${contractorStatus}">
-                        <h2 th:case="null">No Contractor Status yet!</h2>
+                    <div th:switch="${serviceStatuss}">
+                        <h2 th:case="null">No Status yet!</h2>
                         <div th:case="*">
-                            <h2>Contractor Status List</h2>
+                            <h2>Service Status List</h2>
                             <table class="table table-striped table-bordered table-condensed">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Id</th>
-                                        <th>Contractor Status</th>
+                                        <th>Status</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="contractorStatus : ${contractorStatuss}">
-                                        <td th:text="${contractorStatus.id}"></td>
-                                        <td th:text="${contractorStatus.contractor_status}"></td>
-                                        <td><a th:href="@{/removeContractorStatus/{id}(id=${contractorStatus.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                    <tr th:each="serviceStatus : ${serviceStatuss}">
+                                        <td th:text="${serviceStatus.id}"><a href="/serviceStatus/${serviceStatus.id}">Id</a></td>
+                                        <td th:text="${serviceStatus.svo_status}">Status</td>
+                                        <td><a th:href="@{/removeService Status/{id}(id=${serviceStatus.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -33,7 +33,9 @@
                         </div>
                     </div>
                 </div>
-                <hr>
-                <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->   
-                </body>
-                </html>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->   
+    </body>
+</html>

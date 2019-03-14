@@ -1,5 +1,6 @@
 package com.springpos.controller;
 
+import com.springpos.bean.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.springpos.bean.CustomerSite;
+import com.springpos.service.ContactService;
+import com.springpos.service.CountryService;
 import com.springpos.service.MainService;
 import java.util.ArrayList;
 import javax.validation.Valid;
@@ -17,17 +20,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.springpos.service.CustomerSiteService;
+import com.springpos.service.StateService;
 
 @Controller
 public class CustomerSiteController {
 
     private CustomerSiteService customerSiteService;
-
+    private CountryService countryService;
+    private StateService stateService;
     private MainService mainService;
+    private ContactService contactService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomerSiteController.class);
 
     ArrayList<CustomerSite> customerSiteList = new ArrayList();
+
+    @Autowired
+    public void setContactService(ContactService contactService) {
+        this.contactService = contactService;
+    }
+
+    @Autowired
+    public void setCountryService(CountryService countryService) {
+        this.countryService = countryService;
+    }
+
+    @Autowired
+    public void setStateService(StateService stateService) {
+        this.stateService = stateService;
+    }
 
     @Autowired
     public void setCustomerSiteService(CustomerSiteService customerSiteService) {
@@ -45,6 +66,8 @@ public class CustomerSiteController {
             return "index";
         }
         model.addAttribute("customerSite", new CustomerSite());
+        model.addAttribute("countries", this.countryService.findAll());
+        model.addAttribute("states", this.stateService.findAll());
         setInstitution(model);
         return "customerSite";
     }
@@ -74,11 +97,30 @@ public class CustomerSiteController {
             model.addAttribute("customerSite", new CustomerSite());
             return "customerSite";
         }
-        customerSiteService.save(customerSite);
+        CustomerSite cust = customerSiteService.save(customerSite);
+        Contact cont = new Contact(cust);
+        contactService.save(cont);
         model.addAttribute("customerSite", new CustomerSite());
         model.addAttribute("addMessage", " CustomerSite Added Successfull ");
-        return "customerSite";
+        return "redirect:/customerSite";
+    }
+    
+    
+     @PostMapping(value = "customerSite")
+    public String next(@Valid CustomerSite customerSite, BindingResult result, Model model) {
+        setInstitution(model);
+        if (result.hasErrors()) {
+            model.addAttribute("addMessage", result.toString());
 
+            model.addAttribute("customerSite", new CustomerSite());
+            return "customerSite";
+        }
+        CustomerSite cust = customerSiteService.save(customerSite);
+        Contact cont = new Contact(cust);
+        contactService.save(cont);
+        model.addAttribute("customerSite", new CustomerSite());
+        model.addAttribute("addMessage", " CustomerSite Added Successfull ");
+        return "redirect:/customerSite";
     }
 
     @RequestMapping("/updateCustomerSite/{id}")

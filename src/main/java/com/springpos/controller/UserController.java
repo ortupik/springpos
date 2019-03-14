@@ -72,12 +72,10 @@ public class UserController {
     public ModelAndView login(@Valid User p, BindingResult result, Model model) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("loginPage");
-        /*  
-        if(mainService.getAccessPermition().equals("Logged Out")){
-        return mv;
+        if (mainService.getAccessPermition()==0) {
+            return mv;
         }
-         */
-        if (userService.authenticate(p.getEmail(), p.getPassword())) {
+        if (userService.authenticate(p.getEmail(), mainService.encryptStuff(p.getPassword()))) {
             mv = mainService.setLoggedIn(p.getEmail());
             return mv;
         }

@@ -6,21 +6,17 @@ import org.springframework.stereotype.Service;
 import com.springpos.service.MainService;
 import com.springpos.service.SessionService;
 import com.springpos.service.UserService;
-import java.io.File;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDate;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.util.Base64;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,9 +27,13 @@ public class MainServiceImpl implements MainService {
 
     ModelAndView mv;
 
-    public String loggedIn = "nospaniol@gmail.com";
+    String staticUser = "admin@gmail.com";
 
-    public String loggedOut = "";
+    String staticPass = "1234";
+
+    private String loggedIn = "s";
+
+    private int loggedOut = 0;
 
     private UserService userService;
 
@@ -51,7 +51,7 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public String institutionName() {
-        return "HW";
+        return "Computer Xperts";
     }
 
     @Override
@@ -65,25 +65,26 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public ModelAndView setLoggedIn(String loggedIn) {
-        loggedOut = "";
+        setLogout();
         Random rand = new Random();
         int rand_sess = rand.nextInt(1000);
+        User usr = userService.findByEmail(staticUser);
+        if (usr == null) {
+            usr = new User();
+            usr.setEmail(session);
+            usr.setPassword(encryptStuff(staticPass));
+            userService.save(usr);
+        }
         User user = userService.findByEmail(loggedIn);
         Sessions sess = new Sessions();
         sess.setSessionName(user.getEmail() + " | " + String.valueOf(rand_sess));
         sess.setUserName(loggedIn);
         Sessions newSess = sessionService.save(sess);
-        session = newSess.getSessionName();
-        session = newSess.getUserName();
+        session = newSess.getSessionName() + newSess.getUserName();
         String sessName = newSess.getSessionName();
         mv = new ModelAndView();
-        if (user.getRoles().equals("Admin")) {
-            mv.setViewName("adminPage");
-        }
-        if (user.getRoles().equals("Admin")) {
-            mv.setViewName("userPage");
-        }
-        this.loggedIn = loggedIn;
+        setLogin(session, loggedIn, rand_sess);
+        mv.setViewName("adminPage");
         mv.addObject("sessionLoggedIn", sessName);
         mv.addObject("loggedIn", this.loggedIn);
         return mv;
@@ -107,15 +108,45 @@ public class MainServiceImpl implements MainService {
         if (getLoggedIn() == null) {
             return "redirect:/";
         }
-        session = null;
-        this.loggedIn = null;
-        loggedOut = "Logged Out";
+
         return "redirect:/";
     }
 
     @Override
-    public String getAccessPermition() {
+    public int getAccessPermition() {
         return loggedOut;
     }
 
+    @Override
+    public void setAccessPermition() {
+        Random rand = new Random();
+        loggedOut = rand.nextInt(1000);
+    }
+
+    @Override
+    public String encryptStuff(String crap) {
+        try {
+            byte[] input = crap.getBytes();
+            Cipher cipher = Cipher.getInstance("RSA/None/PKCS1Padding", "BC");
+            byte[] cipherText = cipher.doFinal(input);
+            String encodedString = Base64.getEncoder().encodeToString(cipherText);
+            return encodedString;
+        } catch (NoSuchAlgorithmException | NoSuchProviderException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException ex) {
+            Logger.getLogger(MainServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    void setLogout() {
+        session = null;
+        this.loggedIn = null;
+        loggedOut = 0;
+        mv = null;
+    }
+
+    void setLogin(String sess, String loggedIn, int loggedOut) {
+        this.session = sess;
+        this.loggedIn = loggedIn;
+        this.loggedOut = loggedOut;
+    }
 }

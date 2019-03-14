@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+        <title th:text="${nstitle}">Spring App</title>
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form class="form-horizontal"  action="#"  th:object="${incident}" th:action="@{/incident}" method="post">
+                        <input type="hidden" th:field="*{id}"/>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">Incident : </label>
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control" id="incidentName" th:field="*{incidentName}" required=""/>
+                                <span th:if="${#fields.hasErrors('incidentName')}" th:errors="*{incidentName}"></span>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="col-xs-2 control-label">Incident Date : </label>
+                            <div class="col-xs-10">
+                                <input type="date" class="form-control" id="incident_date" th:field="*{incident_date}" required=""/>
+                                <span th:if="${#fields.hasErrors('incident_date')}" th:errors="*{incident_date}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="Save" class="btn btn-primary btn-rounded my-0">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->   
+    </body>
+</html>

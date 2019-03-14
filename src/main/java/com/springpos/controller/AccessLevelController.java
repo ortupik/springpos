@@ -77,7 +77,7 @@ public class AccessLevelController {
         accessLevelService.save(accessLevel);
         model.addAttribute("accessLevel", new AccessLevel());
         model.addAttribute("addMessage", " AccessLevel Added Successfull ");
-        return "accessLevel";
+        return "redirect:/accessLevel";
 
     }
 
@@ -122,6 +122,7 @@ public class AccessLevelController {
 
     void setInstitution(Model institution) {
         institution.addAttribute("institution", this.mainService.institutionName());
+        institution.addAttribute("title", this.mainService.institutionName());
         institution.addAttribute("motto", this.mainService.institutionMotto());
     }
 

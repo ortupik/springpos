@@ -28,7 +28,7 @@
                         <div id="so" class="collapse">
                             <a  href="#" class="list-group-item ">Search</a>
                             <a  href="#" th:href="@{/createOrder}" class="list-group-item ">Create</a>
-                            <a href="#" th:href="@{/newIncident}" class="list-group-item ">Incident</a>
+                            <a href="#" th:href="@{/incident/new}" class="list-group-item ">Incident</a>
                         </div>
 
 
@@ -38,8 +38,8 @@
                         </a>
 
                         <div id="customer" class="collapse">
-                            <a href="#" th:href="@{/contacts}" class="list-group-item ">Search</a>
-                            <a href="#" th:href="@{/contact/new}" class="list-group-item " >Add</a>
+                            <a href="#" th:href="@{/customerSites}" class="list-group-item ">Search</a>
+                            <a href="#" th:href="@{/customerSite/new}" class="list-group-item " >Add</a>
                             <a href="#" th:href="@{/contactStatus/new}" class="list-group-item ">Add Contact Status</a>
                             <a href="#" th:href="@{/contactType/new}" class="list-group-item ">Add Contact Type</a>
                             <a href="#" th:href="@{/contactStatuss}" class="list-group-item ">View Contact Status</a>
@@ -115,7 +115,7 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+                                        <a class="nav-link" href="#" th:href="@{/logout}" >Logout<span class="sr-only">(current)</span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -124,7 +124,7 @@
                     </div>
                     <div class="container-fluid" id="form">
                         <h1 class="mt-4 text-center">Spring POS</h1>
-                        <center> <span th:text="${addMessage}" ></span> </center>>
+                        <center> <span th:text="${addMessage}" ></span> </center>
                     </div>
                 </div>
             </div> 

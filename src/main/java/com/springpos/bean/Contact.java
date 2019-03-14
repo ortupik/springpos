@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "CONTACT")
@@ -31,25 +30,18 @@ public class Contact implements Serializable {
     private int contact_type_id;
     @Column(name = "cust_site_id")
     private int cust_site_id;
-    @Transient
-    private String city;
-    @Transient
-    private String zip;
-    @Transient
-    private int state;
-    @Transient
-    private int country;
-    @Transient
-    private String status;
-    @Transient
-    private String type;
 
-    public String getZip() {
-        return zip;
+    public Contact() {
     }
 
-    public void setZip(String zip) {
-        this.zip = zip;
+    public Contact(CustomerSite cust) {
+        this.contact_fname = cust.getContactName();
+        this.contact_lname = "";
+        this.contact_phone = cust.getContactPhone();
+        this.contact_email = cust.getContactEmail();
+        this.contact_status_id = 1;
+        this.contact_type_id = 1;
+        this.cust_site_id = cust.getId();
     }
 
     public int getId() {
@@ -114,51 +106,6 @@ public class Contact implements Serializable {
 
     public void setCust_site_id(int cust_site_id) {
         this.cust_site_id = cust_site_id;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
-    public int getCountry() {
-        return country;
-    }
-
-    public void setCountry(int country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return "Contact{" + "id=" + id + ", contact_fname=" + contact_fname + ", contact_lname=" + contact_lname + ", contact_phone=" + contact_phone + ", contact_email=" + contact_email + ", contact_status_id=" + contact_status_id + ", contact_type_id=" + contact_type_id + ", cust_site_id=" + cust_site_id + '}';
     }
 
 }
