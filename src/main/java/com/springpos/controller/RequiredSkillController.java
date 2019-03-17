@@ -42,7 +42,7 @@ public class RequiredSkillController {
     @RequestMapping("requiredSkill/new")
     public String requiredSkillPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("requiredSkill", new RequiredSkill());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class RequiredSkillController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("requiredSkills");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("requiredSkill", new RequiredSkill());
             mainService.setInstitution(mv);

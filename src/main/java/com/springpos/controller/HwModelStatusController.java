@@ -42,7 +42,7 @@ public class HwModelStatusController {
     @RequestMapping("hwModelStatus/new")
     public String hwModelStatusPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("hwModelStatus", new HwModelStatus());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class HwModelStatusController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("hwModelStatuss");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("hwModelStatus", new HwModelStatus());
             mainService.setInstitution(mv);

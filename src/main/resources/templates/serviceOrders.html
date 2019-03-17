@@ -20,6 +20,8 @@
                                         <th>Customer Name</th>
                                         <th>Customer Id</th>
                                         <th>Service Name</th>
+                                        <th>Hardware needed</th>
+                                        <th>Comments</th>
                                         <th>Order Status</th>
                                         <th>Contractor Name</th>
                                         <th>Contractor Id</th>
@@ -33,6 +35,8 @@
                                         <td th:text="${serviceOrder.customerSite.custSiteName}"></td>
                                         <td th:text="${serviceOrder.customerSite.custId}"></td>
                                         <td th:text="${serviceOrder.svc.svcName}"></td>
+                                        <td th:text="${serviceOrder.work_request}"></td>
+                                        <td th:text="${serviceOrder.work_summary}"></td>
                                         <td th:text="${serviceOrder.serviceOrderStatus.svo_status}"></td>
                                         <td th:text="${serviceOrder.contractor.fullnames}"></td>
                                         <td th:text="${serviceOrder.contractor.contractorId}"></td>

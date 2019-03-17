@@ -42,7 +42,7 @@ public class KnowledgeBaseCategoryController {
     @RequestMapping("knowledgeBaseCategory/new")
     public String knowledgeBaseCategoryPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("knowledgeBaseCategory", new KnowledgeBaseCategory());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class KnowledgeBaseCategoryController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("knowledgeBaseCategorys");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("knowledgeBaseCategory", new KnowledgeBaseCategory());
             mainService.setInstitution(mv);

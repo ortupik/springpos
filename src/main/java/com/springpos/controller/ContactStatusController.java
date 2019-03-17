@@ -42,7 +42,7 @@ public class ContactStatusController {
     @RequestMapping("contactStatus/new")
     public String contactStatusPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("contactStatus", new ContactStatus());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class ContactStatusController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("contactStatuss");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("contactStatus", new ContactStatus());
             mainService.setInstitution(mv);

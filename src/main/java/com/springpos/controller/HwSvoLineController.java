@@ -42,7 +42,7 @@ public class HwSvoLineController {
     @RequestMapping("hwSvoLine/new")
     public String hwSvoLinePage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("hwSvoLine", new HwSvoLine());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class HwSvoLineController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("hwSvoLines");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("hwSvoLine", new HwSvoLine());
             mainService.setInstitution(mv);

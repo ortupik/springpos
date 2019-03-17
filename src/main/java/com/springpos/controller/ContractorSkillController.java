@@ -56,7 +56,7 @@ public class ContractorSkillController {
     @RequestMapping("contractorSkill/new")
     public String contractorSkillPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("contractors", contractorService.findAll());
         model.addAttribute("skills", skillService.findAll());
@@ -70,7 +70,7 @@ public class ContractorSkillController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("contractorSkills");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("contractorSkill", new ContractorSkill());
             mainService.setInstitution(mv);

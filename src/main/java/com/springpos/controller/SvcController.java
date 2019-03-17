@@ -57,7 +57,7 @@ public class SvcController {
     @RequestMapping("svc/new")
     public String svcPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("svc", new Svc());
         model.addAttribute("serviceTypes", this.typeService.findAll());
@@ -71,7 +71,7 @@ public class SvcController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("svcs");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("svc", new Svc());
             mainService.setInstitution(mv);

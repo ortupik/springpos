@@ -69,7 +69,7 @@ public class ContractorController {
     @RequestMapping("contractor/new")
     public String contractorPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("contractorTypes", this.typeService.findAll());
         model.addAttribute("contractorStatuss", this.statusService.findAll());
@@ -85,7 +85,7 @@ public class ContractorController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("contractors");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("contractor", new Contractor());
             mainService.setInstitution(mv);

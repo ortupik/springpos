@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+      
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-9">
+                    <div th:switch="${hwSeriesStatuss}">
+                        <h2 th:case="null">None</h2>
+                        <div th:case="*">
+                            <h2>List</h2>
+                            <table class="table table-striped table-bordered table-condensed">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Status</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="hwSeriesStatus : ${hwSeriesStatuss}">
+                                        <td th:text="${hwSeriesStatus.hwSeriesStatusId}"></td>
+                                        <td th:text="${hwSeriesStatus.hw_series_status}"></td>
+                                        <td><a th:href="@{/removeHwSeriesStatus/{id}(id=${hwSeriesStatus.hwSeriesStatusId})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->   
+                </body>
+                </html>

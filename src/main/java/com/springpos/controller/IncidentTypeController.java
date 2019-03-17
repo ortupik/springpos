@@ -42,7 +42,7 @@ public class IncidentTypeController {
     @RequestMapping("incidentType/new")
     public String incidentTypePage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("incidentType", new IncidentType());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class IncidentTypeController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("incidentTypes");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("incidentType", new IncidentType());
             mainService.setInstitution(mv);

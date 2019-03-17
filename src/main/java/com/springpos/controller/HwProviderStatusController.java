@@ -42,7 +42,7 @@ public class HwProviderStatusController {
     @RequestMapping("hwProviderStatus/new")
     public String hwProviderStatusPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("hwProviderStatus", new HwProviderStatus());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class HwProviderStatusController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("hwProviderStatuss");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("hwProviderStatus", new HwProviderStatus());
             mainService.setInstitution(mv);

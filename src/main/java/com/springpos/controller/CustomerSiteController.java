@@ -63,7 +63,7 @@ public class CustomerSiteController {
     @RequestMapping("customerSite/new")
     public String customerSitePage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("customerSite", new CustomerSite());
         model.addAttribute("countries", this.countryService.findAll());
@@ -77,7 +77,7 @@ public class CustomerSiteController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customerSites");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("customerSite", new CustomerSite());
             mainService.setInstitution(mv);

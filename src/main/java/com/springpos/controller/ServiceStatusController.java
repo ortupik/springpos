@@ -42,7 +42,7 @@ public class ServiceStatusController {
     @RequestMapping("serviceStatus/new")
     public String serviceStatusPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("serviceStatus", new ServiceStatus());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class ServiceStatusController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("serviceStatuss");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("serviceStatus", new ServiceStatus());
             mainService.setInstitution(mv);

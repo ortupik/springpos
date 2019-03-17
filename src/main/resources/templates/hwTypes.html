@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->      
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-9">
+                    <div th:switch="${hwTypes}">
+                        <h2 th:case="null">No Types Yet!</h2>
+                        <div th:case="*">
+                            <h2>List</h2>
+                            <table class="table table-striped table-bordered table-condensed">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Hardware Type</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="hwType : ${hwTypes}">
+                                        <td th:text="${hwType.hwTypeId}"></td>
+                                        <td th:text="${hwType.hw_type}"></td>
+                                        <td><a th:href="@{/removeCountry/{id}(id=${hwType.hwTypeId})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->   
+    </body>
+</html>

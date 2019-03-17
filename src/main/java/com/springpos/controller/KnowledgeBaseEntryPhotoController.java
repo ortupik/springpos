@@ -42,7 +42,7 @@ public class KnowledgeBaseEntryPhotoController {
     @RequestMapping("knowledgeBaseEntryPhoto/new")
     public String knowledgeBaseEntryPhotoPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("knowledgeBaseEntryPhoto", new KnowledgeBaseEntryPhoto());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class KnowledgeBaseEntryPhotoController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("knowledgeBaseEntryPhotos");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("knowledgeBaseEntryPhoto", new KnowledgeBaseEntryPhoto());
             mainService.setInstitution(mv);

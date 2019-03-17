@@ -17,17 +17,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.springpos.service.HwModelService;
+import com.springpos.service.HwModelStatusService;
+import com.springpos.service.HwSeriesService;
 
 @Controller
 public class HwModelController {
 
     private HwModelService hwModelService;
-
+    private HwModelStatusService hwModelStatusService;
+    private HwSeriesService hwSeriesService;
     private MainService mainService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HwModelController.class);
 
     ArrayList<HwModel> hwModelList = new ArrayList();
+
+    @Autowired
+    public void setHwModelStatusService(HwModelStatusService hwModelStatusService) {
+        this.hwModelStatusService = hwModelStatusService;
+    }
+
+    @Autowired
+    public void setHwSeriesService(HwSeriesService hwSeriesService) {
+        this.hwSeriesService = hwSeriesService;
+    }
 
     @Autowired
     public void setHwModelService(HwModelService hwModelService) {
@@ -42,8 +55,10 @@ public class HwModelController {
     @RequestMapping("hwModel/new")
     public String hwModelPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
+        model.addAttribute("hwSeriess", this.hwSeriesService.findAll());
+        model.addAttribute("hwModelStatuss", this.hwModelStatusService.findAll());
         model.addAttribute("hwModel", new HwModel());
         mainService.setInstitution(model);
         return "hwModel";
@@ -54,7 +69,7 @@ public class HwModelController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("hwModels");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("hwModel", new HwModel());
             mainService.setInstitution(mv);
@@ -119,6 +134,5 @@ public class HwModelController {
         model.addAttribute("hwModel", hwModel);
         return "updateHwModel";
     }
-
 
 }

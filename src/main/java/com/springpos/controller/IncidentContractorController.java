@@ -42,7 +42,7 @@ public class IncidentContractorController {
     @RequestMapping("incidentContractor/new")
     public String incidentContractorPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("incidentContractor", new IncidentContractor());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class IncidentContractorController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("incidentContractors");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("incidentContractor", new IncidentContractor());
             mainService.setInstitution(mv);

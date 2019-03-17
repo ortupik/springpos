@@ -31,8 +31,8 @@ public class Contractor implements Serializable {
     @JoinColumn(name = "contractor_type_id", nullable = false)
     private ContractorType contractorType;
     @OneToMany(mappedBy = "contractor")
-    private Set<ServiceOrder> serviceOrder;    
-    
+    private Set<ServiceOrder> serviceOrder;
+
     @Id
     @Column(name = "contractor_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

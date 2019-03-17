@@ -42,7 +42,7 @@ public class HwManufacturerStatusController {
     @RequestMapping("hwManufacturerStatus/new")
     public String hwManufacturerStatusPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("hwManufacturerStatus", new HwManufacturerStatus());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class HwManufacturerStatusController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("hwManufacturerStatuss");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("hwManufacturerStatus", new HwManufacturerStatus());
             mainService.setInstitution(mv);
@@ -76,7 +76,7 @@ public class HwManufacturerStatusController {
         }
         hwManufacturerStatusService.save(hwManufacturerStatus);
         model.addAttribute("hwManufacturerStatus", new HwManufacturerStatus());
-        model.addAttribute("addMessage", " HwManufacturerStatus Added Successfull ");
+        model.addAttribute("addMessage", " Added Successfull ");
         return "hwManufacturerStatus";
 
     }

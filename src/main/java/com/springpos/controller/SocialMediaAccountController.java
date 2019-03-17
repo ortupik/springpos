@@ -42,7 +42,7 @@ public class SocialMediaAccountController {
     @RequestMapping("socialMediaAccount/new")
     public String socialMediaAccountPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("socialMediaAccount", new SocialMediaAccount());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class SocialMediaAccountController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("socialMediaAccounts");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("socialMediaAccount", new SocialMediaAccount());
             mainService.setInstitution(mv);

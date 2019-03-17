@@ -42,7 +42,7 @@ public class PaymentStatusController {
     @RequestMapping("paymentStatus/new")
     public String paymentStatusPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("paymentStatus", new PaymentStatus());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class PaymentStatusController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("paymentStatuss");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("paymentStatus", new PaymentStatus());
             mainService.setInstitution(mv);

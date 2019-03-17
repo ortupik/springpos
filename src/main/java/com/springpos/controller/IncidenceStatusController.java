@@ -42,7 +42,7 @@ public class IncidenceStatusController {
     @RequestMapping("incidentStatus/new")
     public String incidentStatusPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("incidentStatus", new IncidenceStatus());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class IncidenceStatusController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("incidentStatuss");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("incidentStatus", new IncidenceStatus());
             mainService.setInstitution(mv);

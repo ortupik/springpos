@@ -42,7 +42,7 @@ public class ServiceTypeController {
     @RequestMapping("serviceType/new")
     public String serviceTypePage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("serviceType", new ServiceType());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class ServiceTypeController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("serviceTypes");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("serviceType", new ServiceType());
             mainService.setInstitution(mv);

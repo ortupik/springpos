@@ -42,7 +42,7 @@ public class SocialMediaAccountTypeController {
     @RequestMapping("socialMediaAccountType/new")
     public String socialMediaAccountTypePage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("socialMediaAccountType", new SocialMediaAccountType());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class SocialMediaAccountTypeController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("socialMediaAccountTypes");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("socialMediaAccountType", new SocialMediaAccountType());
             mainService.setInstitution(mv);

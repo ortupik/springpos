@@ -42,7 +42,7 @@ public class HwInventoryController {
     @RequestMapping("hwInventory/new")
     public String hwInventoryPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("hwInventory", new HwInventory());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class HwInventoryController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("hwInventorys");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("hwInventory", new HwInventory());
             mainService.setInstitution(mv);

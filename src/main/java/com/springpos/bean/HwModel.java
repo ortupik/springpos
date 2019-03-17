@@ -1,73 +1,86 @@
 package com.springpos.bean;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "HW_MODEL")
 public class HwModel implements Serializable {
 
+    @OneToMany(mappedBy = "hwModel")
+    private Set<HwInventory> hwInventory;
+    @OneToMany(mappedBy = "hwModel")
+    private Set<CustomerSiteHw> customerSiteHw;
+
+    @ManyToOne
+    @JoinColumn(name = "hwModelStatusId", nullable = false)
+    private HwModelStatus hwModelStatus;
+    @ManyToOne
+    @JoinColumn(name = "hwSeriesId", nullable = false)
+    private HwSeries hwSeries;
+
     @Id
     @Column(name = "hw_model_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "hw_model_number")
-    private String hw_model_number;
-    @Column(name = "hw_type_id")
-    private int hw_type_id;
-    @Column(name = "hw_manu_id")
-    private int hw_manu_id;
-    @Column(name = "hw_model_status_id")
-    private int hw_model_status_id;
+    private int hwModelId;
+    @Column(name = "hw_model")
+    private String hw_model;
 
-    public int getId() {
-        return id;
+    public Set<HwInventory> getHwInventory() {
+        return hwInventory;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setHwInventory(Set<HwInventory> hwInventory) {
+        this.hwInventory = hwInventory;
     }
 
-    public String getHw_model_number() {
-        return hw_model_number;
+    public Set<CustomerSiteHw> getCustomerSiteHw() {
+        return customerSiteHw;
     }
 
-    public void setHw_model_number(String hw_model_number) {
-        this.hw_model_number = hw_model_number;
+    public void setCustomerSiteHw(Set<CustomerSiteHw> customerSiteHw) {
+        this.customerSiteHw = customerSiteHw;
     }
 
-    public int getHw_type_id() {
-        return hw_type_id;
+    public HwModelStatus getHwModelStatus() {
+        return hwModelStatus;
     }
 
-    public void setHw_type_id(int hw_type_id) {
-        this.hw_type_id = hw_type_id;
+    public void setHwModelStatus(HwModelStatus hwModelStatus) {
+        this.hwModelStatus = hwModelStatus;
     }
 
-    public int getHw_manu_id() {
-        return hw_manu_id;
+    public HwSeries getHwSeries() {
+        return hwSeries;
     }
 
-    public void setHw_manu_id(int hw_manu_id) {
-        this.hw_manu_id = hw_manu_id;
+    public void setHwSeries(HwSeries hwSeries) {
+        this.hwSeries = hwSeries;
     }
 
-    public int getHw_model_status_id() {
-        return hw_model_status_id;
+    public int getHwModelId() {
+        return hwModelId;
     }
 
-    public void setHw_model_status_id(int hw_model_status_id) {
-        this.hw_model_status_id = hw_model_status_id;
+    public void setHwModelId(int hwModelId) {
+        this.hwModelId = hwModelId;
     }
 
-    @Override
-    public String toString() {
-        return "HwModel{" + "id=" + id + ", hw_model_number=" + hw_model_number + ", hw_type_id=" + hw_type_id + ", hw_manu_id=" + hw_manu_id + ", hw_model_status_id=" + hw_model_status_id + '}';
+    public String getHw_model() {
+        return hw_model;
+    }
+
+    public void setHw_model(String hw_model) {
+        this.hw_model = hw_model;
     }
 
 }

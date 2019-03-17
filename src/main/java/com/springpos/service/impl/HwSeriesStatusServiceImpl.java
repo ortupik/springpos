@@ -5,33 +5,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springpos.bean.Hw;
+import com.springpos.bean.HwSeriesStatus;
 import java.util.Optional;
-import com.springpos.repository.HwRepository;
-import com.springpos.service.HwService;
+import com.springpos.repository.HwSeriesStatusRepository;
+import com.springpos.service.HwSeriesStatusService;
 
 @Service
-public class HwServiceImpl implements HwService {
+public class HwSeriesStatusServiceImpl implements HwSeriesStatusService {
 
-    private HwRepository bizRepository;
+    private HwSeriesStatusRepository bizRepository;
 
     @Autowired
-    public void setBizRepository(HwRepository bizRepository) {
+    public void setBizRepository(HwSeriesStatusRepository bizRepository) {
         this.bizRepository = bizRepository;
     }
 
     @Override
-    public Hw save(Hw entity) {
+    public HwSeriesStatus save(HwSeriesStatus entity) {
         return bizRepository.save(entity);
     }
 
     @Override
-    public Hw update(Hw entity) {
+    public HwSeriesStatus update(HwSeriesStatus entity) {
         return bizRepository.save(entity);
     }
 
     @Override
-    public void delete(Hw entity) {
+    public void delete(HwSeriesStatus entity) {
         bizRepository.delete(entity);
     }
 
@@ -41,18 +41,18 @@ public class HwServiceImpl implements HwService {
     }
 
     @Override
-    public Hw find(int id) {
-        Optional<Hw> opdata = bizRepository.findById(id);
+    public HwSeriesStatus find(int id) {
+        Optional<HwSeriesStatus> opdata = bizRepository.findById(id);
         return opdata.get();
     }
 
     @Override
-    public List<Hw> findAll() {
+    public List<HwSeriesStatus> findAll() {
         return bizRepository.findAll();
     }
 
     @Override
-    public void deleteInBatch(List<Hw> categories) {
+    public void deleteInBatch(List<HwSeriesStatus> categories) {
         bizRepository.deleteInBatch(categories);
     }
 

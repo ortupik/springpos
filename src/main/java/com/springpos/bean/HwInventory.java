@@ -6,12 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "HW_INVENTORY")
 public class HwInventory implements Serializable {
 
+      @ManyToOne
+    @JoinColumn(name = "hwModelId", nullable = false)
+    private HwModel hwModel;
+    
     @Id
     @Column(name = "hw_inv_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +32,6 @@ public class HwInventory implements Serializable {
     private int hw_provider_id;
     @Column(name = "hw_inv_status_id")
     private int hw_inv_status_id;
-    @Column(name = "hw_id")
-    private int hw_id;
 
     public int getId() {
         return id;
@@ -77,17 +81,13 @@ public class HwInventory implements Serializable {
         this.hw_inv_status_id = hw_inv_status_id;
     }
 
-    public int getHw_id() {
-        return hw_id;
+    public HwModel getHwModel() {
+        return hwModel;
     }
 
-    public void setHw_id(int hw_id) {
-        this.hw_id = hw_id;
+    public void setHwModel(HwModel hwModel) {
+        this.hwModel = hwModel;
     }
 
-    @Override
-    public String toString() {
-        return "HwInventory{" + "id=" + id + ", hw_inv_cost=" + hw_inv_cost + ", hw_serial_number=" + hw_serial_number + ", hw_mac_address=" + hw_mac_address + ", hw_provider_id=" + hw_provider_id + ", hw_inv_status_id=" + hw_inv_status_id + ", hw_id=" + hw_id + '}';
-    }
 
 }

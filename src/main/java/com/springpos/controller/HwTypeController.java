@@ -42,7 +42,7 @@ public class HwTypeController {
     @RequestMapping("hwType/new")
     public String hwTypePage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("hwType", new HwType());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class HwTypeController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("hwTypes");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("hwType", new HwType());
             mainService.setInstitution(mv);

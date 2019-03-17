@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->      
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form class="form-horizontal"  action="#"  th:object="${hwModelStatus}" th:action="@{/hwModelStatus}" method="post">
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label"> Status : </label>
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control" id="hw_model_status" th:field="*{hw_model_status}" required=""/>
+                                <span th:if="${#fields.hasErrors('hw_model_status')}" th:errors="*{hw_model_status}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="Save" class="btn btn-primary btn-rounded my-0">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->   
+    </body>
+</html>

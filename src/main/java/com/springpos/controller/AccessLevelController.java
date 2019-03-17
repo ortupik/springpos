@@ -42,7 +42,7 @@ public class AccessLevelController {
     @RequestMapping("accessLevel/new")
     public String accessLevelPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("accessLevel", new AccessLevel());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class AccessLevelController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("accessLevels");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("accessLevel", new AccessLevel());
             mainService.setInstitution(mv);

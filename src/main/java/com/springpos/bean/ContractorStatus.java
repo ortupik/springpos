@@ -47,5 +47,4 @@ public class ContractorStatus implements Serializable {
         this.contractor_status = contractor_status;
     }
 
-   
 }

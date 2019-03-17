@@ -42,7 +42,7 @@ public class ContactTypeController {
     @RequestMapping("contactType/new")
     public String contactTypePage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("contactType", new ContactType());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class ContactTypeController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("contactTypes");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("contactType", new ContactType());
             mainService.setInstitution(mv);

@@ -6,12 +6,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "CUSTOMER_SITE_HW")
 public class CustomerSiteHw implements Serializable {
 
+    @ManyToOne
+    @JoinColumn(name = "hwModelId", nullable = false)
+    private HwModel hwModel;
     @Id
     @Column(name = "cust_site_hw_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +29,6 @@ public class CustomerSiteHw implements Serializable {
     private int cust_site_id;
     @Column(name = "cust_site_hw_status_id")
     private int cust_site_hw_status_id;
-    @Column(name = "hw_id")
-    private int hw_id;
 
     public int getId() {
         return id;
@@ -67,17 +70,12 @@ public class CustomerSiteHw implements Serializable {
         this.cust_site_hw_status_id = cust_site_hw_status_id;
     }
 
-    public int getHw_id() {
-        return hw_id;
+    public HwModel getHwModel() {
+        return hwModel;
     }
 
-    public void setHw_id(int hw_id) {
-        this.hw_id = hw_id;
-    }
-
-    @Override
-    public String toString() {
-        return "CustomerSiteHw{" + "id=" + id + ", cust_site_serial_number=" + cust_site_serial_number + ", cust_site_mac_address=" + cust_site_mac_address + ", cust_site_id=" + cust_site_id + ", cust_site_hw_status_id=" + cust_site_hw_status_id + ", hw_id=" + hw_id + '}';
+    public void setHwModel(HwModel hwModel) {
+        this.hwModel = hwModel;
     }
 
 }

@@ -79,7 +79,7 @@ public class ContactController {
     @RequestMapping("contact/new")
     public String contactPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("contactTypes", this.typeService.findAll());
         model.addAttribute("contactStatuss", this.statusService.findAll());
@@ -95,7 +95,7 @@ public class ContactController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("contacts");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("contact", new Contact());
             mainService.setInstitution(mv);

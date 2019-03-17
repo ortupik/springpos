@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form action="#"  th:object="${hwSeries}" th:action="@{/hwSeries}" method="post">
+
+                        <div class ="form-group">
+                            <label>Series Name</label>
+                            <input type="text" class ="form-control" placeholder="" id="hw_series_name" th:field="*{hw_series_name}" required="">
+                        </div>
+
+
+                        <div class ="form-group">
+                            <label>Type</label>
+                            <select  placeholder="Country" class="form-control" th:field="*{hwType.hwTypeId}" id="hwTypeId" required="">
+                                <option class="form-control" th:each="hwType : ${hwTypess}"
+                                        th:value="${hwType.hwTypeId}"
+                                        th:utext="${hwType.hw_type}"></option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('hwType.hwTypeId')}" th:errors="*{hwType.hwTypeId}"></span>
+                        </div>
+
+                        <div class ="form-group">
+                            <label>Series Status</label>
+                            <select placeholder="State" class="form-control"  th:field="*{hwSeriesStatus.hwSeriesStatusId}" id="hwSeriesStatus.hwSeriesStatusId" required="">
+                                <option class="form-control" th:each="hwSeriesStatus : ${hwSeriesStatuss}"
+                                        th:value="${hwSeriesStatus.hwSeriesStatusId}"
+                                        th:utext="${hwSeriesStatus.hw_series_status}"></option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('hwSeriesStatus.hwSeriesStatusId')}" th:errors="*{hwSeriesStatus.hwSeriesStatusId}"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-10">
+                                <label class="control-label">Manufacturer : </label>
+                                <select placeholder="Contractor Status" list="statusList" class="form-control"  th:field="*{hwManufacturer.hwManuId}" id="hwManufacturer.hwManuId" required="">
+                                    <option class="form-control" th:each="hwManufacturer : ${hwManufacturers}"
+                                            th:value="${hwManufacturer.hwManuId}"
+                                            th:utext="${hwManufacturer.hwManuName}"></option>
+                                </select>
+                                <span th:if="${#fields.hasErrors('hwManufacturer.hwManuId')}" th:errors="*{hwManufacturer.hwManuId}"></span>
+                            </div>
+                        </div>
+
+                        <br>
+                        <button type="submit" class="btn btn-success"> Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->     
+    </body>
+</html>

@@ -42,7 +42,7 @@ public class ServiceOrderPhotoController {
     @RequestMapping("serviceOrderPhoto/new")
     public String serviceOrderPhotoPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("serviceOrderPhoto", new ServiceOrderPhoto());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class ServiceOrderPhotoController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("serviceOrderPhotos");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("serviceOrderPhoto", new ServiceOrderPhoto());
             mainService.setInstitution(mv);

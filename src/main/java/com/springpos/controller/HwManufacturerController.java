@@ -17,12 +17,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.springpos.service.HwManufacturerService;
+import com.springpos.service.HwManufacturerStatusService;
 
 @Controller
 public class HwManufacturerController {
 
     private HwManufacturerService hwManufacturerService;
-
+    private HwManufacturerStatusService hwManufacturerStatusService;
     private MainService mainService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HwManufacturerController.class);
@@ -35,6 +36,11 @@ public class HwManufacturerController {
     }
 
     @Autowired
+    public void setHwManufacturerStatusService(HwManufacturerStatusService hwManufacturerStatusService) {
+        this.hwManufacturerStatusService = hwManufacturerStatusService;
+    }
+
+    @Autowired
     public void setMainService(MainService mainService) {
         this.mainService = mainService;
     }
@@ -42,8 +48,9 @@ public class HwManufacturerController {
     @RequestMapping("hwManufacturer/new")
     public String hwManufacturerPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
+        model.addAttribute("hwManufacturerStatuss", this.hwManufacturerStatusService.findAll());
         model.addAttribute("hwManufacturer", new HwManufacturer());
         mainService.setInstitution(model);
         return "hwManufacturer";
@@ -54,7 +61,7 @@ public class HwManufacturerController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("hwManufacturers");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("hwManufacturer", new HwManufacturer());
             mainService.setInstitution(mv);
@@ -119,6 +126,5 @@ public class HwManufacturerController {
         model.addAttribute("hwManufacturer", hwManufacturer);
         return "updateHwManufacturer";
     }
-
 
 }

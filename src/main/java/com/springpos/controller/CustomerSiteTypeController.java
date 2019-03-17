@@ -42,7 +42,7 @@ public class CustomerSiteTypeController {
     @RequestMapping("customerSiteType/new")
     public String customerSiteTypePage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("customerSiteType", new CustomerSiteType());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class CustomerSiteTypeController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customerSiteTypes");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("customerSiteType", new CustomerSiteType());
             mainService.setInstitution(mv);

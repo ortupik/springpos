@@ -24,7 +24,7 @@ public class ServiceOrder implements Serializable {
     @ManyToOne
     @JoinColumn(name = "custId", nullable = false)
     private CustomerSite customerSite;
-     @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "contractorId", nullable = false)
     private Contractor contractor;
 

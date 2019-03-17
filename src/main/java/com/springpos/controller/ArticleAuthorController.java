@@ -42,7 +42,7 @@ public class ArticleAuthorController {
     @RequestMapping("articleAuthor/new")
     public String articleAuthorPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("articleAuthor", new ArticleAuthor());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class ArticleAuthorController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("articleAuthors");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("articleAuthor", new ArticleAuthor());
             mainService.setInstitution(mv);

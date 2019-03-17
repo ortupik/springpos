@@ -42,7 +42,7 @@ public class KnowledgeBaseEntryController {
     @RequestMapping("knowledgeBaseEntry/new")
     public String knowledgeBaseEntryPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("knowledgeBaseEntry", new KnowledgeBaseEntry());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class KnowledgeBaseEntryController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("knowledgeBaseEntrys");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("knowledgeBaseEntry", new KnowledgeBaseEntry());
             mainService.setInstitution(mv);

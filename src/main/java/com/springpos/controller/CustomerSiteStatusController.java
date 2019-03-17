@@ -42,7 +42,7 @@ public class CustomerSiteStatusController {
     @RequestMapping("customerSiteStatus/new")
     public String customerSiteStatusPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("customerSiteStatus", new CustomerSiteStatus());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class CustomerSiteStatusController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customerSiteStatuss");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("customerSiteStatus", new CustomerSiteStatus());
             mainService.setInstitution(mv);

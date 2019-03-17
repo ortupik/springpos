@@ -42,7 +42,7 @@ public class PhotoTypeController {
     @RequestMapping("photoType/new")
     public String photoTypePage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("photoType", new PhotoType());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class PhotoTypeController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("photoTypes");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("photoType", new PhotoType());
             mainService.setInstitution(mv);

@@ -121,7 +121,7 @@ public class MainServiceImpl implements MainService {
         String sessName = newSess.getSessionName();
         mv = new ModelAndView();
         setLogin(session, loggedIn, rand_sess);
-        mv.setViewName("adminPage");
+        mv.setViewName("redirect:/adminPage");
         mv.addObject("sessionLoggedIn", sessName);
         mv.addObject("loggedIn", this.loggedIn);
         return mv;

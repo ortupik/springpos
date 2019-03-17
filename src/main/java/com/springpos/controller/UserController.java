@@ -35,17 +35,17 @@ public class UserController {
         this.userService = ps;
     }
 
-    @RequestMapping("loginPage")
+   /* @RequestMapping("loginPage")
     public String loginPage(Model model) {
         model.addAttribute("user", new User());
         mainService.setInstitution(model);
         return "loginPage";
     }
-
+*/
     @RequestMapping("register")
     public String registerPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("user", new User());
         mainService.setInstitution(model);
@@ -55,17 +55,9 @@ public class UserController {
     @RequestMapping(value = {"/adminPage"}, method = RequestMethod.GET)
     public String adminSite() {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         return "adminPage";
-    }
-
-    @RequestMapping(value = {"/userPage"}, method = RequestMethod.GET)
-    public String userPage() {
-        if (mainService.getLoggedIn() == null) {
-            return "index";
-        }
-        return "userPage";
     }
 
     @PostMapping(value = "login")
@@ -84,7 +76,7 @@ public class UserController {
     @PostMapping(value = "user")
     public String save(@Valid User user, BindingResult result, Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         mainService.setInstitution(model);
         if (result.hasErrors()) {
@@ -109,7 +101,7 @@ public class UserController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("users");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         }
         mv.addObject("user", new User());
         mainService.setInstitution(mv);
@@ -121,7 +113,7 @@ public class UserController {
     public String updateUser(@PathVariable("id") int id, @Valid User user,
             BindingResult result, Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         mainService.setInstitution(model);
         model.addAttribute("user", user);
@@ -135,7 +127,7 @@ public class UserController {
     public String deleteUser(@PathVariable("id") int id, Model model) {
         mainService.setInstitution(model);
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         User user = this.userService.find(id);
         if (user == null) {
@@ -153,7 +145,7 @@ public class UserController {
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
         mainService.setInstitution(model);
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         User user = this.userService.find(id);
         if (user == null) {

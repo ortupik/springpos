@@ -42,7 +42,7 @@ public class AssignmentStatusController {
     @RequestMapping("assignmentStatus/new")
     public String assignmentStatusPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("assignmentStatus", new AssignmentStatus());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class AssignmentStatusController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("assignmentStatuss");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("assignmentStatus", new AssignmentStatus());
             mainService.setInstitution(mv);

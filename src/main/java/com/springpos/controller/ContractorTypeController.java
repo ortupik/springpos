@@ -42,7 +42,7 @@ public class ContractorTypeController {
     @RequestMapping("contractorType/new")
     public String contractorTypePage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("contractorType", new ContractorType());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class ContractorTypeController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("contractorTypes");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("contractorType", new ContractorType());
             mainService.setInstitution(mv);

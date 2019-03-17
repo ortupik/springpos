@@ -42,7 +42,7 @@ public class StateController {
     @RequestMapping("state/new")
     public String statePage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("state", new State());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class StateController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("states");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("state", new State());
             mainService.setInstitution(mv);

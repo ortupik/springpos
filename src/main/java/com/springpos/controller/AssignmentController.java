@@ -42,7 +42,7 @@ public class AssignmentController {
     @RequestMapping("assignment/new")
     public String assignmentPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("assignment", new Assignment());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class AssignmentController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("assignments");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("assignment", new Assignment());
             mainService.setInstitution(mv);

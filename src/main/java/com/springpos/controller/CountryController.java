@@ -42,7 +42,7 @@ public class CountryController {
     @RequestMapping("country/new")
     public String countryPage(Model model) {
         if (mainService.getLoggedIn() == null) {
-            return "index";
+            return "redirect:/";
         }
         model.addAttribute("country", new Country());
         mainService.setInstitution(model);
@@ -54,7 +54,7 @@ public class CountryController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("countrys");
         if (mainService.getLoggedIn() == null) {
-            mv.setViewName("index");
+            mv.setViewName("redirect:/");
         } else {
             mv.addObject("country", new Country());
             mainService.setInstitution(mv);
