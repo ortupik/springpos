@@ -1,12 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head lang="en">
-        <title th:text="${nstitle}">Wapemba Hardware</title>
-        <!--/*/ <th:block th:include="fragments/headerin :: head"></th:block> /*/-->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">        
+        <title th:text="${nstitle}"></title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="css/simple-sidebar.css"  rel="stylesheet" th:href="@{/css/simple-sidebar.css}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     </head>
     <body>
-        <div class="container"  >
-            <!--/*/ <th:block th:include="fragments/headerIndex :: header"></th:block> /*/-->
+        <div class="container w-responsive"  >           
+            <div id="page-content-wrapper">
+                <div class="col-sm-12" id="topbar">
+                    <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #cacbce !important;">
+                        <div class="col-sm-12" id="valeriebar1"></div>
+                        <button class="btn btn-primary" id="menu-toggle"><span class="dark-blue-text"><i
+                                    class="fa fa-bars fa-1x"></i></span></button></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                        </div>
+                    </nav>
+                    <div class="col-sm-12" id="valeriebar1"></div>
+                </div>
+                <div class="container-fluid" id="form">
+                    <h1 class="mt-4 text-center" th:text="${nstitle}"></h1>
+                    <center> <span th:text="${addMessage}" ></span> </center>
+                    <h2>Login</h2>
+                    <span th:text="${addMessage}"></span>
+                    <div class="container" id="form">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <form class="form-horizontal"  action="#"  th:object="${user}" th:action="@{/login}" method="post">
+                                    <input type="hidden" th:field="*{id}"/>
+                                    <div class="form-group">
+                                        <label class="col-xs-2 control-label">User Id : </label>
+                                        <div class="col-xs-10">
+                                            <input type="email" class="form-control" id="email" th:field="*{email}" required=""/>
+                                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-2 control-label">Password: </label>
+                                        <div class="col-xs-10">
+                                            <input type="password" class="form-control" id="password" th:field="*{password}" required=""/>
+                                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <button type="Save"  class="btn btn-danger btn-rounded my-0">Log In</button>
+                                    </div>
+                                </form>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="../static/vendor/jquery/jquery.js" th:src="@{/vendor/jquery/jquery.js}"></script>
+                    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.js" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.js}"></script>
+                    <script>
+                        $(document).ready(function(){
+                        $("a").click(function(){
+                        $(".fas fa-plus-circle").toggleClass("fas fa-plus-circle fas fa-minus-circle"))};
+                        });
+                    </script>
+                    <script>
+                        $("#menu-toggle").click(function(e) {
+                        e.preventDefault();
+                        $("#wrapper").toggleClass("toggled");
+                        });
+                    </script>
+                </div>
+            </div>
         </div>
     </body>
 </html>

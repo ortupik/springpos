@@ -10,8 +10,8 @@
             <h2>Country Details</h2>
             <span th:text="${addMessage}"></span>
             <div>
-                <form class="form-horizontal" action="#" th:action="@{/updateCountry/{id}(id=${country.id})}" th:object="${country}">
-                    <input type="hidden" th:field="*{id}"/>
+                <form class="form-horizontal" action="#" th:action="@{/updateCountry/{id}(id=${country.countryId})}" th:object="${country}">
+                    <input type="hidden" th:field="*{countryId}"/>
                     <div class="form-group">
                         <label class="col-xs-2 control-label">Country : </label>
                         <div class="col-xs-10">

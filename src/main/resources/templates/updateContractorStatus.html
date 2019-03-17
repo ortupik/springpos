@@ -10,7 +10,7 @@
             <h2>Contractor Status Details</h2>
             <span th:text="${addMessage}"></span>
             <div>
-                <form class="form-horizontal" action="#" th:action="@{/updateContractorStatus/{id}(id=${contractorStatus.id})}" th:object="${contractorStatus}">
+                <form class="form-horizontal" action="#" th:action="@{/updateContractorStatus/{id}(id=${contractorStatus.statusId})}" th:object="${contractorStatus}">
                     <input type="hidden" th:field="*{id}"/>
                     <div class="form-group">
                         <label class="col-xs-2 control-label">Contractor Status : </label>

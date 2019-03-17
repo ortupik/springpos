@@ -26,10 +26,12 @@
                         </a>
 
                         <div id="so" class="collapse">
-                            <a  href="#" class="list-group-item ">Search</a>
-                            <a  href="#" th:href="@{/createOrder}" class="list-group-item ">Create</a>
+                            <a  href="#" th:href="@{/serviceOrders}" class="list-group-item ">Search Order</a>
+                            <a  href="#" th:href="@{/createOrder}" class="list-group-item ">Create Order</a>
                             <a href="#" th:href="@{/incident/new}" class="list-group-item ">Add Incident</a>
                             <a href="#" th:href="@{/incidents}" class="list-group-item ">View Incident</a>
+                            <a href="#" th:href="@{/serviceOrderStatus/new}" class="list-group-item ">Service Order Status</a>
+                            <a href="#" th:href="@{/serviceOrderStatuss}" class="list-group-item ">View Service Order Status</a>
                         </div>
 
 
@@ -46,7 +48,19 @@
                             <a href="#" th:href="@{/contactStatuss}" class="list-group-item ">View Contact Status</a>
                             <a href="#" th:href="@{/contactTypes}" class="list-group-item ">View Contact Type</a>
                         </div>
+                        <!-- Services -->
+                        <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#service">
+                            Services <i class="fas fa-plus-circle"></i>
+                        </a>
 
+                        <div id="service" class="collapse">
+                            <a href="#" th:href="@{/svcs}" class="list-group-item ">Search</a>
+                            <a href="#" th:href="@{/svc/new}" class="list-group-item " >Add Service</a>
+                            <a href="#" th:href="@{/serviceStatus/new}" class="list-group-item ">Add Service Status</a>
+                            <a href="#" th:href="@{/serviceType/new}" class="list-group-item ">Add Service Type</a>
+                            <a href="#" th:href="@{/serviceStatuss}" class="list-group-item ">View Service Status</a>
+                            <a href="#" th:href="@{/serviceTypes}" class="list-group-item ">View Service Type</a>
+                        </div>
 
                         <!-- Contractor -->
                         <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#contractor">
@@ -94,14 +108,11 @@
                             <a href="#" class="list-group-item ">Search</a>
                             <a href="#" class="list-group-item ">Add</a>
                         </div>
-
-                        <!-- Reports -->
+                        <!--
                         <a href="#" class="list-group-item list-group-item-action bg-light" >Reports</a>
-
-                        <!-- DB Management -->
                         <a href="#" class="list-group-item list-group-item-action bg-light" >DB Management</a>
-                        <!-- Logout -->
-                        <a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+                        -->
+                        <a class="nav-link" href="#" th:href="@{/logout}">Logout<span class="sr-only">(current)</span></a>
                     </div>
                 </div>
             </div>
@@ -124,7 +135,7 @@
                         <div class="col-sm-12" id="valeriebar1"></div>
                     </div>
                     <div class="container-fluid" id="form">
-                        <h1 class="mt-4 text-center">Spring POS</h1>
+                        <h1 class="mt-4 text-center" th:text="${nstitle}"></h1>
                         <center> <span th:text="${addMessage}" ></span> </center>
                     </div>
                 </div>

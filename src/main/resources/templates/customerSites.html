@@ -28,14 +28,14 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="customerSite : ${customerSites}">
-                                        <td th:text="${customerSite.id}"><a href="/customerSite/${customerSite.id}">Id</a></td>
+                                        <td th:text="${customerSite.custId}"></td>
                                         <td th:text="${customerSite.custSiteName}"> </td>
                                         <td th:text="${customerSite.cust_site_address}"> </td>
                                         <td th:text="${customerSite.cust_site_phone}"> </td>
                                         <td th:text="${customerSite.cust_site_city}"> </td>
-                                        <td th:text="${customerSite.country_id}"> </td>
-                                        <td th:text="${customerSite.state_id}"> </td>
-                                        <td><a th:href="@{/removeCustomerSite/{id}(id=${customerSite.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                        <td th:text="${country.countryId}"> </td>
+                                        <td th:text="${state.state_id}"> </td>
+                                        <td><a th:href="@{/removeCustomerSite/{id}(id=${customerSite.custId})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

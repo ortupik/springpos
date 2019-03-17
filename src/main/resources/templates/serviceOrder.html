@@ -12,14 +12,24 @@
                     <form action="#"  th:object="${serviceOrder}" th:action="@{/page3}" method="post">
 
                         <div class ="form-group">
-                            <label>Service Type</label>
-                            <select  placeholder="Select Service Type" type="text" class="form-control" th:field="*{svo_type_id}" id="svo_type_id" required="">
-                                <option class="form-control" th:each="serviceType : ${serviceTypes}"
-                                        th:value="${serviceType.id}"
-                                        th:utext="${serviceType.svc_type}">                                            
+                            <label>Service</label>
+                            <select class="form-control" th:field="*{svc.svcId}" id="svo_type_id" required="">
+                                <option class="form-control" th:each="svc : ${svcs}"
+                                        th:value="${svc.svcId}"
+                                        th:utext="${svc.svcName}">                                            
                                 </option>
                             </select>
-                            <span th:if="${#fields.hasErrors('svo_type_id')}" th:errors="*{svo_type_id}"></span>
+                            <span th:if="${#fields.hasErrors('svc.svcId')}" th:errors="*{svc.svcId}"></span>
+                        </div>
+                        <div class ="form-group">
+                            <label>Service Order Status</label>
+                            <select class="form-control" th:field="*{serviceOrderStatus.svId}" id="svId" required="">
+                                <option class="form-control" th:each="serviceOrderStatus: ${serviceOrderStatuss}"
+                                        th:value="${serviceOrderStatus.svId}"
+                                        th:utext="${serviceOrderStatus.svo_status}">                                            
+                                </option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('serviceOrderStatus.svId')}" th:errors="*{serviceOrderStatus.svId}"></span>
                         </div>
 
                         <div class ="form-group">

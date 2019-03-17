@@ -49,12 +49,12 @@
 
                         <div class ="form-group">
                             <label>Country</label>
-                            <select  placeholder="Country" class="form-control" th:field="*{country_id}" id="country_id" required="">
+                            <select  placeholder="Country" class="form-control" th:field="*{country.countryId}" id="country.countryId" required="">
                                 <option class="form-control" th:each="country : ${countries}"
-                                        th:value="${country.id}"
+                                        th:value="${country.countryId}"
                                         th:utext="${country.country_name}"></option>
                             </select>
-                            <span th:if="${#fields.hasErrors('country_id')}" th:errors="*{country_id}"></span>
+                            <span th:if="${#fields.hasErrors('country.countryId')}" th:errors="*{country.countryId}"></span>
                         </div>
 
                         <div class ="form-group">

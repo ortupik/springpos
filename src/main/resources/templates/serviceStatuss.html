@@ -8,7 +8,7 @@
         <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
         <div class="container" id="form">
             <div class="row justify-content-center">
-                <div class="col-md-12">
+                <div class="col-md-9">
                     <div th:switch="${serviceStatuss}">
                         <h2 th:case="null">No Status yet!</h2>
                         <div th:case="*">
@@ -23,9 +23,9 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="serviceStatus : ${serviceStatuss}">
-                                        <td th:text="${serviceType.svcStatusId}"></td>
-                                        <td th:text="${serviceStatus.svo_status}"></td>
-                                        <td><a th:href="@{/removeService Status/{id}(id=${serviceType.svcStatusId})}" class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                        <td th:text="${serviceStatus.svcStatusId}"></td>
+                                        <td th:text="${serviceStatus.svc_status}"></td>
+                                        <td><a th:href="@{/removeService Status/{id}(id=${serviceStatus.svcStatusId})}" class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

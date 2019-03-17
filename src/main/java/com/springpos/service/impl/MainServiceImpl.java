@@ -25,6 +25,7 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,7 +43,7 @@ public class MainServiceImpl implements MainService {
 
     String staticPass = "1234";
 
-    private String loggedIn = "s";
+    private String loggedIn = null;
 
     private int loggedOut = 0;
 
@@ -111,13 +112,6 @@ public class MainServiceImpl implements MainService {
         setLogout();
         Random rand = new Random();
         int rand_sess = rand.nextInt(1000);
-        User usr = userService.findByEmail(staticUser);
-        if (usr == null) {
-            usr = new User();
-            usr.setEmail(session);
-            usr.setPassword(encryptStuff(staticPass));
-            userService.save(usr);
-        }
         User user = userService.findByEmail(loggedIn);
         Sessions sess = new Sessions();
         sess.setSessionName(user.getEmail() + " | " + String.valueOf(rand_sess));
@@ -148,10 +142,11 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public String getLoggedOut() {
+        setLogout();
+        destroySequence();
         if (getLoggedIn() == null) {
             return "redirect:/";
         }
-
         return "redirect:/";
     }
 
@@ -168,16 +163,19 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public String encryptStuff(String crap) {
-        try {
-            byte[] input = crap.getBytes();
-            Cipher cipher = Cipher.getInstance("RSA/None/PKCS1Padding", "BC");
-            byte[] cipherText = cipher.doFinal(input);
-            String encodedString = Base64.getEncoder().encodeToString(cipherText);
-            return encodedString;
-        } catch (NoSuchAlgorithmException | NoSuchProviderException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException ex) {
-            Logger.getLogger(MainServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+        BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+        String privateData = crap;
+        textEncryptor.setPasswordCharArray("nospaniol".toCharArray());
+        String ecryptedCrap = textEncryptor.encrypt(privateData);
+        return ecryptedCrap;
+    }
+
+    @Override
+    public String decryptStuff(String crap) {
+        BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+        textEncryptor.setPasswordCharArray("nospaniol".toCharArray());
+        String decryptedCrap = textEncryptor.decrypt(crap);
+        return decryptedCrap;
     }
 
     void setLogout() {
@@ -209,9 +207,7 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public Sequence pageTwo(CustomerSite customer) {
-        if (this.sequence == null) {
-            this.sequence = new Sequence();
-        }
+        this.sequence = new Sequence();
         if (customer != null) {
             this.sequence.setCustomer(customer);
         }
@@ -247,19 +243,43 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public ServiceOrder executeSequence() {
-        CustomerSite customer = this.customerSiteService.save(this.sequence.getCustomer());
-        if (this.customerSiteService.findByCust_site_name(this.sequence.getCustomer().getCustSiteName()) == null) {
+        CustomerSite customer = this.sequence.getCustomer();
+        if (customer == null) {
+            return null;
+        }
+        if (this.customerSiteService.findByCust_site_name(customer.getCustSiteName()) == null) {
             customer = this.customerSiteService.save(this.sequence.getCustomer());
             Contact cont = new Contact(customer);
             this.contactService.save(cont);
+        } else {
+            customer = this.customerSiteService.findByCust_site_name(customer.getCustSiteName());
         }
         Contractor contractor = this.sequence.getContractor();
         ServiceOrder order = this.sequence.getServiceOrder();
-        if (customer == null ||contractor ==null|| order == null) {
-        return null;
+        if (customer == null || contractor == null || order == null) {
+            return null;
         }
-        ServiceOrder newOrder=this.serviceOrderService.save(order);
+        this.sequence.getServiceOrder().setCustomerSite(customer);
+        this.sequence.getServiceOrder().setContractor(contractor);
+        ServiceOrder newOrder = this.serviceOrderService.save(order);
+        clearPrevious();
         return newOrder;
+    }
+
+    @Override
+    public void clearPrevious() {
+        sequence = null;
+    }
+
+    @Override
+    public void checkStaticOrder() {
+        User usr = userService.findByEmail(staticUser);
+        if (usr == null) {
+            usr = new User();
+            usr.setEmail(staticUser);
+            usr.setPassword(encryptStuff(staticPass));
+            userService.save(usr);
+        }
     }
 
 }

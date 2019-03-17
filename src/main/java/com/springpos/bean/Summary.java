@@ -15,9 +15,9 @@ public class Summary implements Serializable {
     private String hardwareNeeded;
     private String otherComments;
 
-    public Summary(){
+    public Summary() {
     }
-    
+
     public Summary(CustomerSite customer, ServiceOrder order, Contractor contract) {
         this.companyName = customer.getCustSiteName();
         this.contractor = contract.getContractor_fname() + " " + contract.getContractor_lname();

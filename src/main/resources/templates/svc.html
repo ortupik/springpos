@@ -18,23 +18,23 @@
                         <div class="form-group">
                             <div class="col-xs-10">
                                 <label class="control-label">Service Status : </label>
-                                <select class="form-control"  th:field="*{svc_status_id}" id="svc_status_id" required="">
+                                <select class="form-control"  th:field="*{serviceStatus.svcStatusId}" id="svcStatusId" required="">
                                     <option class="form-control" th:each="serviceStatus : ${serviceStatuss}"
-                                            th:value="${serviceStatus.id}"
+                                            th:value="${serviceStatus.svcStatusId}"
                                             th:utext="${serviceStatus.svc_status}"></option>
                                 </select>
-                                <span th:if="${#fields.hasErrors('svc_status_id')}" th:errors="*{svc_status_id}"></span>
+                                <span th:if="${#fields.hasErrors('serviceStatus.svcStatusId')}" th:errors="*{serviceStatus.svcStatusId}"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-10">
                                 <label class="control-label">Service Type : </label>
-                                <select class="form-control"  th:field="*{svc_type_id}" id="svc_type_id" required="">
+                                <select class="form-control"  th:field="*{serviceType.svcTypeId}" id="svcTypeId" required="">
                                     <option class="form-control" th:each="serviceType : ${serviceTypes}"
-                                            th:value="${serviceType.id}"
+                                            th:value="${serviceType.svcTypeId}"
                                             th:utext="${serviceType.svc_type}"></option>
                                 </select>
-                                <span th:if="${#fields.hasErrors('svc_type_id')}" th:errors="*{svc_type_id}"></span>
+                                <span th:if="${#fields.hasErrors('serviceType.svcTypeId')}" th:errors="*{serviceType.svcTypeId}"></span>
                             </div>
                         </div>
                         <br>

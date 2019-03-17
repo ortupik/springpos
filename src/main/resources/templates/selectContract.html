@@ -23,16 +23,16 @@
                                         <th>Phone Number </th>
                                         <th>Address</th>
                                         <th>City </th>
-                                        <th>Zip</th>
-                                        <th>Contractor Status </th>
+                                        <th>Zip</th>                                        
                                         <th>Contractor Type</th>
+                                        <th>Contractor Status </th>
                                         <th>Country</th>
                                         <th>Assign</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr th:each="contractor : ${contractors}">
-                                        <td th:text="${contractor.id}"><a href="/contractor/${contractor.id}">Id</a></td>
+                                        <td th:text="${contractor.contractorId}"></td>
                                         <td th:text="${contractor.contractor_fname}"> </td>
                                         <td th:text="${contractor.contractor_lname}"> </td>
                                         <td th:text="${contractor.contractor_email}"> </td>
@@ -40,10 +40,10 @@
                                         <td th:text="${contractor.contractor_address}"> </td>
                                         <td th:text="${contractor.contractor_city}"> </td>
                                         <td th:text="${contractor.contractor_zip}"> </td>
-                                        <td th:text="${contractor.contractor_type_id}"> </td>
-                                        <td th:text="${contractor.acc_level_id}"> </td>                                        
-                                        <td th:text="${contractor.country_id}"> </td>
-                                        <td><a th:href="@{/selectContractor/{id}(id=${contractor.id})}"  class="btn btn-success btn-rounded btn-sm  my-0">Select</a></td>
+                                        <td th:text="${contractor.contractorType.contractor_type}"> </td>
+                                        <td th:text="${contractor.contractorStatus.contractor_status}"> </td>                                        
+                                        <td th:text="${contractor.country.countryId}"> </td>
+                                        <td><a th:href="@{/selectContractor/{id}(id=${contractor.contractorId})}"  class="btn btn-success btn-rounded btn-sm  my-0">Select</a></td>
                                     </tr>
                                 </tbody>
                             </table>

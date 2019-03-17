@@ -16,7 +16,7 @@ public class ServiceType implements Serializable {
 
     @OneToMany(mappedBy = "serviceType")
     private Set<Svc> svc;
-    
+
     @Id
     @Column(name = "svc_type_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,6 @@ public class ServiceType implements Serializable {
     @Column(name = "svc_type")
     private String svc_type;
 
-   
     public int getSvcTypeId() {
         return svcTypeId;
     }
@@ -48,6 +47,5 @@ public class ServiceType implements Serializable {
     public void setSvc(Set<Svc> svc) {
         this.svc = svc;
     }
-
 
 }

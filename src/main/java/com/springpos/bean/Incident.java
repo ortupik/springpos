@@ -76,6 +76,4 @@ public class Incident implements Serializable {
         this.incident_type_id = incident_type_id;
     }
 
-
-
 }

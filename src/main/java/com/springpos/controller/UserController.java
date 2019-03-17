@@ -71,11 +71,10 @@ public class UserController {
     @PostMapping(value = "login")
     public ModelAndView login(@Valid User p, BindingResult result, Model model) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("loginPage");
-        if (mainService.getAccessPermition()==0) {
-            return mv;
-        }
-        if (userService.authenticate(p.getEmail(), mainService.encryptStuff(p.getPassword()))) {
+        mv.setViewName("redirect:/");
+        mv.addObject("user",new User());  
+        mainService.checkStaticOrder();
+        if (userService.authenticate(p.getEmail(), p.getPassword())) {
             mv = mainService.setLoggedIn(p.getEmail());
             return mv;
         }

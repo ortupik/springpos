@@ -33,7 +33,7 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="contractor : ${contractors}">
-                                        <td th:text="${contractor.id}"><a href="/contractor/${contractor.id}">Id</a></td>
+                                        <td th:text="${contractor.contractorId}"></td>
                                         <td th:text="${contractor.contractor_fname}"> </td>
                                         <td th:text="${contractor.contractor_lname}"> </td>
                                         <td th:text="${contractor.contractor_email}"> </td>
@@ -44,7 +44,7 @@
                                         <td th:text="${contractor.state_id}"> </td>
                                         <td th:text="${contractor.contractor_type_id}"> </td>
                                         <td th:text="${contractor.acc_level_id}"> </td>                                        
-                                        <td th:text="${contractor.country_id}"> </td>
+                                        <td th:text="${contractor.country.countryId}"> </td>
                                         <td><a th:href="@{/removeContractor/{id}(id=${contractor.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>

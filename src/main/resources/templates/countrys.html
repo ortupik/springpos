@@ -24,10 +24,10 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="country : ${countrys}">
-                                        <td th:text="${country.id}"><a href="/country/${country.id}">Id</a></td>
+                                        <td th:text="${country.countryId}"><a href="/country/${country.countryId}">Id</a></td>
                                         <td th:text="${country.country_name}">Country Name</td>
-                                        <td><a th:href="@{/editCountry/{id}(id=${country.id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
-                                        <td><a th:href="@{/removeCountry/{id}(id=${country.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                        <td><a th:href="@{/editCountry/{id}(id=${country.countryId})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
+                                        <td><a th:href="@{/removeCountry/{id}(id=${country.countryId})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

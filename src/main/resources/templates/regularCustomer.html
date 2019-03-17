@@ -33,8 +33,8 @@
                                         <td th:text="${customerSite.cust_site_address}"> </td>
                                         <td th:text="${customerSite.cust_site_phone}"> </td>
                                         <td th:text="${customerSite.cust_site_city}"> </td>
-                                        <td th:text="${customerSite.country_id}"> </td>
-                                        <td th:text="${customerSite.state_id}"> </td>
+                                        <td th:text="${country.countryId}"> </td>
+                                        <td th:text="${state.state_id}"> </td>
                                         <td><a th:href="@{/bookCustomerSite/{id}(id=${customerSite.id})}" class="btn btn-danger btn-rounded btn-sm  my-0">Select</a></td>
                                     </tr>
                                 </tbody>

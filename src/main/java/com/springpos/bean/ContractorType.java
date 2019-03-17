@@ -1,30 +1,42 @@
 package com.springpos.bean;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "CONTRACTOR_TYPE")
 public class ContractorType implements Serializable {
 
+    @OneToMany(mappedBy = "country")
+    private Set<Contractor> contractor;
     @Id
     @Column(name = "contractor_type_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int typeId;
     @Column(name = "contractor_type")
     private String contractor_type;
 
-    public int getId() {
-        return id;
+    public Set<Contractor> getContractor() {
+        return contractor;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setContractor(Set<Contractor> contractor) {
+        this.contractor = contractor;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
     public String getContractor_type() {
@@ -33,11 +45,6 @@ public class ContractorType implements Serializable {
 
     public void setContractor_type(String contractor_type) {
         this.contractor_type = contractor_type;
-    }
-
-    @Override
-    public String toString() {
-        return "ContractorType{" + "id=" + id + ", contractor_type=" + contractor_type + '}';
     }
 
 }

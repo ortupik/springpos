@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.springpos.bean.User;
 import com.springpos.repository.UserRepository;
+import com.springpos.service.MainService;
 import com.springpos.service.UserService;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserServiceImpl implements UserService {
 
     private UserRepository bizRepository;
+    private MainService mainService;
+
+    @Autowired
+    public void setMainService(MainService mainService) {
+        this.mainService = mainService;
+    }
 
     @Autowired
     public void setBizRepository(UserRepository bizRepository) {
@@ -57,7 +64,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return false;
         } else {
-            return password.equals(user.getPassword());
+            return password.equals(mainService.decryptStuff(user.getPassword()));
         }
     }
 

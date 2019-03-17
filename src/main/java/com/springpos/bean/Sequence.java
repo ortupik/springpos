@@ -2,9 +2,8 @@ package com.springpos.bean;
 
 import java.io.Serializable;
 
-
 public class Sequence implements Serializable {
-    
+
     private CustomerSite customer;
     private Contact contact;
     private ServiceOrder serviceOrder;

@@ -2,11 +2,15 @@ package com.springpos.bean;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -14,10 +18,25 @@ import javax.persistence.Transient;
 @Table(name = "CONTRACTOR")
 public class Contractor implements Serializable {
 
+    @ManyToOne
+    @JoinColumn(name = "state_id", nullable = false)
+    private State state;
+    @ManyToOne
+    @JoinColumn(name = "country_id", nullable = false)
+    private Country country;
+    @ManyToOne
+    @JoinColumn(name = "contractor_status_id", nullable = false)
+    private ContractorStatus contractorStatus;
+    @ManyToOne
+    @JoinColumn(name = "contractor_type_id", nullable = false)
+    private ContractorType contractorType;
+    @OneToMany(mappedBy = "contractor")
+    private Set<ServiceOrder> serviceOrder;    
+    
     @Id
     @Column(name = "contractor_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int contractorId;
     @Column(name = "contact_type")
     private String contact_type;
     @Column(name = "contractor_fname")
@@ -42,14 +61,6 @@ public class Contractor implements Serializable {
     private String contractor_password;
     @Column(name = "contractor_availability")
     private String contractor_availability;
-    @Column(name = "contractor_status_id")
-    private int contractor_status_id;
-    @Column(name = "country_id")
-    private int country_id;
-    @Column(name = "state_id")
-    private int state_id;
-    @Column(name = "contractor_type_id")
-    private int contractor_type_id;
     @Column(name = "acc_level_id")
     private int acc_level_id;
     @Transient
@@ -59,16 +70,16 @@ public class Contractor implements Serializable {
         return fullnames;
     }
 
-    public void setFullnames(String fullnames) {
+    public void setFullnames() {
         this.fullnames = this.contractor_fname + " " + this.contractor_lname + " (" + this.contractor_email + ")";
     }
 
-    public int getId() {
-        return id;
+    public int getContractorId() {
+        return contractorId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setContractorId(int contractorId) {
+        this.contractorId = contractorId;
     }
 
     public String getContact_type() {
@@ -167,38 +178,6 @@ public class Contractor implements Serializable {
         this.contractor_availability = contractor_availability;
     }
 
-    public int getContractor_status_id() {
-        return contractor_status_id;
-    }
-
-    public void setContractor_status_id(int contractor_status_id) {
-        this.contractor_status_id = contractor_status_id;
-    }
-
-    public int getCountry_id() {
-        return country_id;
-    }
-
-    public void setCountry_id(int country_id) {
-        this.country_id = country_id;
-    }
-
-    public int getState_id() {
-        return state_id;
-    }
-
-    public void setState_id(int state_id) {
-        this.state_id = state_id;
-    }
-
-    public int getContractor_type_id() {
-        return contractor_type_id;
-    }
-
-    public void setContractor_type_id(int contractor_type_id) {
-        this.contractor_type_id = contractor_type_id;
-    }
-
     public int getAcc_level_id() {
         return acc_level_id;
     }
@@ -207,9 +186,44 @@ public class Contractor implements Serializable {
         this.acc_level_id = acc_level_id;
     }
 
-    @Override
-    public String toString() {
-        return "Contractor{" + "id=" + id + ", contact_type=" + contact_type + ", contractor_fname=" + contractor_fname + ", contractor_lname=" + contractor_lname + ", contractor_address=" + contractor_address + ", contractor_city=" + contractor_city + ", contractor_zip=" + contractor_zip + ", contractor_phone=" + contractor_phone + ", contractor_hire_date=" + contractor_hire_date + ", contractor_email=" + contractor_email + ", contractor_username=" + contractor_username + ", contractor_password=" + contractor_password + ", contractor_availability=" + contractor_availability + ", contractor_status_id=" + contractor_status_id + ", country_id=" + country_id + ", state_id=" + state_id + ", contractor_type_id=" + contractor_type_id + ", acc_level_id=" + acc_level_id + '}';
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public ContractorStatus getContractorStatus() {
+        return contractorStatus;
+    }
+
+    public void setContractorStatus(ContractorStatus contractorStatus) {
+        this.contractorStatus = contractorStatus;
+    }
+
+    public ContractorType getContractorType() {
+        return contractorType;
+    }
+
+    public void setContractorType(ContractorType contractorType) {
+        this.contractorType = contractorType;
+    }
+
+    public Set<ServiceOrder> getServiceOrder() {
+        return serviceOrder;
+    }
+
+    public void setServiceOrder(Set<ServiceOrder> serviceOrder) {
+        this.serviceOrder = serviceOrder;
     }
 
 }

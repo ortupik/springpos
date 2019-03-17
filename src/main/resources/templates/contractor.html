@@ -55,44 +55,44 @@
 
                         <div class ="form-group">
                             <label>Country</label>
-                            <select  placeholder="Country" class="form-control" th:field="*{country_id}" id="country_id" required="">
+                            <select  placeholder="Country" class="form-control" th:field="*{country.countryId}" id="country.countryId" required="">
                                 <option class="form-control" th:each="country : ${countries}"
-                                        th:value="${country.id}"
+                                        th:value="${country.countryId}"
                                         th:utext="${country.country_name}"></option>
                             </select>
-                            <span th:if="${#fields.hasErrors('country_id')}" th:errors="*{country_id}"></span>
+                            <span th:if="${#fields.hasErrors('country.countryId')}" th:errors="*{country.countryId}"></span>
                         </div>
 
                         <div class ="form-group">
                             <label>State</label>
-                            <select placeholder="State" class="form-control"  th:field="*{state_id}" id="state_id" required="">
+                            <select placeholder="State" class="form-control"  th:field="*{state.state_id}" id="state.state_id" required="">
                                 <option class="form-control" th:each="state : ${states}"
-                                        th:value="${state.id}"
+                                        th:value="${state.state_id}"
                                         th:utext="${state.state_name}"></option>
                             </select>
-                            <span th:if="${#fields.hasErrors('state_id')}" th:errors="*{state_id}"></span>
+                            <span th:if="${#fields.hasErrors('state.state_id')}" th:errors="*{state.state_id}"></span>
                         </div>
 
                         <div class="form-group">
                             <div class="col-xs-10">
                                 <label class="control-label">Contractor Status : </label>
-                                <select placeholder="Contractor Status" list="statusList" class="form-control"  th:field="*{contractor_status_id}" id="contractor_status_id" required="">
+                                <select placeholder="Contractor Status" list="statusList" class="form-control"  th:field="*{contractorStatus.statusId}" id="contractorStatus.statusId" required="">
                                     <option class="form-control" th:each="contractorStatus : ${contractorStatuss}"
-                                            th:value="${contractorStatus.id}"
+                                            th:value="${contractorStatus.statusId}"
                                             th:utext="${contractorStatus.contractor_status}"></option>
                                 </select>
-                                <span th:if="${#fields.hasErrors('contractor_status_id')}" th:errors="*{contractor_status_id}"></span>
+                                <span th:if="${#fields.hasErrors('contractorStatus.statusId')}" th:errors="*{contractorStatus.statusId}"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-10">
                                 <label class="control-label">Contractor Type : </label>
-                                <select  type="text" placeholder="Contractor Type" class="form-control"  th:field="*{contractor_type_id}" id="contractor_type_id" required="">
+                                <select  type="text" placeholder="Contractor Type" class="form-control"  th:field="*{contractorType.typeId}" id="contractorType.typeId" required="">
                                     <option class="form-control" th:each="contractorType : ${contractorTypes}"
-                                            th:value="${contractorType.id}"
+                                            th:value="${contractorType.typeId}"
                                             th:utext="${contractorType.contractor_type}"></option>
                                 </select>
-                                <span th:if="${#fields.hasErrors('contractor_type_id')}" th:errors="*{contractor_type_id}"></span>
+                                <span th:if="${#fields.hasErrors('contractorType.typeId')}" th:errors="*{contractorType.typeId}"></span>
                             </div>
                         </div>
                         <br>

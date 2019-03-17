@@ -1,6 +1,7 @@
 package com.springpos.controller;
 
 import com.springpos.bean.CustomerSite;
+import com.springpos.bean.User;
 import com.springpos.service.CustomerSiteService;
 import com.springpos.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class MainController {
     @RequestMapping("/")
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView("index");
+        mv.addObject("user", new User());
         mainService.setInstitution(mv);
         return mv;
     }

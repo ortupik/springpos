@@ -51,7 +51,7 @@
                             <label>Country</label>
                             <select  placeholder="Country" class="form-control" th:field="*{country}" id="country" required="">
                           <option class="form-control" th:each="country : ${countries}"
-                                        th:value="${country.id}"
+                                        th:value="${country.countryId}"
                                         th:utext="${country.country_name}"></option>
                             </select>
                        </div>
@@ -60,7 +60,7 @@
                             <label>State</label>
                             <select placeholder="State" class="form-control" name="hidden" th:field="*{state}" id="state" required="">
                             <option class="form-control" th:each="state : ${states}"
-                                        th:value="${state.id}"
+                                        th:value="${state.state_id}"
                                         th:utext="${state.state_name}"></option>
                             </select>
                             <span th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></span>

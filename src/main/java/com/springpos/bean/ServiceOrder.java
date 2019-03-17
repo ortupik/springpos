@@ -7,11 +7,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "SERVICE_ORDER")
 public class ServiceOrder implements Serializable {
+
+    @ManyToOne
+    @JoinColumn(name = "svcId", nullable = false)
+    private Svc svc;
+    @ManyToOne
+    @JoinColumn(name = "svId", nullable = false)
+    private ServiceOrderStatus serviceOrderStatus;
+    @ManyToOne
+    @JoinColumn(name = "custId", nullable = false)
+    private CustomerSite customerSite;
+     @ManyToOne
+    @JoinColumn(name = "contractorId", nullable = false)
+    private Contractor contractor;
 
     @Id
     @Column(name = "svo_id")
@@ -25,12 +40,6 @@ public class ServiceOrder implements Serializable {
     private String work_summary;
     @Column(name = "work_request")
     private String work_request;
-    @Column(name = "cust_site_id")
-    private int cust_site_id;
-    @Column(name = "svo_status_id")
-    private int svo_status_id;
-    @Column(name = "svo_type_id")
-    private int svo_type_id;
 
     public int getId() {
         return id;
@@ -72,28 +81,36 @@ public class ServiceOrder implements Serializable {
         this.work_request = work_request;
     }
 
-    public int getCust_site_id() {
-        return cust_site_id;
+    public Svc getSvc() {
+        return svc;
     }
 
-    public void setCust_site_id(int cust_site_id) {
-        this.cust_site_id = cust_site_id;
+    public void setSvc(Svc svc) {
+        this.svc = svc;
     }
 
-    public int getSvo_status_id() {
-        return svo_status_id;
+    public ServiceOrderStatus getServiceOrderStatus() {
+        return serviceOrderStatus;
     }
 
-    public void setSvo_status_id(int svo_status_id) {
-        this.svo_status_id = svo_status_id;
+    public void setServiceOrderStatus(ServiceOrderStatus serviceOrderStatus) {
+        this.serviceOrderStatus = serviceOrderStatus;
     }
 
-    public int getSvo_type_id() {
-        return svo_type_id;
+    public CustomerSite getCustomerSite() {
+        return customerSite;
     }
 
-    public void setSvo_type_id(int svo_type_id) {
-        this.svo_type_id = svo_type_id;
+    public void setCustomerSite(CustomerSite customerSite) {
+        this.customerSite = customerSite;
+    }
+
+    public Contractor getContractor() {
+        return contractor;
+    }
+
+    public void setContractor(Contractor contractor) {
+        this.contractor = contractor;
     }
 
 }

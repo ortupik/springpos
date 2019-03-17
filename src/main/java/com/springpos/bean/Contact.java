@@ -41,7 +41,7 @@ public class Contact implements Serializable {
         this.contact_email = cust.getContactEmail();
         this.contact_status_id = 1;
         this.contact_type_id = 1;
-        this.cust_site_id = cust.getId();
+        this.cust_site_id = cust.getCustId();
     }
 
     public int getId() {

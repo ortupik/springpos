@@ -20,9 +20,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import com.springpos.service.CustomerSiteService;
-import com.springpos.service.ServiceOrderService;
-import com.springpos.service.ServiceTypeService;
+import com.springpos.service.ServiceOrderStatusService;
 import com.springpos.service.StateService;
+import com.springpos.service.SvcService;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -33,22 +33,21 @@ public class SequenceController {
     private CountryService countryService;
     private StateService stateService;
     private MainService mainService;
-    private ServiceOrderService serviceOrderService;
     private ContractorService contractorService;
-    private ServiceTypeService serviceTypeService;
-
+    private SvcService svcService;
+    private ServiceOrderStatusService orderStatusService;
     private static final Logger LOGGER = LoggerFactory.getLogger(SequenceController.class);
-
+    String message = "";
     ArrayList<CustomerSite> customerSiteList = new ArrayList();
 
     @Autowired
-    public void setServiceTypeService(ServiceTypeService serviceTypeService) {
-        this.serviceTypeService = serviceTypeService;
+    public void setOrderStatusService(ServiceOrderStatusService orderStatusService) {
+        this.orderStatusService = orderStatusService;
     }
 
     @Autowired
-    public void setServiceOrderService(ServiceOrderService serviceOrderService) {
-        this.serviceOrderService = serviceOrderService;
+    public void setSvcService(SvcService svcService) {
+        this.svcService = svcService;
     }
 
     @Autowired
@@ -80,6 +79,8 @@ public class SequenceController {
     public ModelAndView createOrder() {
         ModelAndView mv = new ModelAndView("createOrder");
         mainService.setInstitution(mv);
+        mv.addObject("addMessage", message);
+        this.mainService.clearPrevious();
         return mv;
     }
 
@@ -112,7 +113,8 @@ public class SequenceController {
         }
         this.mainService.pageTwo(customerSite);
         model.addAttribute("serviceOrder", new ServiceOrder());
-        model.addAttribute("serviceTypes", this.serviceTypeService.findAll());
+        model.addAttribute("serviceOrderStatuss", this.orderStatusService.findAll());
+        model.addAttribute("svcs", this.svcService.findAll());
         return "serviceOrder";
     }
 
@@ -121,12 +123,12 @@ public class SequenceController {
         mainService.setInstitution(model);
         CustomerSite customerSite = this.customerSiteService.find(id);
         if (customerSite == null) {
-            model.addAttribute("customerSites", this.customerSiteService.findAll());
-            return "selectCustomer";
+            return "redirect:/regularCustomer";
         }
         this.mainService.pageTwo(customerSite);
-        model.addAttribute("serviceTypes", this.serviceTypeService.findAll());
         model.addAttribute("serviceOrder", new ServiceOrder());
+        model.addAttribute("serviceOrderStatuss", this.orderStatusService.findAll());
+        model.addAttribute("svcs", this.svcService.findAll());
         return "serviceOrder";
     }
 
@@ -136,7 +138,8 @@ public class SequenceController {
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
             model.addAttribute("serviceOrder", new ServiceOrder());
-            model.addAttribute("serviceTypes", this.serviceTypeService.findAll());
+            model.addAttribute("serviceOrderStatuss", this.orderStatusService.findAll());
+            model.addAttribute("svcs", this.svcService.findAll());
             return "serviceOrder";
         }
         if (mainService.getSequence() == null) {
@@ -180,9 +183,14 @@ public class SequenceController {
         LocalDateTime end = summary.getDateScheduled().toLocalDate().atTime(LocalTime.now());
         mainService.getSequence().getServiceOrder().setDate_started(start);
         mainService.getSequence().getServiceOrder().setDate_finished(end);
-        mainService.executeSequence();
+        ServiceOrder order = mainService.executeSequence();
         mainService.setInstitution(model);
-        model.addAttribute("addMessage", "Your order has been successful!");
+        message = "";
+        if (order == null) {
+            message = "Your order failed to register!";
+        } else {
+            message = "Your order has been successful!";
+        }
         return "redirect:/createOrder";
     }
 

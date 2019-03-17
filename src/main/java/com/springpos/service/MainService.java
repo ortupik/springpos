@@ -31,6 +31,8 @@ public interface MainService {
 
     public String encryptStuff(String crap);
     
+    public String decryptStuff(String crap);
+    
     public ServiceOrder executeSequence();
     
     public Sequence getSequence();
@@ -42,5 +44,9 @@ public interface MainService {
     public Sequence pageThree(ServiceOrder order);
 
     public Sequence pageFour(Contractor contractor);
+
+    public void clearPrevious();
+
+    public void checkStaticOrder();
 
 }

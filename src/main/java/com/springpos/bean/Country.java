@@ -13,11 +13,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "COUNTRY")
 public class Country implements Serializable {
-    
-   @OneToMany(mappedBy = "country")
+
+    @OneToMany(mappedBy = "country")
     private Set<CustomerSite> customer;
     @OneToMany(mappedBy = "country")
     private Set<Contractor> contractor;
+
     @Id
     @Column(name = "country_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,6 +57,5 @@ public class Country implements Serializable {
     public void setCountry_name(String country_name) {
         this.country_name = country_name;
     }
-
 
 }

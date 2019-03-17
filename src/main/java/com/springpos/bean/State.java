@@ -28,6 +28,8 @@ public class State implements Serializable {
 
     @OneToMany(mappedBy = "state")
     private Set<CustomerSite> customer;
+    @OneToMany(mappedBy = "state")
+    private Set<Contractor> contractor;
 
     public int getState_id() {
         return state_id;
@@ -36,8 +38,6 @@ public class State implements Serializable {
     public void setState_id(int state_id) {
         this.state_id = state_id;
     }
-
- 
 
     public String getState_name() {
         return state_name;
@@ -53,6 +53,14 @@ public class State implements Serializable {
 
     public void setCustomer(Set<CustomerSite> customer) {
         this.customer = customer;
+    }
+
+    public Set<Contractor> getContractor() {
+        return contractor;
+    }
+
+    public void setContractor(Set<Contractor> contractor) {
+        this.contractor = contractor;
     }
 
 }

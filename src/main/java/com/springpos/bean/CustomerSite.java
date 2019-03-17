@@ -1,6 +1,7 @@
 package com.springpos.bean;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -18,10 +20,15 @@ public class CustomerSite implements Serializable {
     @ManyToOne
     @JoinColumn(name = "state_id", nullable = false)
     private State state;
+    @ManyToOne
+    @JoinColumn(name = "country_id", nullable = false)
+    private Country country;
+    @OneToMany(mappedBy = "customerSite")
+    private Set<ServiceOrder> serviceOrder;
     @Id
     @Column(name = "cust_site_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int custId;
     @Column(name = "cust_site_name")
     private String custSiteName;
     @Column(name = "cust_site_address")
@@ -38,8 +45,6 @@ public class CustomerSite implements Serializable {
     private int cust_site_status_id;
     @Column(name = "cust_site_type_id")
     private int cust_site_type_id;
-    @Column(name = "country_id")
-    private int country_id;
     @Transient
     private String storeId;
     @Transient
@@ -52,12 +57,12 @@ public class CustomerSite implements Serializable {
     public CustomerSite() {
     }
 
-    public int getId() {
-        return id;
+    public int getCustId() {
+        return custId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCustId(int custId) {
+        this.custId = custId;
     }
 
     public String getCustSiteName() {
@@ -124,14 +129,6 @@ public class CustomerSite implements Serializable {
         this.cust_site_type_id = cust_site_type_id;
     }
 
-    public int getCountry_id() {
-        return country_id;
-    }
-
-    public void setCountry_id(int country_id) {
-        this.country_id = country_id;
-    }
-
     public String getStoreId() {
         return storeId;
     }
@@ -170,6 +167,22 @@ public class CustomerSite implements Serializable {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public Set<ServiceOrder> getServiceOrder() {
+        return serviceOrder;
+    }
+
+    public void setServiceOrder(Set<ServiceOrder> serviceOrder) {
+        this.serviceOrder = serviceOrder;
     }
 
 }

@@ -55,13 +55,13 @@
 
                         <div class ="form-group">
                             <label>Country</label>
-                            <input  placeholder="Country" type="text" list="countryList" class="form-control" th:field="*{country_id}" id="country_id" required="">
+                            <input  placeholder="Country" type="text" list="countryList" class="form-control" th:field="*{country.countryId}" id="country.countryId" required="">
                             <datalist id="countryList">      
                                 <option class="form-control" th:each="country : ${countries}"
-                                        th:value="${country.id}"
+                                        th:value="${country.countryId}"
                                         th:utext="${country.country_name}"></option>
                             </datalist>
-                            <span th:if="${#fields.hasErrors('country_id')}" th:errors="*{country_id}"></span>
+                            <span th:if="${#fields.hasErrors('country.countryId')}" th:errors="*{country.countryId}"></span>
                         </div>
 
                         <div class ="form-group">
@@ -69,7 +69,7 @@
                             <input placeholder="State" type="text" list="stateList" class="form-control" name="hidden" th:field="*{state_id}" id="state_id" required="">
                             <datalist id="stateList">      
                                 <option class="form-control" th:each="state : ${states}"
-                                        th:value="${state.id}"
+                                        th:value="${state.state_id}"
                                         th:utext="${state.state_name}"></option>
                             </datalist>
                             <span th:if="${#fields.hasErrors('state_id')}" th:errors="*{state_id}"></span>
