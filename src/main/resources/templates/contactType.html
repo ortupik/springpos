@@ -10,8 +10,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <form class="form-horizontal"  action="#"  th:object="${contactType}" th:action="@{/contactType}" method="post">
-                        <input type="hidden" th:field="*{id}"/>
-                        <div class="form-group">
+                       <div class="form-group">
                             <label class="col-xs-2 control-label">Contact Type : </label>
                             <div class="col-xs-10">
                                 <input type="text" class="form-control" id="contact_type" th:field="*{contact_type}" required=""/>

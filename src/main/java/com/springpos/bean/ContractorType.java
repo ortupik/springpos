@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "CONTRACTOR_TYPE")
 public class ContractorType implements Serializable {
 
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "contractorType")
     private Set<Contractor> contractor;
     @Id
     @Column(name = "contractor_type_id")

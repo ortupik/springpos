@@ -56,4 +56,9 @@ public class CountryServiceImpl implements CountryService {
         bizRepository.deleteInBatch(country);
     }
 
+    @Override
+    public Country findCountry(String united_States) {
+    return bizRepository.findByCountryName(united_States);
+    }
+
 }

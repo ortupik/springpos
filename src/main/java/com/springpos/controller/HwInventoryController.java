@@ -17,17 +17,38 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.springpos.service.HwInventoryService;
+import com.springpos.service.HwInventoryStatusService;
+import com.springpos.service.HwModelService;
+import com.springpos.service.HwProviderService;
+import com.springpos.service.HwProviderService;
 
 @Controller
 public class HwInventoryController {
 
     private HwInventoryService hwInventoryService;
-
+    private HwProviderService hwProviderService;
+    private HwInventoryStatusService hwInventoryStatusService;
+    private HwModelService hwModelService;
     private MainService mainService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HwInventoryController.class);
 
     ArrayList<HwInventory> hwInventoryList = new ArrayList();
+
+    @Autowired
+    public void setHwProviderService(HwProviderService hwProviderService) {
+        this.hwProviderService = hwProviderService;
+    }
+
+    @Autowired
+    public void setHwInventoryStatusService(HwInventoryStatusService hwInventoryStatusService) {
+        this.hwInventoryStatusService = hwInventoryStatusService;
+    }
+
+    @Autowired
+    public void setHwModelService(HwModelService hwModelService) {
+        this.hwModelService = hwModelService;
+    }
 
     @Autowired
     public void setHwInventoryService(HwInventoryService hwInventoryService) {
@@ -39,11 +60,15 @@ public class HwInventoryController {
         this.mainService = mainService;
     }
 
+ 
     @RequestMapping("hwInventory/new")
     public String hwInventoryPage(Model model) {
         if (mainService.getLoggedIn() == null) {
             return "redirect:/";
         }
+        model.addAttribute("hwProviders",this.hwProviderService.findAll());
+        model.addAttribute("hwModels",this.hwModelService.findAll());
+         model.addAttribute("hwInventoryStatuss",this.hwInventoryStatusService.findAll());
         model.addAttribute("hwInventory", new HwInventory());
         mainService.setInstitution(model);
         return "hwInventory";

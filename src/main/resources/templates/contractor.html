@@ -58,7 +58,7 @@
                             <select  placeholder="Country" class="form-control" th:field="*{country.countryId}" id="country.countryId" required="">
                                 <option class="form-control" th:each="country : ${countries}"
                                         th:value="${country.countryId}"
-                                        th:utext="${country.country_name}"></option>
+                                        th:utext="${country.countryName}"></option>
                             </select>
                             <span th:if="${#fields.hasErrors('country.countryId')}" th:errors="*{country.countryId}"></span>
                         </div>
@@ -68,15 +68,26 @@
                             <select placeholder="State" class="form-control"  th:field="*{state.state_id}" id="state.state_id" required="">
                                 <option class="form-control" th:each="state : ${states}"
                                         th:value="${state.state_id}"
-                                        th:utext="${state.state_name}"></option>
+                                        th:utext="${state.stateName}"></option>
                             </select>
                             <span th:if="${#fields.hasErrors('state.state_id')}" th:errors="*{state.state_id}"></span>
                         </div>
 
                         <div class="form-group">
                             <div class="col-xs-10">
+                                <label class="control-label">Access Level : </label>
+                                <select placeholder="Contractor Status" class="form-control"  th:field="*{accessLevel.acc_level_id}" id="acc_level_id" required="">
+                                    <option class="form-control" th:each="accessLevel : ${accessLevels}"
+                                            th:value="${accessLevel.acc_level_id}"
+                                            th:utext="${accessLevel.acc_level_name}"></option>
+                                </select>
+                                <span th:if="${#fields.hasErrors('accessLevel.acc_level_id')}" th:errors="*{accessLevel.acc_level_id}"></span>
+                            </div>
+                        </div>
+                             <div class="form-group">
+                            <div class="col-xs-10">
                                 <label class="control-label">Contractor Status : </label>
-                                <select placeholder="Contractor Status" list="statusList" class="form-control"  th:field="*{contractorStatus.statusId}" id="contractorStatus.statusId" required="">
+                                <select placeholder="Contractor Status"  class="form-control"  th:field="*{contractorStatus.statusId}" id="statusId" required="">
                                     <option class="form-control" th:each="contractorStatus : ${contractorStatuss}"
                                             th:value="${contractorStatus.statusId}"
                                             th:utext="${contractorStatus.contractor_status}"></option>
@@ -87,7 +98,7 @@
                         <div class="form-group">
                             <div class="col-xs-10">
                                 <label class="control-label">Contractor Type : </label>
-                                <select  type="text" placeholder="Contractor Type" class="form-control"  th:field="*{contractorType.typeId}" id="contractorType.typeId" required="">
+                                <select  type="text" placeholder="Contractor Type" class="form-control"  th:field="*{contractorType.typeId}" id="typeId" required="">
                                     <option class="form-control" th:each="contractorType : ${contractorTypes}"
                                             th:value="${contractorType.typeId}"
                                             th:utext="${contractorType.contractor_type}"></option>

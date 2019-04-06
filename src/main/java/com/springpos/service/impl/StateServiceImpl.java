@@ -56,4 +56,9 @@ public class StateServiceImpl implements StateService {
         bizRepository.deleteInBatch(categories);
     }
 
+    @Override
+    public State findState(String s) {
+    return bizRepository.findByStateName(s);
+    }
+
 }

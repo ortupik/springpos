@@ -21,7 +21,6 @@ public class Summary implements Serializable {
     public Summary(CustomerSite customer, ServiceOrder order, Contractor contract) {
         this.companyName = customer.getCustSiteName();
         this.contractor = contract.getContractor_fname() + " " + contract.getContractor_lname();
-        this.clientContact = customer.getContactName();
         this.service = "ser";
         this.hardwareNeeded = order.getWork_request();
         this.otherComments = order.getWork_summary();

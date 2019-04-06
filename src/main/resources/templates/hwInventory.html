@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form action="#"  th:object="${hwInventory}" th:action="@{/hwInventory}" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class ="form-group">
+                                    <label>Serial Number</label>
+                                    <input type="text" class ="form-control" placeholder="Serial Number" id="hw_serial_number" th:field="*{hw_serial_number}" required="">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class ="form-group">
+                                    <label>Mac Address</label>
+                                    <input type="text" class ="form-control" placeholder="Mac Address" id="hw_mac_address" th:field="*{hw_mac_address}" required="">
+                                </div>
+                            </div>
+                        </div>
+       
+                        <div class ="form-group">
+                            <label>Sale Price</label>
+                            <input type="text" class ="form-control" placeholder="Sale Price" id="hw_cost" th:field="*{hw_cost}" required="">
+                        </div>
+
+                        <div class ="form-group">
+                            <label>Purchase Date</label>
+                            <input type="date" class ="form-control" placeholder="Purchase Date" id="hw_purchase_date" th:field="*{hw_purchase_date}" required="">
+                        </div>
+
+
+                        <div class ="form-group">
+                            <label>Provider</label>
+                            <select  placeholder="" class="form-control" th:field="*{hwProvider.providerId}" id="providerId" required="">
+                                <option class="form-control" th:each="hwProvider : ${hwProviders}"
+                                        th:value="${hwProvider.providerId}"
+                                        th:utext="${hwProvider.hw_provider_name}"></option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('hwProvider.providerId')}" th:errors="*{hwProvider.providerId}"></span>
+                        </div>
+
+                        <div class ="form-group">
+                            <label>Model</label>
+                            <select placeholder="" class="form-control"  th:field="*{hwModel.hwModelId}" id="hwModelId" required="">
+                                <option class="form-control" th:each="hwModel:${hwModels}"
+                                        th:value="${hwModel.hwModelId}"
+                                        th:utext="${hwModel.hw_model}"></option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('hwModel.hwModelId')}" th:errors="*{hwModel.hwModelId}"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-xs-10">
+                                <label class="control-label">Inventory Status : </label>
+                                <select placeholder="Inventory Status"  class="form-control"  th:field="*{hwInventoryStatus.statusId}" id="statusId" required="">
+                                    <option class="form-control" th:each="hwInventoryStatus : ${hwInventoryStatuss}"
+                                            th:value="${hwInventoryStatus.statusId}"
+                                            th:utext="${hwInventoryStatus.hw_inv_status}"></option>
+                                </select>
+                                <span th:if="${#fields.hasErrors('hwInventoryStatus.statusId')}" th:errors="*{hwInventoryStatus.statusId}"></span>
+                            </div>
+                        </div>
+
+                        <br>
+                        <button type="submit" class="btn btn-success"> Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->     
+    </body>
+</html>

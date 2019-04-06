@@ -30,8 +30,6 @@
                             <a  href="#" th:href="@{/createOrder}" class="list-group-item ">Create Order</a>
                             <a href="#" th:href="@{/incident/new}" class="list-group-item ">Add Incident</a>
                             <a href="#" th:href="@{/incidents}" class="list-group-item ">View Incident</a>
-                            <a href="#" th:href="@{/serviceOrderStatus/new}" class="list-group-item ">Service Order Status</a>
-                            <a href="#" th:href="@{/serviceOrderStatuss}" class="list-group-item ">View Service Order Status</a>
                         </div>
 
 
@@ -41,12 +39,11 @@
                         </a>
 
                         <div id="customer" class="collapse">
-                            <a href="#" th:href="@{/customerSites}" class="list-group-item ">Search</a>
-                            <a href="#" th:href="@{/customerSite/new}" class="list-group-item " >Add</a>
-                            <a href="#" th:href="@{/contactStatus/new}" class="list-group-item ">Add Contact Status</a>
-                            <a href="#" th:href="@{/contactType/new}" class="list-group-item ">Add Contact Type</a>
-                            <a href="#" th:href="@{/contactStatuss}" class="list-group-item ">View Contact Status</a>
-                            <a href="#" th:href="@{/contactTypes}" class="list-group-item ">View Contact Type</a>
+                            <a href="#" th:href="@{/customerSites}" class="list-group-item ">Search Customer</a>
+                            <a href="#" th:href="@{/customerSite/new}" class="list-group-item " >Add Customer</a>
+                            <a href="#" th:href="@{/contacts}" class="list-group-item ">Search Contact</a>
+                            <a href="#" th:href="@{/contact/new}" class="list-group-item " >Add Contact</a>
+
                         </div>
                         <!-- Services -->
                         <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#service">
@@ -56,10 +53,6 @@
                         <div id="service" class="collapse">
                             <a href="#" th:href="@{/svcs}" class="list-group-item ">View Services</a>
                             <a href="#" th:href="@{/svc/new}" class="list-group-item " >Add Service</a>
-                            <a href="#" th:href="@{/serviceStatus/new}" class="list-group-item ">Add Service Status</a>
-                            <a href="#" th:href="@{/serviceType/new}" class="list-group-item ">Add Service Type</a>
-                            <a href="#" th:href="@{/serviceStatuss}" class="list-group-item ">View Service Status</a>
-                            <a href="#" th:href="@{/serviceTypes}" class="list-group-item ">View Service Type</a>
                         </div>
 
                         <!-- Contractor -->
@@ -68,12 +61,8 @@
                         </a>
 
                         <div id="contractor" class="collapse">
-                            <a href="#" th:href="@{/contractors}" class="list-group-item ">Search</a>
+                            <a href="#" th:href="@{/contractors}" class="list-group-item ">Search Contractor</a>
                             <a href="#" th:href="@{/contractor/new}" class="list-group-item ">Add Contractor</a>
-                            <a href="#" th:href="@{/contractorStatus/new}" class="list-group-item ">Add Contractor Status</a>
-                            <a href="#" th:href="@{/contractorType/new}" class="list-group-item ">Add Contractor Type</a>
-                            <a href="#" th:href="@{/contractorStatuss}" class="list-group-item ">View Contractor Status</a>
-                            <a href="#" th:href="@{/contractorTypes}" class="list-group-item ">View Contractor Type</a>
                         </div>
 
 
@@ -83,51 +72,69 @@
                         </a>
 
                         <div id="hardware" class="collapse">
-                            <a href="#" class="list-group-item ">Search</a>
-                            <a href="#" class="list-group-item ">Add</a>
+                            <a href="#" th:href="@{/hwInventorys}" class="list-group-item ">Search Hardware</a>
+                            <a href="#" th:href="@{/hwInventory/new}" class="list-group-item ">Add Hardware</a>
+                            <a href="#" th:href="@{/hwProviders}" class="list-group-item ">View Hardware Provider</a>
+                            <a href="#" th:href="@{/hwProvider/new}" class="list-group-item ">Add Hardware Provider</a>
                             <a href="#" th:href="@{/hwManufacturer/new}" class="list-group-item ">Add Hardware Manufacture</a>
-                              <a href="#" th:href="@{/hwSeriesStatus/new}" class="list-group-item ">Add Hardware Series Status</a>
-                            <a href="#" th:href="@{/hwModelStatus/new}" class="list-group-item ">Add Hardware Model Status</a>
                             <a href="#" th:href="@{/hwSeries/new}" class="list-group-item ">Add Hardware Series</a>
-                            <a href="#" th:href="@{/hwModel/new}" class="list-group-item ">Add Hardware Model</a>
-                            <a href="#" th:href="@{/hwType/new}" class="list-group-item ">Add Hardware Type</a>
-                            <a href="#" th:href="@{/hwManufacturerStatus/new}" class="list-group-item ">Add Hardware Manufacture Status</a>
-                            <a href="#" th:href="@{/hwType/new}" class="list-group-item ">Add Hardware Type</a>
-                            <a href="#" th:href="@{/hwManufacturerStatuss}" class="list-group-item ">View Hardware Manufacture Status</a>
-                            <a href="#" th:href="@{/hwTypes}" class="list-group-item ">View Hardware Type</a>
-                             <a href="#" th:href="@{/hwManufactures}" class="list-group-item ">View Hardware Manufacture</a>
+                            <a href="#" th:href="@{/hwModel/new}" class="list-group-item ">Add Hardware Model</a>                      
+                            <a href="#" th:href="@{/hwManufacturers}" class="list-group-item ">View Hardware Manufacture</a>
                             <a href="#" th:href="@{/hwSeriess}" class="list-group-item ">View Hardware Series</a>
                             <a href="#" th:href="@{/hwModels}" class="list-group-item ">View Hardware Model</a>
+                        </div>
+
+                        <!--   <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#kb">
+                               Knowledge Base <i class="fas fa-plus-circle"></i>
+                           </a>
+   
+                           <div id="kb" class="collapse">
+                               <a href="#" class="list-group-item ">Search</a>
+                               <a href="#" class="list-group-item ">Add</a>
+                           </div>
+                        
+                        <a href="#" class="list-group-item list-group-item-action bg-light" >Reports</a>
+-->
+                        <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#dbManagement">
+                            DB Management <i class="fas fa-plus-circle"></i>
+                        </a>
+                        <div id="dbManagement" class="collapse">   
+                            <a href="#" th:href="@{/serviceOrderStatus/new}" class="list-group-item ">Service Order Status</a>
+                            <a href="#" th:href="@{/serviceOrderStatuss}" class="list-group-item ">View Service Order Status</a>                       
+                            <a href="#" th:href="@{/serviceStatus/new}" class="list-group-item ">Add Service Status</a>
+                            <a href="#" th:href="@{/serviceType/new}" class="list-group-item ">Add Service Type</a>
+                            <a href="#" th:href="@{/serviceStatuss}" class="list-group-item ">View Service Status</a>
+                            <a href="#" th:href="@{/serviceTypes}" class="list-group-item ">View Service Type</a>
+                            <a href="#" th:href="@{/contractorStatus/new}" class="list-group-item ">Add Contractor Status</a>
+                            <a href="#" th:href="@{/contractorType/new}" class="list-group-item ">Add Contractor Type</a>
+                            <a href="#" th:href="@{/contractorStatuss}" class="list-group-item ">View Contractor Status</a>
+                            <a href="#" th:href="@{/hwInventoryStatuss}" class="list-group-item ">View Hardware Inventory Status</a>
+                            <a href="#" th:href="@{/hwInventoryStatus/new}" class="list-group-item ">Add Hardware Inventory Status</a>
+                            <a href="#" th:href="@{/serviceStatuss}" class="list-group-item ">View Service Status</a>
+                            <a href="#" th:href="@{/hwType/new}" class="list-group-item ">Add Hardware Type</a>
+                            <a href="#" th:href="@{/hwProviderStatus/new}" class="list-group-item ">Add Hardware Provider Status</a>
+                            <a href="#" th:href="@{/hwProviderStatuss}" class="list-group-item ">View Hardware Provider Status</a>
+                            <a href="#" th:href="@{/hwManufacturerStatus/new}" class="list-group-item ">Add Hardware Manufacture Status</a>
+                            <a href="#" th:href="@{/hwManufacturerStatuss}" class="list-group-item ">View Hardware Manufacture Status</a>
+                            <a href="#" th:href="@{/hwSeriesStatus/new}" class="list-group-item ">Add Hardware Series Status</a>
+                            <a href="#" th:href="@{/hwModelStatus/new}" class="list-group-item ">Add Hardware Model Status</a>
                             <a href="#" th:href="@{/hwSeriesStatuss}" class="list-group-item ">View Hardware Series Status </a>
                             <a href="#" th:href="@{/hwModelStatuss}" class="list-group-item ">View Hardware Model Status</a>
-                        </div>
-                        <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#others">
-                            Other <i class="fas fa-plus-circle"></i>
-                        </a>
-
-                        <div id="others" class="collapse">
+                            <a href="#" th:href="@{/hwTypes}" class="list-group-item ">View Hardware Type</a>
+                            <a href="#" th:href="@{/hwType/new}" class="list-group-item ">Add Hardware Type</a>
+                            <a href="#" th:href="@{/contactStatus/new}" class="list-group-item ">Add Contact Status</a>
+                            <a href="#" th:href="@{/contactType/new}" class="list-group-item ">Add Contact Type</a>
+                            <a href="#" th:href="@{/contactStatuss}" class="list-group-item ">View Contact Status</a>
+                            <a href="#" th:href="@{/contactTypes}" class="list-group-item ">View Contact Type</a>
+                            <a href="#" th:href="@{/accessLevel/new}" class="list-group-item ">Add Access Levels</a>
+                            <a href="#" th:href="@{/accessLevels}" class="list-group-item ">View Access Levels</a>
                             <a href="#" th:href="@{/country/new}"  class="list-group-item ">Add Countries</a>
                             <a href="#" th:href="@{/state/new}" class="list-group-item ">Add States</a>
                             <a href="#" th:href="@{/countrys}" class="list-group-item ">View Countries</a>
                             <a href="#" th:href="@{/states}" class="list-group-item ">View States</a>
                             <a href="#" th:href="@{/skill/new}" class="list-group-item ">Add Skills</a>
-                            <a href="#" th:href="@{/skills}" class="list-group-item ">View Kills</a>
+                            <a href="#" th:href="@{/skills}" class="list-group-item ">View Skills</a>
                         </div>
-
-                        <!-- Knowledge base 
-                        <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#kb">
-                            Knowledge Base <i class="fas fa-plus-circle"></i>
-                        </a>
-
-                        <div id="kb" class="collapse">
-                            <a href="#" class="list-group-item ">Search</a>
-                            <a href="#" class="list-group-item ">Add</a>
-                        </div>
-                        -->
-                        <!--
-                        <a href="#" class="list-group-item list-group-item-action bg-light" >Reports</a>
-                        <a href="#" class="list-group-item list-group-item-action bg-light" >DB Management</a>
-                        -->
                         <a class="nav-link" href="#" th:href="@{/logout}">Logout<span class="sr-only">(current)</span></a>
                     </div>
                 </div>

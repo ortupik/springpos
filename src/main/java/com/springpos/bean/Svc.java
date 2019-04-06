@@ -24,6 +24,8 @@ public class Svc implements Serializable {
     private ServiceStatus serviceStatus;
     @OneToMany(mappedBy = "svc")
     private Set<ServiceOrder> serviceOrder;
+    @OneToMany(mappedBy = "svc")
+    private Set<ServiceOrderLine> serviceOrderLine;
 
     @Id
     @Column(name = "svc_id")
@@ -70,6 +72,14 @@ public class Svc implements Serializable {
 
     public void setServiceOrder(Set<ServiceOrder> serviceOrder) {
         this.serviceOrder = serviceOrder;
+    }
+
+    public Set<ServiceOrderLine> getServiceOrderLine() {
+        return serviceOrderLine;
+    }
+
+    public void setServiceOrderLine(Set<ServiceOrderLine> serviceOrderLine) {
+        this.serviceOrderLine = serviceOrderLine;
     }
 
 }

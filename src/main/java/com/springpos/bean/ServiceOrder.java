@@ -2,6 +2,7 @@ package com.springpos.bean;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,26 +29,31 @@ public class ServiceOrder implements Serializable {
     @ManyToOne
     @JoinColumn(name = "contractorId", nullable = false)
     private Contractor contractor;
-
+    @OneToMany(mappedBy = "serviceOrder")
+    private Set<ServiceOrderLine> serviceOrderLine;
     @Id
     @Column(name = "svo_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int orderId;
     @Column(name = "date_started")
     private LocalDateTime date_started;
     @Column(name = "date_finished")
     private LocalDateTime date_finished;
+    @Column(name = "date_requested")
+    private LocalDateTime date_requested;
+    @Column(name = "date_scheduled")
+    private LocalDateTime date_scheduled;
     @Column(name = "work_summary")
     private String work_summary;
     @Column(name = "work_request")
     private String work_request;
 
-    public int getId() {
-        return id;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public LocalDateTime getDate_started() {
@@ -111,6 +118,30 @@ public class ServiceOrder implements Serializable {
 
     public void setContractor(Contractor contractor) {
         this.contractor = contractor;
+    }
+
+    public LocalDateTime getDate_requested() {
+        return date_requested;
+    }
+
+    public void setDate_requested(LocalDateTime date_requested) {
+        this.date_requested = date_requested;
+    }
+
+    public LocalDateTime getDate_scheduled() {
+        return date_scheduled;
+    }
+
+    public void setDate_scheduled(LocalDateTime date_scheduled) {
+        this.date_scheduled = date_scheduled;
+    }
+
+    public Set<ServiceOrderLine> getServiceOrderLine() {
+        return serviceOrderLine;
+    }
+
+    public void setServiceOrderLine(Set<ServiceOrderLine> serviceOrderLine) {
+        this.serviceOrderLine = serviceOrderLine;
     }
 
 }

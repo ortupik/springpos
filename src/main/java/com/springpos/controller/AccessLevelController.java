@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.springpos.service.AccessLevelService;
+import java.util.List;
 
 @Controller
 public class AccessLevelController {
@@ -65,19 +66,18 @@ public class AccessLevelController {
         return mv;
     }
 
-    @PostMapping(value = "accessLevel")
+    @RequestMapping(value = "accessLevel")
     public String save(@Valid AccessLevel accessLevel, BindingResult result, Model model) {
         mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
-
             model.addAttribute("accessLevel", new AccessLevel());
-            return "accessLevel";
+            return "redirect:/accessLevel/new";
         }
         accessLevelService.save(accessLevel);
         model.addAttribute("accessLevel", new AccessLevel());
         model.addAttribute("addMessage", " AccessLevel Added Successfull ");
-        return "redirect:/accessLevel";
+        return "redirect:/accessLevel/new";
 
     }
 
@@ -104,7 +104,16 @@ public class AccessLevelController {
         this.accessLevelService.delete(accessLevel);
         model.addAttribute("addMessage", "Deleted Successfully ! ");
         model.addAttribute("accessLevels", this.accessLevelService.findAll());
-        return "accessLevels";
+        return "redirect:/accessLevels";
+    }
+
+    @GetMapping("/removeAllAccessLevel")
+    public String removeAllAccessLevel(Model model) {
+        List<AccessLevel> delList=accessLevelService.findAll();
+        this.accessLevelService.deleteInBatch(delList);
+        model.addAttribute("addMessage", "Deleted Successfully ! ");
+        model.addAttribute("accessLevels", this.accessLevelService.findAll());
+        return "redirect:/accessLevels";
     }
 
     @GetMapping("/editAccessLevel/{id}")
@@ -119,6 +128,5 @@ public class AccessLevelController {
         model.addAttribute("accessLevel", accessLevel);
         return "updateAccessLevel";
     }
-   
 
 }

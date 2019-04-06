@@ -31,14 +31,14 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="serviceOrder : ${serviceOrders}">
-                                        <td th:text="${serviceOrder.id}"></td>
+                                        <td th:text="${serviceOrder.orderId}"></td>
                                         <td th:text="${serviceOrder.customerSite.custSiteName}"></td>
                                         <td th:text="${serviceOrder.customerSite.custId}"></td>
                                         <td th:text="${serviceOrder.svc.svcName}"></td>
                                         <td th:text="${serviceOrder.work_request}"></td>
                                         <td th:text="${serviceOrder.work_summary}"></td>
                                         <td th:text="${serviceOrder.serviceOrderStatus.svo_status}"></td>
-                                        <td th:text="${serviceOrder.contractor.fullnames}"></td>
+                                        <td th:text="${serviceOrder.contractor.contractor_fname}"></td>
                                         <td th:text="${serviceOrder.contractor.contractorId}"></td>
                                         <td th:text="${serviceOrder.date_started}"></td>
                                          <td th:text="${serviceOrder.date_finished}"></td>

@@ -1,6 +1,5 @@
 package com.springpos.controller;
 
-import com.springpos.bean.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +29,7 @@ public class CustomerSiteController {
     private MainService mainService;
     private ContactService contactService;
     private CustomerSite cust = null;
-    
+
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomerSiteController.class);
 
     ArrayList<CustomerSite> customerSiteList = new ArrayList();
@@ -93,21 +92,14 @@ public class CustomerSiteController {
         mainService.setInstitution(model);
         if (result.hasErrors()) {
             model.addAttribute("addMessage", result.toString());
-
             model.addAttribute("customerSite", new CustomerSite());
             return "customerSite";
         }
         cust = customerSiteService.save(customerSite);
-        if (cust != null) {
-            Contact cont = new Contact(cust);
-            contactService.save(cont);
-        }
-        model.addAttribute("customerSite", new CustomerSite());
         model.addAttribute("addMessage", " CustomerSite Added Successfull ");
-        return "redirect:/customerSite";
+        return "redirect:/customerSite/new";
     }
-   
- 
+
     @RequestMapping("/updateCustomerSite/{id}")
     public String updateCustomerSite(@PathVariable("id") int id, @Valid CustomerSite customerSite,
             BindingResult result, Model model) {
@@ -146,7 +138,5 @@ public class CustomerSiteController {
         model.addAttribute("customerSite", customerSite);
         return "updateCustomerSite";
     }
-
-  
 
 }

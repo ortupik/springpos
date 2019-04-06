@@ -25,7 +25,7 @@
                                     <tr th:each="serviceStatus : ${serviceStatuss}">
                                         <td th:text="${serviceStatus.svcStatusId}"></td>
                                         <td th:text="${serviceStatus.svc_status}"></td>
-                                        <td><a th:href="@{/removeService Status/{id}(id=${serviceStatus.svcStatusId})}" class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                        <td><a th:href="@{/removeServiceStatus/{id}(id=${serviceStatus.svcStatusId})}" class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

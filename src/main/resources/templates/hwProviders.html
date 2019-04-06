@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+      
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div th:switch="${hwProviders}">
+                        <h2 th:case="null">No yet!</h2>
+                        <div th:case="*">
+                            <h2> List</h2>
+                            <table class="table table-striped table-bordered table-condensed">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Model Name </th>
+                                        <th>Serial Number </th>
+                                        <th>Mac Number </th>
+                                        <th>Sale Price </th>
+                                        <th>Purchase Date</th>
+                                        <th>Provider </th>
+                                        <th>Inventory Status </th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="hwProvider : ${hwProviders}">
+                                        <td th:text="${hwProvider.providerId}"></td>
+                                        <td th:text="${hwProvider.hw_provider_name}"> </td>
+                                        <td th:text="${hwProvider.hw_provider_address}"> </td>
+                                        <td th:text="${hwProvider.hw_provider_city}"> </td>
+                                        <td th:text="${hwProvider.hw_provider_phone}"> </td>
+                                        <td th:text="${hwProvider.hw_provider_email}"> </td>
+                                        <td th:text="${hwProvider.hw_provider_web}"> </td>
+                                         <td th:text="${hwProvider.hwProviderStatus.hw_provider_status}"> </td>
+                                        <td><a th:href="@{/removeContractor/{id}(id=${hwProvider.providerId})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->   
+    </body>
+</html>

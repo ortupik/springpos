@@ -9,16 +9,14 @@
         <div class="container" id="form">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <form action="#"  th:object="${state}" th:action="@{/state}" method="post">
-                        <input type="hidden" th:field="*{state_id}"/>
-                        <div class="form-group">
-                            <label class="col-2 control-label">State : </label>
-                            <div class="col-10">
-                                <input type="text" class="form-control" id="stateName" th:field="*{stateName}" required=""/>
-                                <span th:if="${#fields.hasErrors('stateName')}" th:errors="*{stateName}"></span>
+                    <form class="form-horizontal"  action="#"  th:object="${hwProviderStatus}" th:action="@{/hwProviderStatus}" method="post">
+                       <div class="form-group">
+                            <label class="col-xs-2 control-label"> Status : </label>
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control" id="hw_provider_status" th:field="*{hw_provider_status}" required=""/>
+                                <span th:if="${#fields.hasErrors('hw_provider_status')}" th:errors="*{hw_provider_status}"></span>
                             </div>
                         </div>
-
                         <div class="row">
                             <button type="Save" class="btn btn-primary btn-rounded my-0">Save</button>
                         </div>

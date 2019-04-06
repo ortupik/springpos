@@ -24,7 +24,7 @@ public class State implements Serializable {
     @NotNull
     @Size(max = 100)
     @Column(name = "state_name", unique = true)
-    private String state_name;
+    private String stateName;
 
     @OneToMany(mappedBy = "state")
     private Set<CustomerSite> customer;
@@ -39,12 +39,12 @@ public class State implements Serializable {
         this.state_id = state_id;
     }
 
-    public String getState_name() {
-        return state_name;
+    public String getStateName() {
+        return stateName;
     }
 
-    public void setState_name(String state_name) {
-        this.state_name = state_name;
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
     }
 
     public Set<CustomerSite> getCustomer() {
@@ -63,4 +63,5 @@ public class State implements Serializable {
         this.contractor = contractor;
     }
 
+  
 }

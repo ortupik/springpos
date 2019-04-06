@@ -8,26 +8,28 @@
         <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
         <div class="container" id="form">
             <div class="row justify-content-center">
-                <div class="col-md-9">
-                    <div th:switch="${countrys}">
-                        <h2 th:case="null">No countrys yet!</h2>
+                <div class="col-md-12">
+                    <div th:switch="${hwModels}">
+                        <h2 th:case="null">No Hardware Model  yet!</h2>
                         <div th:case="*">
-                            <h2>Country List</h2>
+                            <h2>Hardware Model  List</h2>
                             <table class="table table-striped table-bordered table-condensed">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Id</th>
-                                        <th>Country Name</th>
-                                        <th>Edit</th>
+                                        <th>Series </th>
+                                        <th>Status</th>
+                                        <th>Model</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="country : ${countrys}">
-                                        <td th:text="${country.countryId}"><a href="/country/${country.countryId}">Id</a></td>
-                                        <td th:text="${country.countryName}">Country Name</td>
-                                        <td><a th:href="@{/editCountry/{id}(id=${country.countryId})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
-                                        <td><a th:href="@{/removeCountry/{id}(id=${country.countryId})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                    <tr th:each="hwModel : ${hwModels}">
+                                        <td th:text="${hwModel.hwModelId}"></td>
+                                        <td th:text="${hwModel.hwSeries.hw_series_name}"> </td>
+                                        <td th:text="${hwModel.hwModelStatus.hw_model_status}"> </td>
+                                        <td th:text="${hwModel.hw_model}"> </td>
+                                        <td><a th:href="@{/removeHwModel/{id}(id=${hwModel.hwModelId})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.springpos.bean.Contractor;
+import com.springpos.service.AccessLevelService;
 import com.springpos.service.MainService;
 import java.util.ArrayList;
 import javax.validation.Valid;
@@ -31,10 +32,16 @@ public class ContractorController {
     private CountryService countryService;
     private StateService stateService;
     private MainService mainService;
+    private AccessLevelService accessLevelService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ContractorController.class);
 
     ArrayList<Contractor> contractorList = new ArrayList();
+
+    @Autowired
+    public void setAccessLevelService(AccessLevelService accessLevelService) {
+        this.accessLevelService = accessLevelService;
+    }
 
     @Autowired
     public void setContractorService(ContractorService contractorService) {
@@ -71,6 +78,7 @@ public class ContractorController {
         if (mainService.getLoggedIn() == null) {
             return "redirect:/";
         }
+        model.addAttribute("accessLevels", this.accessLevelService.findAll());
         model.addAttribute("contractorTypes", this.typeService.findAll());
         model.addAttribute("contractorStatuss", this.statusService.findAll());
         model.addAttribute("countries", this.countryService.findAll());
@@ -150,7 +158,5 @@ public class ContractorController {
         model.addAttribute("contractor", contractor);
         return "updateContractor";
     }
-
-
 
 }

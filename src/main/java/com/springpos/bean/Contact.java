@@ -6,16 +6,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "CONTACT")
 public class Contact implements Serializable {
 
+    @ManyToOne
+    @JoinColumn(name = "state_id", nullable = false)
+    private State state;
+    @ManyToOne
+    @JoinColumn(name = "country_id", nullable = false)
+    private Country country;
+    @ManyToOne
+    @JoinColumn(name = "custId", nullable = false)
+    private CustomerSite customerSite;
+    @ManyToOne
+    @JoinColumn(name = "statusId", nullable = false)
+    private ContactStatus contactStatus;
+    @ManyToOne
+    @JoinColumn(name = "typeId", nullable = false)
+    private ContactType contactType;
     @Id
     @Column(name = "contact_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int contactId;
     @Column(name = "contact_fname")
     private String contact_fname;
     @Column(name = "contact_lname")
@@ -24,32 +41,53 @@ public class Contact implements Serializable {
     private String contact_phone;
     @Column(name = "contact_email")
     private String contact_email;
-    @Column(name = "contact_status_id")
-    private int contact_status_id;
-    @Column(name = "contact_type_id")
-    private int contact_type_id;
-    @Column(name = "cust_site_id")
-    private int cust_site_id;
 
-    public Contact() {
+    public State getState() {
+        return state;
     }
 
-    public Contact(CustomerSite cust) {
-        this.contact_fname = cust.getContactName();
-        this.contact_lname = "";
-        this.contact_phone = cust.getContactPhone();
-        this.contact_email = cust.getContactEmail();
-        this.contact_status_id = 1;
-        this.contact_type_id = 1;
-        this.cust_site_id = cust.getCustId();
+    public void setState(State state) {
+        this.state = state;
     }
 
-    public int getId() {
-        return id;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public CustomerSite getCustomerSite() {
+        return customerSite;
+    }
+
+    public void setCustomerSite(CustomerSite customerSite) {
+        this.customerSite = customerSite;
+    }
+
+    public ContactStatus getContactStatus() {
+        return contactStatus;
+    }
+
+    public void setContactStatus(ContactStatus contactStatus) {
+        this.contactStatus = contactStatus;
+    }
+
+    public ContactType getContactType() {
+        return contactType;
+    }
+
+    public void setContactType(ContactType contactType) {
+        this.contactType = contactType;
+    }
+
+    public int getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(int contactId) {
+        this.contactId = contactId;
     }
 
     public String getContact_fname() {
@@ -84,28 +122,6 @@ public class Contact implements Serializable {
         this.contact_email = contact_email;
     }
 
-    public int getContact_status_id() {
-        return contact_status_id;
-    }
-
-    public void setContact_status_id(int contact_status_id) {
-        this.contact_status_id = contact_status_id;
-    }
-
-    public int getContact_type_id() {
-        return contact_type_id;
-    }
-
-    public void setContact_type_id(int contact_type_id) {
-        this.contact_type_id = contact_type_id;
-    }
-
-    public int getCust_site_id() {
-        return cust_site_id;
-    }
-
-    public void setCust_site_id(int cust_site_id) {
-        this.cust_site_id = cust_site_id;
-    }
+ 
 
 }

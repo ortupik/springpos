@@ -23,9 +23,9 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="contactType : ${contactTypes}">
-                                        <td th:text="${contactType.id}"><a href="/contactType/${contactType.id}">Id</a></td>
+                                        <td th:text="${contactType.contact_type_id}"><a href="/contactType/${contactType.id}">Id</a></td>
                                         <td th:text="${contactType.contact_type}">Contact Type </td>
-                                        <td><a th:href="@{/removeContactType/{id}(id=${contactType.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                        <td><a th:href="@{/removeContactType/{id}(id=${contactType.contact_type_id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

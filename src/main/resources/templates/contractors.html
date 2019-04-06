@@ -24,6 +24,7 @@
                                         <th>Address</th>
                                         <th>City </th>
                                         <th>Zip</th>
+                                        <th>State </th>
                                         <th>Contractor Status </th>
                                         <th>Contractor Type</th>
                                         <th>Account Level Id</th>
@@ -41,11 +42,12 @@
                                         <td th:text="${contractor.contractor_address}"> </td>
                                         <td th:text="${contractor.contractor_city}"> </td>
                                         <td th:text="${contractor.contractor_zip}"> </td>
-                                        <td th:text="${contractor.state_id}"> </td>
-                                        <td th:text="${contractor.contractor_type_id}"> </td>
-                                        <td th:text="${contractor.acc_level_id}"> </td>                                        
-                                        <td th:text="${contractor.country.countryId}"> </td>
-                                        <td><a th:href="@{/removeContractor/{id}(id=${contractor.id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                        <td th:text="${contractor.state.stateName}"> </td>
+                                        <td th:text="${contractor.contractorType.contractor_type}"> </td>
+                                         <td th:text="${contractor.contractorStatus.contractor_status}"> </td>
+                                        <td th:text="${contractor.accessLevel.acc_level_name}"> </td>                                        
+                                        <td th:text="${contractor.country.countryName}"> </td>
+                                        <td><a th:href="@{/removeContractor/{id}(id=${contractor.contractorId})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

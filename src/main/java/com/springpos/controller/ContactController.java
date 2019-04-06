@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.springpos.bean.Contact;
-import com.springpos.bean.ContactStatus;
-import com.springpos.bean.ContactType;
 import com.springpos.bean.CustomerSite;
 import com.springpos.service.MainService;
 import java.util.ArrayList;
@@ -17,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.springpos.service.ContactService;
 import com.springpos.service.ContactStatusService;
@@ -36,6 +33,24 @@ public class ContactController {
     private StateService stateService;
     private MainService mainService;
     private CustomerSiteService customerSiteService;
+    CustomerSite customerSite;
+    Contact cont;
+
+    public Contact getCont() {
+        return cont;
+    }
+
+    public void setCont(Contact cont) {
+        this.cont = cont;
+    }
+
+    public CustomerSite getCustomerSite() {
+        return customerSite;
+    }
+
+    public void setCustomerSite(CustomerSite customerSite) {
+        this.customerSite = customerSite;
+    }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ContactController.class);
 
@@ -99,13 +114,13 @@ public class ContactController {
         } else {
             mv.addObject("contact", new Contact());
             mainService.setInstitution(mv);
-            contactList.clear();          
-            mv.addObject("contacts",this.contactService.findAll());
+            contactList.clear();
+            mv.addObject("contacts", this.contactService.findAll());
         }
         return mv;
     }
 
-    @PostMapping(value = "contact")
+    @RequestMapping(value = "contact")
     public String save(@Valid Contact contact, BindingResult result, Model model) {
         mainService.setInstitution(model);
         if (result.hasErrors()) {
@@ -113,18 +128,8 @@ public class ContactController {
             model.addAttribute("contact", new Contact());
             return "contact";
         }
-        CustomerSite cust = new CustomerSite();
-        if (cust == null) {
-            model.addAttribute("addMessage", contact.toString());
-            model.addAttribute("contact", new Contact());
-            return "contact";
-        }
-        CustomerSite newCust = customerSiteService.save(cust);
-        contact.setCust_site_id(newCust.getCust_site_status_id());
-        Contact contac = contactService.save(contact);
-        model.addAttribute("contact", new Contact());
-        model.addAttribute("addMessage", " Contact Added Successfull ");
-        return "contact";
+        model.addAttribute("addMessage", " Contact Added To Queue Successfull, Select Customer Linked To It");
+        return "selectCustomerSite";
 
     }
 
@@ -167,5 +172,22 @@ public class ContactController {
         return "updateContact";
     }
 
-
+    @RequestMapping("/selectCustomerSite/{id}")
+    public String selectCustomer(@PathVariable("id") int id, Model model) {
+        mainService.setInstitution(model);
+        setCustomerSite(this.customerSiteService.find(id));
+        if (customerSite == null) {
+            return "redirect:/contact/new";
+        }
+        if(getCustomerSite()==null||getCont()==null){
+        return "customerSite/new";
+        }
+        if(getCont()==null){
+        return "contact/new";
+        }
+        Contact contac = getCont();
+        contac.setCustomerSite(getCustomerSite());
+        contactService.save(contac);
+        return "redirect:/contact/new";
+    }
 }

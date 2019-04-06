@@ -52,7 +52,7 @@
                             <select  placeholder="Country" class="form-control" th:field="*{country.countryId}" id="country.countryId" required="">
                                 <option class="form-control" th:each="country : ${countries}"
                                         th:value="${country.countryId}"
-                                        th:utext="${country.country_name}"></option>
+                                        th:utext="${country.countryName}"></option>
                             </select>
                             <span th:if="${#fields.hasErrors('country.countryId')}" th:errors="*{country.countryId}"></span>
                         </div>
@@ -62,23 +62,11 @@
                             <select class="form-control" th:field="*{state.state_id}" id="state_id" required="">
                                 <option class="form-control" th:each="state : ${states}"
                                         th:value="${state.state_id}"
-                                        th:utext="${state.state_name}"></option>
+                                        th:utext="${state.stateName}"></option>
                             </select>
                             <span th:if="${#fields.hasErrors('state.state_id')}" th:errors="*{state.state_id}"></span>
                         </div>
 
-                        <div class ="form-group">
-                            <label>Contact Name</label>
-                            <input type="text" class ="form-control" placeholder="Contact Name" id="contactName" th:field="*{contactName}" required="">
-                        </div>
-                        <div class ="form-group">
-                            <label>Contact Phone</label>
-                            <input type="text" class ="form-control" placeholder="Contact Phone" id="contactPhone" th:field="*{contactPhone}" required="">
-                        </div>
-                        <div class ="form-group">
-                            <label>Contact Email</label>
-                            <input type="email" class ="form-control" placeholder="Contact Email" id="contactEmail" th:field="*{contactEmail}" required="">
-                        </div>
                         <br>
                         <button type="submit" class="btn btn-success"> Next</button>
                     </form>

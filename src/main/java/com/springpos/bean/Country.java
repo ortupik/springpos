@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Country implements Serializable {
 
     @OneToMany(mappedBy = "country")
-    private Set<CustomerSite> customer;
+    private Set<CustomerSite> customerSite;
     @OneToMany(mappedBy = "country")
     private Set<Contractor> contractor;
 
@@ -24,15 +24,25 @@ public class Country implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int countryId;
     @Column(name = "country_name")
-    private String country_name;
+    private String countryName;
 
-    public Set<CustomerSite> getCustomer() {
-        return customer;
+    public Set<CustomerSite> getCustomerSite() {
+        return customerSite;
     }
 
-    public void setCustomer(Set<CustomerSite> customer) {
-        this.customer = customer;
+    public void setCustomerSite(Set<CustomerSite> customerSite) {
+        this.customerSite = customerSite;
     }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+ 
 
     public Set<Contractor> getContractor() {
         return contractor;
@@ -50,12 +60,5 @@ public class Country implements Serializable {
         this.countryId = countryId;
     }
 
-    public String getCountry_name() {
-        return country_name;
-    }
-
-    public void setCountry_name(String country_name) {
-        this.country_name = country_name;
-    }
-
+ 
 }

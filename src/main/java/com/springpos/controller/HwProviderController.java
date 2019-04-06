@@ -17,12 +17,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.springpos.service.HwProviderService;
+import com.springpos.service.HwProviderStatusService;
 
 @Controller
 public class HwProviderController {
 
     private HwProviderService hwProviderService;
-
+private HwProviderStatusService hwProviderStatusService;
     private MainService mainService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HwProviderController.class);
@@ -32,6 +33,10 @@ public class HwProviderController {
     @Autowired
     public void setHwProviderService(HwProviderService hwProviderService) {
         this.hwProviderService = hwProviderService;
+    }
+    @Autowired
+    public void setHwProviderStatusService(HwProviderStatusService hwProviderStatusService) {
+        this.hwProviderStatusService = hwProviderStatusService;
     }
 
     @Autowired
@@ -45,6 +50,7 @@ public class HwProviderController {
             return "redirect:/";
         }
         model.addAttribute("hwProvider", new HwProvider());
+        model.addAttribute("hwProviderStatuss",this.hwProviderStatusService.findAll());
         mainService.setInstitution(model);
         return "hwProvider";
     }

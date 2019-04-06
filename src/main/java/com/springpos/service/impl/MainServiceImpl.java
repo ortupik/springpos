@@ -1,30 +1,24 @@
 package com.springpos.service.impl;
 
-import com.springpos.bean.Contact;
+import com.springpos.bean.Assignment;
 import com.springpos.bean.Contractor;
+import com.springpos.bean.Country;
 import com.springpos.bean.CustomerSite;
 import com.springpos.bean.Sequence;
 import com.springpos.bean.ServiceOrder;
 import com.springpos.bean.User;
 import com.springpos.bean.Sessions;
-import com.springpos.service.ContactService;
-import com.springpos.service.ContractorService;
+import com.springpos.bean.State;
+import com.springpos.service.AssignmentService;
+import com.springpos.service.CountryService;
 import com.springpos.service.CustomerSiteService;
 import org.springframework.stereotype.Service;
 import com.springpos.service.MainService;
 import com.springpos.service.ServiceOrderService;
 import com.springpos.service.SessionService;
+import com.springpos.service.StateService;
 import com.springpos.service.UserService;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.util.Base64;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -43,16 +37,19 @@ public class MainServiceImpl implements MainService {
 
     String staticPass = "1234";
 
-    private String loggedIn = null;
+    private String loggedIn = "";
 
     private int loggedOut = 0;
 
+    String[] states = {"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"};
+
     private ServiceOrderService serviceOrderService;
     private CustomerSiteService customerSiteService;
-    private ContactService contactService;
+    private StateService stateService;
     private UserService userService;
     private SessionService sessionService;
-    private ContractorService contractorService;
+    private CountryService countryService;
+    private AssignmentService assignmentService;
 
     public void setSequence(Sequence sequence) {
         this.sequence = sequence;
@@ -64,8 +61,13 @@ public class MainServiceImpl implements MainService {
     }
 
     @Autowired
-    public void setContractorService(ContractorService contractorService) {
-        this.contractorService = contractorService;
+    public void setStateService(StateService stateService) {
+        this.stateService = stateService;
+    }
+
+    @Autowired
+    public void setCountryService(CountryService countryService) {
+        this.countryService = countryService;
     }
 
     @Autowired
@@ -79,8 +81,8 @@ public class MainServiceImpl implements MainService {
     }
 
     @Autowired
-    public void setContactService(ContactService contactService) {
-        this.contactService = contactService;
+    public void setAssignmentService(AssignmentService assignmentService) {
+        this.assignmentService = assignmentService;
     }
 
     @Autowired
@@ -109,6 +111,18 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public ModelAndView setLoggedIn(String loggedIn) {
+        for (String s : states) {
+            if (this.stateService.findState(s) == null) {
+                State state = new State();
+                state.setStateName(s);
+                this.stateService.save(state);
+            }
+        }
+        if (this.countryService.findCountry("United States") != null) {
+            Country country = new Country();
+            country.setCountryName("United States");
+            this.countryService.save(country);
+        }
         setLogout();
         Random rand = new Random();
         int rand_sess = rand.nextInt(1000);
@@ -249,8 +263,6 @@ public class MainServiceImpl implements MainService {
         }
         if (this.customerSiteService.findByCust_site_name(customer.getCustSiteName()) == null) {
             customer = this.customerSiteService.save(this.sequence.getCustomer());
-            Contact cont = new Contact(customer);
-            this.contactService.save(cont);
         } else {
             customer = this.customerSiteService.findByCust_site_name(customer.getCustSiteName());
         }
@@ -262,6 +274,10 @@ public class MainServiceImpl implements MainService {
         this.sequence.getServiceOrder().setCustomerSite(customer);
         this.sequence.getServiceOrder().setContractor(contractor);
         ServiceOrder newOrder = this.serviceOrderService.save(order);
+        Assignment ass = new Assignment();
+        ass.setContractor(contractor);
+        ass.setServiceOrder(newOrder);
+        this.assignmentService.save(ass);
         clearPrevious();
         return newOrder;
     }

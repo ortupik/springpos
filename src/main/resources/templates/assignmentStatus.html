@@ -2,23 +2,21 @@
 <html lang="en">
     <head>
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-      
+
     </head>
     <body>
         <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
         <div class="container" id="form">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <form action="#"  th:object="${state}" th:action="@{/state}" method="post">
-                        <input type="hidden" th:field="*{state_id}"/>
+                    <form class="form-horizontal"  action="#"  th:object="${assignmentStatus}" th:action="@{/assignmentStatus}" method="post">
                         <div class="form-group">
-                            <label class="col-2 control-label">State : </label>
-                            <div class="col-10">
-                                <input type="text" class="form-control" id="stateName" th:field="*{stateName}" required=""/>
-                                <span th:if="${#fields.hasErrors('stateName')}" th:errors="*{stateName}"></span>
+                            <label class="col-xs-2 control-label">Service Status : </label>
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control" id="asgmt_status" th:field="*{asgmt_status}" required=""/>
+                                <span th:if="${#fields.hasErrors('asgmt_status')}" th:errors="*{asgmt_status}"></span>
                             </div>
                         </div>
-
                         <div class="row">
                             <button type="Save" class="btn btn-primary btn-rounded my-0">Save</button>
                         </div>

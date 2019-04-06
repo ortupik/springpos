@@ -9,4 +9,6 @@ import com.springpos.generic.GenericService;
  */
 public interface StateService extends GenericService<State> {
 
+    public Object findState(String s);
+
 }

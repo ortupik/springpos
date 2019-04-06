@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "CUSTOMER_SITE")
@@ -23,8 +22,13 @@ public class CustomerSite implements Serializable {
     @ManyToOne
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
+    
     @OneToMany(mappedBy = "customerSite")
     private Set<ServiceOrder> serviceOrder;
+    
+    @OneToMany(mappedBy = "customerSite")
+    private Set<Contact> contact;
+    
     @Id
     @Column(name = "cust_site_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,17 +49,7 @@ public class CustomerSite implements Serializable {
     private int cust_site_status_id;
     @Column(name = "cust_site_type_id")
     private int cust_site_type_id;
-    @Transient
-    private String storeId;
-    @Transient
-    private String contactName;
-    @Transient
-    private String contactEmail;
-    @Transient
-    private String contactPhone;
-
-    public CustomerSite() {
-    }
+  
 
     public int getCustId() {
         return custId;
@@ -129,38 +123,7 @@ public class CustomerSite implements Serializable {
         this.cust_site_type_id = cust_site_type_id;
     }
 
-    public String getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(String storeId) {
-        this.storeId = storeId;
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
-    }
-
-    public String getContactEmail() {
-        return contactEmail;
-    }
-
-    public void setContactEmail(String contactEmail) {
-        this.contactEmail = contactEmail;
-    }
-
-    public String getContactPhone() {
-        return contactPhone;
-    }
-
-    public void setContactPhone(String contactPhone) {
-        this.contactPhone = contactPhone;
-    }
-
+  
     public State getState() {
         return state;
     }

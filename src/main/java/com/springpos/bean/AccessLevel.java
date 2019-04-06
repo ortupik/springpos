@@ -1,32 +1,44 @@
 package com.springpos.bean;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ACCESS_LEVEL")
 public class AccessLevel implements Serializable {
-
+  
+    @OneToMany(mappedBy = "accessLevel")
+    private Set<Contractor> contractor;
     @Id
     @Column(name = "acc_level_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int acc_level_id;
     @Column(name = "acc_level_name")
     private String acc_level_name;
     @Column(name = "acc_level_desc")
     private String acc_level_desc;
 
-    public int getId() {
-        return id;
+    public Set<Contractor> getContractor() {
+        return contractor;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setContractor(Set<Contractor> contractor) {
+        this.contractor = contractor;
+    }
+
+    public int getAcc_level_id() {
+        return acc_level_id;
+    }
+
+    public void setAcc_level_id(int acc_level_id) {
+        this.acc_level_id = acc_level_id;
     }
 
     public String getAcc_level_name() {
@@ -45,9 +57,5 @@ public class AccessLevel implements Serializable {
         this.acc_level_desc = acc_level_desc;
     }
 
-    @Override
-    public String toString() {
-        return "AccessLevel{" + "id=" + id + ", acc_level_name=" + acc_level_name + ", acc_level_desc=" + acc_level_desc + '}';
-    }
 
 }

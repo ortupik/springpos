@@ -2,30 +2,32 @@
 <html lang="en">
     <head>
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-      
+
     </head>
     <body>
         <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
         <div class="container" id="form">
             <div class="row justify-content-center">
                 <div class="col-md-9">
-                    <div th:switch="${contactStatus}">
-                        <h2 th:case="null">No Contact Status yet!</h2>
+                    <div th:switch="${hwInventoryStatus}">
+                        <h2 th:case="null">No Status yet!</h2>
                         <div th:case="*">
-                            <h2>Contact Status List</h2>
+                            <h2> Status List</h2>
                             <table class="table table-striped table-bordered table-condensed">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Id</th>
-                                        <th>Contact Status</th>
+                                        <th>Status</th>
+                                        <th>Description</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="contactStatus : ${contactStatuss}">
-                                        <td th:text="${contactStatus.statusId}"><a href="/contactStatus/${contactStatus.id}">Id</a></td>
-                                        <td th:text="${contactStatus.contact_status}">Contact Status </td>
-                                        <td><a th:href="@{/removeContactStatus/{id}(id=${contactStatus.statusId})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
+                                    <tr th:each="hwInventoryStatus : ${hwInventoryStatuss}">
+                                        <td th:text="${hwInventoryStatus.statusId}"></td>
+                                        <td th:text="${hwInventoryStatus.hw_inv_status}"></td>
+                                        <td th:text="${hwInventoryStatus.hw_inv_status_desc}"></td>
+                                        <td><a th:href="@{/removeHwInventoryStatus/{id}(id=${hwInventoryStatus.statusId})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

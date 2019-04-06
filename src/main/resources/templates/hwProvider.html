@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form action="#"  th:object="${hwProvider}" th:action="@{/hwProvider}" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class ="form-group">
+                                    <label>Provider Name</label>
+                                    <input type="text" class ="form-control" placeholder="" id="hw_provider_name" th:field="*{hw_provider_name}" required="">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class ="form-group">
+                                    <label>Address</label>
+                                    <input type="text" class ="form-control" placeholder="" id="hw_provider_address" th:field="*{hw_provider_address}" required="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class ="form-group">
+                            <label>City</label>
+                            <input type="text" class ="form-control" placeholder="" id="hw_provider_city" th:field="*{hw_provider_city}" required="">
+                        </div>
+
+                        <div class ="form-group">
+                            <label>Phone Number</label>
+                            <input type="text" class ="form-control" placeholder="" id="hw_provider_phone" th:field="*{hw_provider_phone}" required="">
+                        </div>
+
+                        <div class ="form-group">
+                            <label>Provider Web</label>
+                            <input type="url" class ="form-control" placeholder="" id="hw_provider_web" th:field="*{hw_provider_web}" required="">
+                        </div>
+
+
+
+                        <div class ="form-group">
+                            <label>Provider Email</label>
+                            <input type="email" class ="form-control" placeholder="" id="hw_provider_email" th:field="*{hw_provider_email}" required="">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-10">
+                                <label class="control-label">Provider Status : </label>
+                                <select placeholder="Inventory Status"  class="form-control"  th:field="*{hwProviderStatus.statusId}" id="statusId" required="">
+                                    <option class="form-control" th:each="hwProviderStatus : ${hwProviderStatuss}"
+                                            th:value="${hwProviderStatus.statusId}"
+                                            th:utext="${hwProviderStatus.hw_provider_status}"></option>
+                                </select>
+                                <span th:if="${#fields.hasErrors('hwProviderStatus.statusId')}" th:errors="*{hwProviderStatus.statusId}"></span>
+                            </div>
+                        </div>
+
+                        <br>
+                        <button type="submit" class="btn btn-success"> Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->     
+    </body>
+</html>

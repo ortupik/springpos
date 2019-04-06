@@ -8,7 +8,7 @@
         <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
         <div class="container" id="form">
             <div class="row justify-content-center">
-                <div class="col-md-12">
+                <div class="col-md-9">
                     <form action="#"  th:object="${contact}" th:action="@{/contact}" method="post">
                         <div class="row">
                             <div class="col-md-6">
@@ -36,32 +36,21 @@
                             <input type="text" class ="form-control" placeholder="Phone Number" id="contact_phone" th:field="*{contact_phone}" required="">
                         </div>
 
-
-                        <div class ="form-group">
-                            <label>City</label>
-                            <input type="text" class ="form-control" placeholder="City" id="city" th:field="*{city}" required="">
-                        </div>
-
-                        <div class ="form-group">
-                            <label>Zip code</label>
-                            <input type="text" class ="form-control" placeholder="Zip code" id="zip" th:field="*{zip}" required="">
-                        </div>
-
                         <div class ="form-group">
                             <label>Country</label>
-                            <select  placeholder="Country" class="form-control" th:field="*{country}" id="country" required="">
+                            <select  placeholder="Country" class="form-control" th:field="*{country.countryId}" id="country" required="">
                           <option class="form-control" th:each="country : ${countries}"
                                         th:value="${country.countryId}"
-                                        th:utext="${country.country_name}"></option>
+                                        th:utext="${country.countryName}"></option>
                             </select>
                        </div>
 
                         <div class ="form-group">
                             <label>State</label>
-                            <select placeholder="State" class="form-control" name="hidden" th:field="*{state}" id="state" required="">
+                            <select placeholder="State" class="form-control" th:field="*{state.state_id}" id="state" required="">
                             <option class="form-control" th:each="state : ${states}"
                                         th:value="${state.state_id}"
-                                        th:utext="${state.state_name}"></option>
+                                        th:utext="${state.stateName}"></option>
                             </select>
                             <span th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></span>
                         </div>
@@ -69,24 +58,24 @@
                         <div class="form-group">
                             <div class="col-xs-10">
                                 <label class="control-label">Contact Status : </label>
-                                <select  type="text"  placeholder="Contact Status" list="statusList" class="form-control" name="hidden" th:field="*{contact_status_id}" id="contact_status_id" required="">
+                                <select  type="text"  placeholder="Contact Status" list="statusList" class="form-control" th:field="*{contactStatus.statusId}" id="statusId" required="">
                                  <option class="form-control" th:each="contactStatus : ${contactStatuss}"
-                                            th:value="${contactStatus.id}"
+                                            th:value="${contactStatus.statusId}"
                                             th:utext="${contactStatus.contact_status}"></option>
                                 </select>
-                                <span th:if="${#fields.hasErrors('contact_status_id')}" th:errors="*{contact_status_id}"></span>
+                                <span th:if="${#fields.hasErrors('contactStatus.statusId')}" th:errors="*{contactStatus.statusId}"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-10">
                                 <label class="control-label">Contact Type : </label>
-                                <input  type="text" placeholder="Contact Type" list="typeList" class="form-control" name="hidden" th:field="*{contact_type_id}" id="contact_type_id" required="">
+                                <input  type="text" placeholder="Contact Type" list="typeList" class="form-control" th:field="*{contactType.contact_type_id}" id="contact_type_id" required="">
                                 <datalist id="typeList">      
                                     <option class="form-control" th:each="contactType : ${contactTypes}"
-                                            th:value="${contactType.id}"
+                                            th:value="${contactType.contact_type_id}"
                                             th:utext="${contactType.contact_type}"></option>
                                 </datalist>
-                                <span th:if="${#fields.hasErrors('contact_type_id')}" th:errors="*{contact_type_id}"></span>
+                                <span th:if="${#fields.hasErrors('contactType.contact_type_id')}" th:errors="*{contactType.contact_type_id}"></span>
                             </div>
                         </div>
                         <br>

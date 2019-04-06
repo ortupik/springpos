@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+      
+    </head>
+    <body>
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->         
+        <div class="container" id="form">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form class="form-horizontal"  action="#"  th:object="${hwInventoryStatus}" th:action="@{/hwInventoryStatus}" method="post">
+                       <div class="form-group">
+                            <label class="col-xs-2 control-label"> Status : </label>
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control" id="hw_inv_status" th:field="*{hw_inv_status}" required=""/>
+                                <span th:if="${#fields.hasErrors('hw_inv_status')}" th:errors="*{hw_inv_status}"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label"> Description : </label>
+                            <div class="col-xs-10">
+                                <textarea type="text" class="form-control" id="hw_inv_status_desc" th:field="*{hw_inv_status_desc}" required=""/></textarea>
+                                <span th:if="${#fields.hasErrors('hw_inv_status_desc')}" th:errors="*{hw_inv_status_desc}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="Save" class="btn btn-primary btn-rounded my-0">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->   
+    </body>
+</html>

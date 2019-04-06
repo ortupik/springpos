@@ -25,7 +25,7 @@
                                 <tbody>
                                     <tr th:each="state : ${states}">
                                         <td th:text="${state.state_id}"></td>
-                                        <td th:text="${state.state_name}"></td>
+                                        <td th:text="${state.stateName}"></td>
                                         <td><a th:href="@{/editState/{id}(id=${state.state_id})}"  class="btn btn-primary btn-rounded btn-sm  my-0">Edit</a></td>
                                         <td><a th:href="@{/removeState/{id}(id=${state.state_id})}"  class="btn btn-danger btn-rounded btn-sm  my-0">Delete</a></td>
                                     </tr>

@@ -1,22 +1,33 @@
 package com.springpos.bean;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "HW_PROVIDER")
 public class HwProvider implements Serializable {
 
+    @ManyToOne
+    @JoinColumn(name = "statusId", nullable = false)
+    private HwProviderStatus hwProviderStatus;
+
+    @OneToMany(mappedBy = "hwProvider")
+    private Set<HwInventory> hwInventory;
+
     @Id
     @Column(name = "hw_provider_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "hw_provider_name")
+    private int providerId;
+    @Column(name = "hw_provider_name", unique = true)
     private String hw_provider_name;
     @Column(name = "hw_provider_address")
     private String hw_provider_address;
@@ -28,19 +39,30 @@ public class HwProvider implements Serializable {
     private String hw_provider_email;
     @Column(name = "hw_provider_web")
     private String hw_provider_web;
-    @Column(name = "hw_provider_status_id")
-    private int hw_provider_status_id;
-    @Column(name = "country_id")
-    private int country_id;
-    @Column(name = "state_id")
-    private int state_id;
 
-    public int getId() {
-        return id;
+    public HwProviderStatus getHwProviderStatus() {
+        return hwProviderStatus;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setHwProviderStatus(HwProviderStatus hwProviderStatus) {
+        this.hwProviderStatus = hwProviderStatus;
+    }
+
+
+    public Set<HwInventory> getHwInventory() {
+        return hwInventory;
+    }
+
+    public void setHwInventory(Set<HwInventory> hwInventory) {
+        this.hwInventory = hwInventory;
+    }
+
+    public int getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(int providerId) {
+        this.providerId = providerId;
     }
 
     public String getHw_provider_name() {
@@ -89,30 +111,6 @@ public class HwProvider implements Serializable {
 
     public void setHw_provider_web(String hw_provider_web) {
         this.hw_provider_web = hw_provider_web;
-    }
-
-    public int getHw_provider_status_id() {
-        return hw_provider_status_id;
-    }
-
-    public void setHw_provider_status_id(int hw_provider_status_id) {
-        this.hw_provider_status_id = hw_provider_status_id;
-    }
-
-    public int getCountry_id() {
-        return country_id;
-    }
-
-    public void setCountry_id(int country_id) {
-        this.country_id = country_id;
-    }
-
-    public int getState_id() {
-        return state_id;
-    }
-
-    public void setState_id(int state_id) {
-        this.state_id = state_id;
     }
 
 }

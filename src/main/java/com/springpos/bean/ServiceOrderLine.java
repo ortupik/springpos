@@ -6,43 +6,55 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "SERVICE_ORDER_LINE")
 public class ServiceOrderLine implements Serializable {
 
+    @ManyToOne
+    @JoinColumn(name = "svcId", nullable = false)
+    private Svc svc;
+    
+    @ManyToOne
+    @JoinColumn(name = "orderId", nullable = false)
+    private ServiceOrder serviceOrder;
+    
+    @ManyToOne
+    @JoinColumn(name = "contractorId", nullable = false)
+    private Contractor contractor;
+    
     @Id
     @Column(name = "svo_line_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "svo_id")
-    private int svo_id;
-    @Column(name = "svc_id")
-    private int svc_id;
+    private int orderLineId;
 
-    public int getId() {
-        return id;
+    public Svc getSvc() {
+        return svc;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSvc(Svc svc) {
+        this.svc = svc;
     }
 
-    public int getSvo_id() {
-        return svo_id;
+
+    public int getOrderLineId() {
+        return orderLineId;
     }
 
-    public void setSvo_id(int svo_id) {
-        this.svo_id = svo_id;
+    public void setOrderLineId(int orderLineId) {
+        this.orderLineId = orderLineId;
     }
 
-    public int getSvc_id() {
-        return svc_id;
+    public ServiceOrder getServiceOrder() {
+        return serviceOrder;
     }
 
-    public void setSvc_id(int svc_id) {
-        this.svc_id = svc_id;
+    public void setServiceOrder(ServiceOrder serviceOrder) {
+        this.serviceOrder = serviceOrder;
     }
+
 
 }

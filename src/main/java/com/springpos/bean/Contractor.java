@@ -30,6 +30,9 @@ public class Contractor implements Serializable {
     @ManyToOne
     @JoinColumn(name = "contractor_type_id", nullable = false)
     private ContractorType contractorType;
+    @ManyToOne
+    @JoinColumn(name = "acc_level_id", nullable = false)
+    private AccessLevel accessLevel;
     @OneToMany(mappedBy = "contractor")
     private Set<ServiceOrder> serviceOrder;
 
@@ -61,13 +64,12 @@ public class Contractor implements Serializable {
     private String contractor_password;
     @Column(name = "contractor_availability")
     private String contractor_availability;
-    @Column(name = "acc_level_id")
-    private int acc_level_id;
+ 
     @Transient
     private String fullnames;
 
     public String getFullnames() {
-        return fullnames;
+        return this.fullnames;
     }
 
     public void setFullnames() {
@@ -178,13 +180,6 @@ public class Contractor implements Serializable {
         this.contractor_availability = contractor_availability;
     }
 
-    public int getAcc_level_id() {
-        return acc_level_id;
-    }
-
-    public void setAcc_level_id(int acc_level_id) {
-        this.acc_level_id = acc_level_id;
-    }
 
     public State getState() {
         return state;
@@ -224,6 +219,14 @@ public class Contractor implements Serializable {
 
     public void setServiceOrder(Set<ServiceOrder> serviceOrder) {
         this.serviceOrder = serviceOrder;
+    }
+
+    public AccessLevel getAccessLevel() {
+        return accessLevel;
+    }
+
+    public void setAccessLevel(AccessLevel accessLevel) {
+        this.accessLevel = accessLevel;
     }
 
 }
